@@ -2,40 +2,48 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LUXESTATE | Dubai Luxury Real Estate & FORMA Architectural Walkthrough</title>
-  <meta name="description" content="Official cinematic luxury real estate experience featuring Dubai penthouse skyline, Sheikh architectural showcase, and FORMA continuous interior walkthrough.">
-  
-  <!-- Tailwind CSS -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- GSAP for Smooth Cinematic Sequencing -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+  <title>REALTOR® DUBAI | Ultra-Luxury Penthouses, Sky Villas & Private Islands</title>
+  <meta name="description" content="Dubai's premier private portfolio of trophy penthouses, super-prime waterfront villas, and branded residences. Sotheby's-caliber advisory with bespoke VIP concierge.">
 
-  <!-- Google Fonts & FontAwesome -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚜️</text></svg>">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="REALTOR® DUBAI — Ultra-Luxury Private Residences">
+  <meta property="og:description" content="Exclusive private dossier of trophy penthouses in Palm Jumeirah, Downtown Dubai, and Jumeira Bay.">
+  <meta property="og:type" content="website">
+
+  <!-- Luxury Editorial Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@600;700;800;900&family=Italiana&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
-          fontFamily: {
-            sans: ['"Plus Jakarta Sans"', '"Inter"', 'sans-serif'],
-            editorial: ['"Playfair Display"', 'serif'],
-            serif: ['"Cinzel"', 'serif'],
-            italiana: ['"Italiana"', 'serif'],
-          },
           colors: {
-            studio: {
-              bg: '#F5F7FB',
-              card: '#FFFFFF',
-              dark: '#0A1120',
-              navy: '#0E172A',
-              border: '#E2E8F0',
+            noir: '#07080a',
+            obsidian: '#0d0f14',
+            surface: '#121620',
+            elevated: '#171c28',
+            gold: {
+              100: '#faf3dd',
+              200: '#f4e6bb',
+              300: '#eed899',
+              400: '#e5c46e',
+              500: '#c5a044',
+              600: '#9e7b2b',
+              700: '#755818'
             }
+          },
+          fontFamily: {
+            serif: ['"Cormorant Garamond"', 'serif'],
+            display: ['Cinzel', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif']
           }
         }
       }
@@ -43,871 +51,989 @@
   </script>
 
   <style>
-    * {
-      box-sizing: border-box;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
+    /* Custom Smooth Scrollbar */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #07080a; }
+    ::-webkit-scrollbar-thumb { background: #262b38; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #c5a044; }
+
+    /* Frosted Glass */
+    .glass-dark {
+      background: rgba(13, 15, 20, 0.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    
+    .glass-gold {
+      background: linear-gradient(135deg, rgba(197, 160, 68, 0.12), rgba(13, 15, 20, 0.75));
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(197, 160, 68, 0.35);
     }
 
-    body {
-      background-color: #F0F3F8;
-      color: #0F172A;
-      overflow-x: hidden;
-      font-family: "Plus Jakarta Sans", sans-serif;
+    .luxury-card-shadow {
+      box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.06);
     }
 
-    /* Video 1 3D Studio Mockup Shadow */
-    .studio-mockup-frame {
-      box-shadow: 0 40px 100px -20px rgba(15, 23, 42, 0.35), 0 20px 45px -10px rgba(0, 0, 0, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.8);
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    .editorial-gradient {
+      background: linear-gradient(180deg, rgba(7,8,10,0.2) 0%, rgba(7,8,10,0.85) 70%, #07080a 100%);
     }
 
-    /* Video 1 Massive "D U B A I" with Spire Piercing Through */
-    .dubai-title-massive {
-      font-family: 'Cinzel', serif;
-      letter-spacing: 0.24em;
-      text-indent: 0.24em;
-      text-shadow: 0 15px 40px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 180, 80, 0.3);
+    /* Subtle Ken Burns Zoom */
+    @keyframes subtleZoom {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
     }
-
-    .invest-cursive {
-      font-family: 'Italiana', 'Playfair Display', serif;
-      font-style: italic;
-      letter-spacing: 0.08em;
-    }
-
-    /* Video 1: Pristine White Luxury Cards */
-    .v1-white-card {
-      background: #FFFFFF;
-      color: #0F172A;
-      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.55), 0 0 15px rgba(0, 0, 0, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.95);
-      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, opacity 0.6s ease;
-      cursor: pointer;
-      user-select: none;
-    }
-
-    .v1-white-card:hover {
-      transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 28px 55px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 176, 65, 0.25);
-    }
-
-    /* Physical 3D Press-Back on Click */
-    .v1-white-card.pressed {
-      transform: perspective(800px) translateZ(-40px) scale(0.93) rotateX(4deg) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.85), inset 0 0 15px rgba(0,0,0,0.12) !important;
-      transition: transform 0.14s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.14s ease !important;
-    }
-
-    /* Video 2 FORMA Continuous Walkthrough */
-    .forma-title-text {
-      font-family: 'Playfair Display', serif;
-      letter-spacing: 0.06em;
-      text-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-    }
-
-    .forma-pill-bar {
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    .animate-subtle-zoom {
+      animation: subtleZoom 25s ease-in-out infinite;
     }
   </style>
 </head>
-<body class="selection:bg-amber-400 selection:text-black">
+
+<body class="bg-noir text-slate-100 font-sans selection:bg-gold-500 selection:text-noir antialiased overflow-x-hidden">
 
   <!-- ======================================================== -->
-  <!-- VIDEO 1: THE STUDIO ENVIRONMENT (EXACT REFERENCE 1 FRAME) -->
-  <!-- Header: "Real estate" with UX design / Landing Page pills -->
+  <!-- 1. EDITORIAL HEADER & VIP NAVIGATION                     -->
   <!-- ======================================================== -->
-  <section class="min-h-screen py-8 sm:py-14 px-3 sm:px-6 flex flex-col items-center justify-center relative overflow-hidden bg-[#EFF2F8]">
-    
-    <!-- Top Studio Title & Badges (Exact match to Video 1 frame 00:00) -->
-    <div class="text-center mb-6 sm:mb-8 z-10">
-      <h1 class="font-sans text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
-        Real estate
-      </h1>
-      <div class="flex items-center justify-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-medium text-slate-600">
-        <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700">UX design</span>
-        <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700">Landing Page</span>
-        <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700">Dashboard</span>
-      </div>
-    </div>
-
-    <!-- ===================================================== -->
-    <!-- THE FLOATING 3D BROWSER VIEWPORT (EXACT VIDEO 1 SCREEN) -->
-    <!-- ===================================================== -->
-    <div id="mockupViewport" class="w-full max-w-5xl rounded-[28px] sm:rounded-[36px] overflow-hidden studio-mockup-frame bg-[#080D1A] relative h-[560px] sm:h-[680px] flex flex-col justify-between select-none">
+  <header class="fixed top-0 left-0 right-0 z-50 glass-dark border-b border-white/5 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
       
-      <!-- Top Navigation Bar Inside Viewport (Exact Video 1) -->
-      <div class="absolute top-0 left-0 right-0 z-40 px-5 sm:px-8 py-5 flex items-center justify-between">
-        
-        <!-- Logo: LUXESTATE -->
-        <div class="flex items-center space-x-2">
-          <span class="font-bold text-white text-base sm:text-lg tracking-wider font-sans">LUXESTATE</span>
-          <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+      <!-- Brand Crest & Monogram -->
+      <a href="#" class="flex items-center gap-3.5 group">
+        <div class="w-10 h-10 rounded-full border border-gold-400/50 flex items-center justify-center bg-gold-500/10 group-hover:bg-gold-500/20 transition-all">
+          <span class="text-gold-400 font-display font-bold text-lg">⚜</span>
         </div>
-
-        <!-- Center Navigation Pill -->
-        <div class="hidden md:flex items-center space-x-1 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 text-xs text-white">
-          <button onclick="jumpToHeroScene(1)" class="px-3.5 py-1 rounded-full bg-white text-slate-900 font-bold shadow-sm">Home</button>
-          <button onclick="jumpToHeroScene(2)" class="px-3.5 py-1 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">Penthouse View</button>
-          <a href="#forma-section" class="px-3.5 py-1 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">Property List</a>
-          <a href="#calculator-section" class="px-3.5 py-1 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">Contact Us</a>
-        </div>
-
-        <!-- Right Action Pill: Search & Sign In -->
-        <div class="flex items-center space-x-2 text-xs">
-          <div class="flex items-center space-x-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 text-white/80">
-            <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
-            <span class="text-[11px]">Eng</span>
-          </div>
-          <a href="https://wa.me/971566037833" target="_blank" class="px-4 py-1.5 rounded-full bg-white text-slate-900 font-bold hover:bg-slate-100 transition-colors shadow-sm">
-            Sign In
-          </a>
-        </div>
-
-      </div>
-
-      <!-- ===================================================== -->
-      <!-- SCENE 1: SUNSET DUBAI SKYLINE & "Invest in DUBAI"     -->
-      <!-- ===================================================== -->
-      <div id="v1Scene1" class="absolute inset-0 z-10 transition-opacity duration-1000 opacity-100 flex flex-col justify-between p-6 sm:p-10">
-        
-        <!-- Horizon Backdrop with Burj Khalifa & Crescent Moon -->
-        <div class="absolute inset-0 z-0">
-          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=95" alt="Dubai Sunset Horizon" class="w-full h-full object-cover object-center filter brightness-95 contrast-110">
-          <div class="absolute inset-0 bg-gradient-to-t from-[#060B14] via-[#060B14]/20 to-[#060B14]/40"></div>
-          
-          <!-- Crescent Moon in Upper Right (as Video 1 frame 00:00) -->
-          <div class="absolute top-16 sm:top-20 right-16 sm:right-28 text-white/70 text-xs sm:text-sm">
-            <i class="fa-regular fa-moon"></i>
-          </div>
-        </div>
-
-        <!-- Spacer for top nav -->
-        <div class="h-16"></div>
-
-        <!-- Centerpiece: "Invest in DUBAI" (Burj Khalifa Pierces Through 'B') -->
-        <div class="text-center my-auto relative z-10">
-          <span class="invest-cursive text-3xl sm:text-5xl md:text-6xl text-amber-100/90 block mb-0.5">
-            Invest in
-          </span>
-          <h2 class="dubai-title-massive text-5xl sm:text-7xl md:text-9xl font-black text-white uppercase leading-none">
-            DUBAI
-          </h2>
-        </div>
-
-        <!-- Bottom Row: Build Your Future & Description -->
-        <div class="relative z-10 flex flex-col sm:flex-row items-end justify-between gap-4">
-          <div class="flex items-center space-x-3 bg-black/60 backdrop-blur-xl p-3 sm:p-3.5 rounded-2xl border border-white/20 shadow-xl">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-black flex items-center justify-center font-bold text-xs shadow-md shadow-amber-500/30">
-              <i class="fa-solid fa-play ml-0.5"></i>
-            </div>
-            <div>
-              <span class="text-xs sm:text-sm font-bold text-white block">Build Your Future.</span>
-              <span class="text-[10px] text-amber-300 font-medium">Automatic Cinematic Mode</span>
-            </div>
-          </div>
-
-          <div class="max-w-xs text-right hidden sm:block">
-            <p class="text-[11px] text-white/80 leading-relaxed">
-              Prime off-plan allocations, waterfront trophy estates, and 10-Year UAE Golden Visa structuring.
-            </p>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- ===================================================== -->
-      <!-- SCENE 2: PENTHOUSE WINDOW + SHEIKH + 4 WHITE CARDS    -->
-      <!-- ===================================================== -->
-      <div id="v1Scene2" class="absolute inset-0 z-20 transition-opacity duration-1000 opacity-0 pointer-events-none flex items-center justify-center">
-        
-        <!-- Penthouse Interior Glass Columns (3-Pane Window Frame) -->
-        <div class="absolute inset-0 border-[14px] sm:border-[24px] border-[#080D1A] pointer-events-none shadow-2xl"></div>
-        <div class="absolute inset-0 flex justify-between pointer-events-none px-20 sm:px-36">
-          <div class="w-2 sm:w-3 h-full bg-[#080D1A] shadow-2xl"></div>
-          <div class="w-2 sm:w-3 h-full bg-[#080D1A] shadow-2xl"></div>
-        </div>
-
-        <!-- The Sheikh Figure in White Thobe on Steps -->
-        <div id="sheikhFigure" class="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center pointer-events-none transition-transform duration-1000 translate-y-10 opacity-0">
-          <!-- 3 Steps -->
-          <div class="w-56 sm:w-72 h-3.5 bg-[#09101E] border-t border-slate-700/60 shadow-xl"></div>
-          <div class="w-64 sm:w-80 h-4.5 bg-[#070D18] border-t border-slate-700/60 shadow-xl"></div>
-          <div class="w-72 sm:w-96 h-5.5 bg-[#050912] border-t border-slate-700/60 shadow-xl"></div>
-          <!-- Sheikh Portrait Silhouette Gazing at Sunset Burj -->
-          <div class="relative -mt-64 sm:-mt-72 flex flex-col items-center">
-            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=85" alt="Sheikh Overlooking Dubai" class="w-44 sm:w-52 h-64 sm:h-72 object-cover object-top filter contrast-125 brightness-90 rounded-t-full shadow-2xl">
-            <div class="absolute inset-0 bg-gradient-to-t from-[#060B14] via-transparent to-transparent"></div>
-          </div>
-        </div>
-
-        <!-- =================================================== -->
-        <!-- THE 4 WHITE LUXURY CARDS (EXACT MATCH TO VIDEO 1)   -->
-        <!-- 2 on Left, 2 on Right framing the window            -->
-        <!-- =================================================== -->
-
-        <!-- Card 1: Top-Left -->
-        <div id="c1" onclick="triggerCardClick(event, 0)" class="v1-white-card absolute top-16 sm:top-20 left-3 sm:left-8 z-30 p-2 sm:p-2.5 rounded-2xl w-40 sm:w-52 transform -translate-x-12 opacity-0">
-          <div class="relative h-20 sm:h-28 rounded-xl overflow-hidden mb-1.5 bg-slate-100">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=85" alt="Ellington Water Villa" class="w-full h-full object-cover">
-            <span class="absolute top-1.5 left-1.5 bg-slate-900 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">Palm Jumeirah</span>
-          </div>
-          <h4 class="font-bold text-slate-900 text-[11px] sm:text-xs truncate">Ellington Water Villa</h4>
-          <div class="flex items-center justify-between mt-0.5 text-[9px] sm:text-[10px] text-slate-500">
-            <span>6 Suites • Ocean</span>
-            <span class="font-extrabold text-amber-600 text-[10px] sm:text-xs">AED 38M</span>
-          </div>
-        </div>
-
-        <!-- Card 2: Bottom-Left -->
-        <div id="c2" onclick="triggerCardClick(event, 1)" class="v1-white-card absolute bottom-10 sm:bottom-16 left-3 sm:left-8 z-30 p-2 sm:p-2.5 rounded-2xl w-40 sm:w-52 transform -translate-x-12 opacity-0">
-          <div class="relative h-20 sm:h-28 rounded-xl overflow-hidden mb-1.5 bg-slate-100">
-            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=700&q=85" alt="Horizon Beachfront Mansion" class="w-full h-full object-cover">
-            <span class="absolute top-1.5 left-1.5 bg-slate-900 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">Dubai Islands</span>
-          </div>
-          <h4 class="font-bold text-slate-900 text-[11px] sm:text-xs truncate">Horizon Beach Mansion</h4>
-          <div class="flex items-center justify-between mt-0.5 text-[9px] sm:text-[10px] text-slate-500">
-            <span>5 Suites • Dock</span>
-            <span class="font-extrabold text-amber-600 text-[10px] sm:text-xs">AED 19.5M</span>
-          </div>
-        </div>
-
-        <!-- Card 3: Top-Right -->
-        <div id="c3" onclick="triggerCardClick(event, 2)" class="v1-white-card absolute top-16 sm:top-20 right-3 sm:right-8 z-30 p-2 sm:p-2.5 rounded-2xl w-40 sm:w-52 transform translate-x-12 opacity-0">
-          <div class="relative h-20 sm:h-28 rounded-xl overflow-hidden mb-1.5 bg-slate-100">
-            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=700&q=85" alt="Burj Sky Duplex" class="w-full h-full object-cover">
-            <span class="absolute top-1.5 left-1.5 bg-slate-900 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">Downtown Burj</span>
-          </div>
-          <h4 class="font-bold text-slate-900 text-[11px] sm:text-xs truncate">Burj Sky Duplex</h4>
-          <div class="flex items-center justify-between mt-0.5 text-[9px] sm:text-[10px] text-slate-500">
-            <span>4 Suites • Skyline</span>
-            <span class="font-extrabold text-amber-600 text-[10px] sm:text-xs">AED 14.8M</span>
-          </div>
-        </div>
-
-        <!-- Card 4: Bottom-Right -->
-        <div id="c4" onclick="triggerCardClick(event, 3)" class="v1-white-card absolute bottom-10 sm:bottom-16 right-3 sm:right-8 z-30 p-2 sm:p-2.5 rounded-2xl w-40 sm:w-52 transform translate-x-12 opacity-0">
-          <div class="relative h-20 sm:h-28 rounded-xl overflow-hidden mb-1.5 bg-slate-100">
-            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=85" alt="Fairway Golf Estate" class="w-full h-full object-cover">
-            <span class="absolute top-1.5 left-1.5 bg-slate-900 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">Dubai Hills</span>
-          </div>
-          <h4 class="font-bold text-slate-900 text-[11px] sm:text-xs truncate">Fairway Golf Estate</h4>
-          <div class="flex items-center justify-between mt-0.5 text-[9px] sm:text-[10px] text-slate-500">
-            <span>6 Suites • Gallery</span>
-            <span class="font-extrabold text-amber-600 text-[10px] sm:text-xs">AED 24M</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-    <!-- Studio Frame Footer Labels (Exact Video 1 frame 00:00) -->
-    <div class="w-full max-w-5xl flex items-center justify-between text-slate-400 text-[11px] sm:text-xs mt-4 px-2">
-      <span>© 2026 09. Real. All rights reserved.</span>
-      <span class="font-medium text-slate-500">@beast.graphicdesigner • Realtor Signature UAE</span>
-    </div>
-
-  </section>
-
-  <!-- ======================================================== -->
-  <!-- VIDEO 2: THE FORMA CONTINUOUS INTERIOR WALKTHROUGH       -->
-  <!-- Exact Video 2 (Video-249.mp4 - FORMA Residential)       -->
-  <!-- ======================================================== -->
-  <section id="forma-section" class="relative min-h-screen flex items-center justify-center py-20 bg-[#0A0E17] overflow-hidden select-none">
-    
-    <!-- Ultra-Wide Continuous Room Canvas -->
-    <div class="absolute inset-0 z-0 overflow-hidden">
-      <img id="formaImg" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2600&q=95" alt="FORMA Residence" class="w-full h-full object-cover filter brightness-85 transition-all duration-1000 scale-105">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/60 pointer-events-none"></div>
-    </div>
-
-    <div class="relative z-10 max-w-7xl w-full mx-auto px-6 sm:px-12 flex flex-col justify-between min-h-[540px]">
-      
-      <!-- Top FORMA Navigation (Exact Match to Video 2 frame 00:00) -->
-      <div class="flex items-center justify-between border-b border-white/20 pb-4">
-        <span class="font-serif tracking-[0.28em] font-bold text-white text-base">FORMA</span>
-        
-        <div class="hidden sm:flex items-center space-x-6 text-xs text-white/80 tracking-widest uppercase">
-          <span class="hover:text-white cursor-pointer transition-colors">PROJECTS</span>
-          <span class="hover:text-white cursor-pointer transition-colors">STUDIO</span>
-          <span class="hover:text-white cursor-pointer transition-colors">SERVICES</span>
-          <span class="hover:text-white cursor-pointer transition-colors">CONTACT</span>
-        </div>
-
-        <span class="text-[10px] sm:text-xs tracking-widest uppercase text-slate-400 font-semibold bg-white/5 border border-white/10 px-3 py-1 rounded-full">
-          RESIDENTIAL INTERIORS
-        </span>
-      </div>
-
-      <!-- Main Editorial Room Block (Alternating Left/Right Alignment) -->
-      <div id="formaTextBlock" class="my-auto transition-all duration-700 max-w-2xl text-left">
-        <span id="formaRoomNum" class="text-xs sm:text-sm tracking-[0.25em] uppercase text-amber-300 font-bold block mb-2">
-          01 / LIVING
-        </span>
-        <h2 id="formaRoomTitle" class="forma-title-text text-4xl sm:text-6xl md:text-7xl font-bold text-white uppercase leading-none mb-3">
-          THE LIVING SPACE
-        </h2>
-        <p id="formaRoomSub" class="text-xs sm:text-sm tracking-[0.22em] uppercase text-white/90 font-medium">
-          WHERE THE DAY GATHERS.
-        </p>
-      </div>
-
-      <!-- Bottom Walkthrough Controls & Pills -->
-      <div class="flex flex-col sm:flex-row items-center justify-between border-t border-white/20 pt-6 gap-4">
-        
-        <!-- Progress Pills -->
-        <div id="formaPillContainer" class="flex items-center space-x-2 sm:space-x-3">
-          <!-- Dynamically populated -->
-        </div>
-
-        <!-- Buttons -->
-        <div class="flex items-center space-x-3">
-          <button onclick="navigateForma(-1)" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
-            <i class="fa-solid fa-chevron-left text-xs"></i>
-          </button>
-          <button onclick="navigateForma(1)" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
-            <i class="fa-solid fa-chevron-right text-xs"></i>
-          </button>
-          <button id="formaPlayBtn" onclick="toggleFormaPlay()" class="px-4 py-2 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold hover:bg-amber-400/30 transition-colors">
-            <i class="fa-solid fa-pause mr-1"></i> Auto Glide
-          </button>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ======================================================== -->
-  <!-- SECTION 3: 10-YEAR GOLDEN VISA & ROI ENGINE              -->
-  <!-- ======================================================== -->
-  <section id="calculator-section" class="py-24 bg-white text-slate-900 border-t border-slate-200">
-    <div class="max-w-4xl mx-auto px-6">
-      
-      <div class="text-center mb-12">
-        <span class="text-xs uppercase tracking-[0.25em] font-extrabold text-amber-600 block mb-2">DUBAI LAND DEPARTMENT OFFICIAL RULEBOOK</span>
-        <h2 class="font-serif text-3xl sm:text-5xl font-extrabold text-slate-900 mb-4">10-Year UAE Golden Visa & ROI Tool</h2>
-        <p class="text-slate-600 text-sm max-w-lg mx-auto">
-          Calculate your tax-free annual rental yields and family residency eligibility with Realtor Signature Properties.
-        </p>
-      </div>
-
-      <div class="bg-slate-50 p-6 sm:p-12 rounded-3xl border border-slate-200 shadow-xl relative">
-        
-        <div class="mb-10">
-          <div class="flex justify-between items-center mb-3">
-            <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Planned Real Estate Allocation (AED)</label>
-            <span id="sliderDisplay" class="font-serif text-2xl font-extrabold text-slate-900">AED 3,000,000 (~$816,000)</span>
-          </div>
-          <input type="range" id="sliderInput" min="1500000" max="25000000" step="250000" value="3000000" class="w-full h-3 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-amber-500">
-          <div class="flex justify-between text-[11px] text-slate-500 font-medium mt-2">
-            <span>AED 1.5M (Standard Visa)</span>
-            <span class="text-emerald-700 font-extrabold">AED 2.0M (Golden Visa Minimum)</span>
-            <span>AED 25M+ (Ultra-Prime)</span>
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-sm">
-            <span class="text-[11px] uppercase font-bold text-slate-500 tracking-wider block mb-1">Annual Rental Yield (8.4%)</span>
-            <span id="rentalYield" class="font-serif text-2xl font-extrabold text-slate-900">AED 252,000/yr</span>
-            <span class="text-[10px] text-emerald-700 font-bold block mt-1">100% Tax-Free In Hand</span>
-          </div>
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-sm">
-            <span class="text-[11px] uppercase font-bold text-slate-500 tracking-wider block mb-1">5-Yr Capital Gain (38%)</span>
-            <span id="capitalGain" class="font-serif text-2xl font-extrabold text-slate-900">+AED 1,140,000</span>
-            <span class="text-[10px] text-slate-500 block mt-1">Off-Plan Spec</span>
-          </div>
-          <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-sm">
-            <span class="text-[11px] uppercase font-bold text-slate-500 tracking-wider block mb-1">UAE Residency Track</span>
-            <span id="visaTier" class="font-serif text-lg font-extrabold text-emerald-800">10-Year Golden Visa</span>
-            <span class="text-[10px] text-emerald-700 font-bold block mt-1">Family & Domestic Staff</span>
-          </div>
-        </div>
-
-        <div id="visaBanner" class="p-4 rounded-xl bg-emerald-100 border border-emerald-300 flex items-center space-x-3 text-xs text-emerald-950 mb-8">
-          <i class="fa-solid fa-circle-check text-lg text-emerald-700 flex-shrink-0"></i>
-          <span><strong>Eligible for 10-Year UAE Golden Visa:</strong> Your allocation clears the AED 2,000,000 threshold. Realtor Signature Properties manages complete DLD title deed verification and residency paperwork.</span>
-        </div>
-
-        <div class="text-center">
-          <a id="btnWhatsAppCalc" href="https://wa.me/971566037833?text=Hi%20Realtor%20UAE,%20I%20used%20your%20Golden%20Visa%20calculator%20for%20AED%203,000,000.%20Please%20send%20matching%20developer%20options." target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm tracking-wide shadow-xl hover:scale-105 transition-all">
-            <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
-            <span>Send My Golden Visa Property File on WhatsApp</span>
-          </a>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ======================================================== -->
-  <!-- MODAL: ARCHITECTURAL PROPERTY SHOWCASE                   -->
-  <!-- ======================================================== -->
-  <div id="propModal" class="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl transition-opacity duration-300 opacity-0 pointer-events-none" onclick="handleModalBackdrop(event)">
-    <div class="bg-[#0A111F] border border-white/20 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col" onclick="event.stopPropagation()">
-      
-      <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between bg-black/60 sticky top-0 z-30 backdrop-blur-xl">
-        <div class="flex items-center space-x-3">
-          <div class="w-10 h-10 rounded-xl bg-amber-400 text-black flex items-center justify-center font-serif font-black text-sm">
-            <span>R</span>
-          </div>
-          <div>
-            <div class="flex items-center space-x-2">
-              <span id="mLocation" class="text-[10px] uppercase tracking-widest font-extrabold text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-500/30">Palm Jumeirah</span>
-              <span class="text-[10px] text-emerald-300 font-bold bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">10-Year Golden Visa</span>
-            </div>
-            <h3 id="mTitle" class="font-serif font-bold text-white text-lg sm:text-2xl mt-0.5">The Ellington Water Villa</h3>
-          </div>
-        </div>
-
-        <div class="flex items-center space-x-3">
-          <div class="text-right hidden sm:block mr-2">
-            <span id="mPriceAED" class="font-serif font-black text-amber-300 text-xl block leading-none">AED 38,000,000</span>
-            <span id="mPriceUSD" class="text-xs text-slate-400">~$10,340,000 USD</span>
-          </div>
-          <button type="button" onclick="closePropModal()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center space-x-2 transition-colors border border-white/15 text-xs font-bold cursor-pointer">
-            <i class="fa-solid fa-xmark text-sm"></i>
-            <span>Close</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="relative h-64 sm:h-96 w-full overflow-hidden bg-slate-900 select-none">
-        <img id="mImg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85" alt="Property Preview" class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
-
-        <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
-          <div class="bg-black/70 backdrop-blur-md px-3.5 py-1.5 rounded-xl border border-white/20">
-            <span class="text-[10px] text-amber-300 font-bold block uppercase tracking-wider">DLD Escrow Protected</span>
-            <span class="text-xs font-bold text-white">Direct Developer Allocation</span>
-          </div>
-          <span id="mPriceMobile" class="sm:hidden bg-amber-400 text-black px-2.5 py-1 rounded-lg text-xs font-bold font-serif">AED 38M</span>
-        </div>
-      </div>
-
-      <div class="p-5 sm:p-7 space-y-5">
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-          <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
-            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Suites</span>
-            <span id="mBeds" class="font-serif text-base font-bold text-white">6 Suites</span>
-          </div>
-          <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
-            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Bathrooms</span>
-            <span id="mBaths" class="font-serif text-base font-bold text-white">8 Baths</span>
-          </div>
-          <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
-            <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Built-Up Area</span>
-            <span id="mArea" class="font-serif text-base font-bold text-white">11,500 Sq. Ft.</span>
-          </div>
-          <div class="bg-amber-950/40 p-3 rounded-2xl border border-amber-500/30 text-center">
-            <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider block">Net Yield</span>
-            <span id="mYield" class="font-serif text-base font-bold text-amber-400">8.6% Tax-Free</span>
-          </div>
-        </div>
-
         <div>
-          <h4 class="font-serif font-bold text-white text-xs uppercase tracking-wider mb-1.5 text-slate-300">Property Overview</h4>
-          <p id="mDesc" class="text-xs text-slate-300 leading-relaxed"></p>
+          <div class="flex items-center gap-2">
+            <span class="font-display font-bold tracking-[0.22em] text-white text-base">REALTOR</span>
+            <span class="text-[9px] text-gold-400 border border-gold-400/40 px-1.5 py-0.2 rounded font-sans tracking-widest font-semibold">DUBAI</span>
+          </div>
+          <span class="text-[9px] text-slate-400 tracking-[0.35em] uppercase block -mt-0.5">Sovereign Private Office</span>
+        </div>
+      </a>
+
+      <!-- Primary Navigation -->
+      <nav class="hidden lg:flex items-center gap-8">
+        <a href="#signature-portfolio" class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold-400 transition-colors">Trophy Portfolio</a>
+        <a href="#forma-showcase" class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold-400 transition-colors">FORMA Interiors</a>
+        <a href="#market-intelligence" class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold-400 transition-colors">Market Advisory</a>
+        <a href="#private-services" class="text-xs uppercase tracking-[0.2em] text-slate-300 hover:text-gold-400 transition-colors">White-Glove VIP</a>
+      </nav>
+
+      <!-- Right Action Controls -->
+      <div class="flex items-center gap-3">
+        <!-- Live Currency Switcher -->
+        <div class="relative">
+          <select id="currencySelector" onchange="updateCurrency(this.value)" class="bg-surface text-gold-300 text-xs font-semibold px-3 py-2 rounded-lg border border-gold-500/30 focus:outline-none focus:border-gold-400 cursor-pointer">
+            <option value="AED">AED (د.إ)</option>
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="BTC">BTC (₿)</option>
+          </select>
         </div>
 
-        <div id="mHighlights" class="flex flex-wrap gap-2"></div>
+        <!-- Private Concierge Button -->
+        <a href="https://wa.me/971501234567?text=Hello%20Realtor%20Dubai%2C%20I%20am%20inquiring%20about%20the%20Ultra-Luxury%20Penthouse%20Collection." target="_blank" class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-gold-500 to-gold-600 text-noir font-bold text-xs uppercase tracking-wider hover:brightness-110 shadow-lg shadow-gold-500/20 transition-all">
+          <span>Private Concierge</span>
+          <span class="text-sm">→</span>
+        </a>
+      </div>
 
-        <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <button type="button" onclick="closePropModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs transition-colors flex items-center justify-center space-x-2 border border-white/15 cursor-pointer">
-            <i class="fa-solid fa-arrow-left"></i>
-            <span>Back to Penthouse</span>
-          </button>
+    </div>
+  </header>
 
-          <a id="mWhatsAppBtn" href="https://wa.me/971566037833" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-black font-bold text-xs shadow-xl transition-all">
-            <i class="fa-brands fa-whatsapp text-base"></i>
-            <span>Book Private Viewing on WhatsApp</span>
+  <!-- ======================================================== -->
+  <!-- 2. FULLSCREEN CINEMATIC HERO (SOTHEBY'S EDITORIAL STYLE) -->
+  <!-- ======================================================== -->
+  <section class="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    
+    <!-- Ultra-High-Resolution 4K Architectural Visual with Subtle Zoom -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=90" 
+        alt="Dubai Ultra-Luxury Skyline and Penthouses" 
+        class="w-full h-full object-cover animate-subtle-zoom"
+      >
+      <!-- Editorial Multi-Stop Gradient Vignette -->
+      <div class="absolute inset-0 editorial-gradient"></div>
+      <div class="absolute inset-0 bg-black/40 backdrop-blur-[1px]"></div>
+    </div>
+
+    <!-- Hero Content Envelope -->
+    <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 pb-20">
+      
+      <!-- Prestige Heritage Badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-gold-400/40 bg-noir/70 backdrop-blur-md text-gold-300 text-[11px] font-semibold tracking-[0.25em] uppercase mb-6 shadow-xl">
+        <span class="text-gold-400">⚜</span>
+        <span>Curated Off-Market & Trophy Residences</span>
+      </div>
+
+      <!-- Main Headline: Editorial Luxury Serif -->
+      <h1 class="text-4xl sm:text-6xl md:text-7xl font-serif font-bold text-white tracking-tight uppercase leading-[1.08] mb-6 drop-shadow-2xl">
+        The Crown Estates <br class="hidden sm:inline">
+        <span class="font-display italic font-normal text-gold-300 normal-case tracking-normal">of</span> 
+        <span class="bg-gradient-to-r from-amber-200 via-gold-300 to-amber-400 bg-clip-text text-transparent">Dubai</span>
+      </h1>
+
+      <p class="text-slate-300 text-sm sm:text-lg max-w-2xl mx-auto font-light leading-relaxed mb-10 drop-shadow">
+        Representing the pinnacle of international architecture — from branded sky penthouses overlooking the Burj Khalifa to private waterfront islands in Palm Jumeirah.
+      </p>
+
+      <!-- ============================================== -->
+      <!-- VIP PROPERTY FILTER / DISCOVERY SEARCH ENGINE   -->
+      <!-- ============================================== -->
+      <div class="glass-dark rounded-2xl p-3 sm:p-4 max-w-4xl mx-auto shadow-2xl border border-white/10 text-left">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+          
+          <!-- Location Filter -->
+          <div class="p-2.5 rounded-xl bg-surface/70 border border-white/5">
+            <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold block mb-1">Location</span>
+            <select id="filterLocation" onchange="applyFilters()" class="w-full bg-transparent text-white font-semibold text-xs focus:outline-none cursor-pointer">
+              <option value="all" class="bg-surface text-white">All Iconic Locations</option>
+              <option value="Downtown Dubai" class="bg-surface text-white">Downtown Dubai</option>
+              <option value="Palm Jumeirah" class="bg-surface text-white">Palm Jumeirah</option>
+              <option value="Jumeira Bay Island" class="bg-surface text-white">Jumeira Bay Island</option>
+              <option value="Dubai Water Canal" class="bg-surface text-white">Dubai Water Canal</option>
+            </select>
+          </div>
+
+          <!-- Typology Filter -->
+          <div class="p-2.5 rounded-xl bg-surface/70 border border-white/5">
+            <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold block mb-1">Typology</span>
+            <select id="filterType" onchange="applyFilters()" class="w-full bg-transparent text-white font-semibold text-xs focus:outline-none cursor-pointer">
+              <option value="all" class="bg-surface text-white">All Residence Types</option>
+              <option value="Sky Penthouse" class="bg-surface text-white">Sky Penthouse</option>
+              <option value="Waterfront Villa" class="bg-surface text-white">Waterfront Villa</option>
+              <option value="Triplex Mansion" class="bg-surface text-white">Triplex Mansion</option>
+            </select>
+          </div>
+
+          <!-- Price Threshold -->
+          <div class="p-2.5 rounded-xl bg-surface/70 border border-white/5">
+            <span class="text-[9px] uppercase tracking-widest text-slate-400 font-semibold block mb-1">Acquisition Range</span>
+            <select id="filterPrice" onchange="applyFilters()" class="w-full bg-transparent text-gold-300 font-semibold text-xs focus:outline-none cursor-pointer">
+              <option value="all" class="bg-surface text-white">All Price Points</option>
+              <option value="50-80" class="bg-surface text-white">AED 50M – AED 80M</option>
+              <option value="80-120" class="bg-surface text-white">AED 80M – AED 120M</option>
+              <option value="120+" class="bg-surface text-white">AED 120M+ (Trophy Assets)</option>
+            </select>
+          </div>
+
+          <!-- Action Button -->
+          <div class="flex items-center">
+            <button onclick="scrollToSection('signature-portfolio')" class="w-full h-full min-h-[46px] rounded-xl bg-gradient-to-r from-gold-500 to-gold-600 text-noir font-bold text-xs uppercase tracking-widest hover:brightness-110 shadow-lg transition-all flex items-center justify-center gap-2">
+              <span>View Collection</span>
+              <span>↓</span>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Quick Trust Indicators -->
+      <div class="mt-8 flex flex-wrap items-center justify-center gap-6 text-[11px] text-slate-400">
+        <span class="flex items-center gap-1.5"><span class="text-gold-400 font-bold">✓</span> RERA Licensed #94821</span>
+        <span class="flex items-center gap-1.5"><span class="text-gold-400 font-bold">✓</span> 10-Year Golden Visa Included</span>
+        <span class="flex items-center gap-1.5"><span class="text-gold-400 font-bold">✓</span> Rolls-Royce Chauffeur Viewing</span>
+        <span class="flex items-center gap-1.5"><span class="text-gold-400 font-bold">✓</span> Direct Crypto & Escrow Settlement</span>
+      </div>
+
+    </div>
+
+    <!-- Scroll Down Indicator -->
+    <a href="#signature-portfolio" class="absolute bottom-6 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1 text-[10px] uppercase tracking-[0.25em] text-slate-400 hover:text-gold-400 transition-colors">
+      <span>Explore Portfolio</span>
+      <span class="animate-bounce text-sm">↓</span>
+    </a>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 3. SIGNATURE TROPHY RESIDENCES PORTFOLIO (EDITORIAL)     -->
+  <!-- ======================================================== -->
+  <section id="signature-portfolio" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-white/5">
+      <div>
+        <span class="text-gold-400 text-xs font-semibold tracking-[0.25em] uppercase block mb-2">Curated Dossier</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-bold uppercase text-white tracking-tight">The Crown Collection</h2>
+      </div>
+      <p class="text-slate-400 text-sm max-w-md mt-4 md:mt-0 font-light">
+        Privately vetted architectural masterworks with guaranteed unobstructed horizons, private elevators, and turnkey Italian finishes.
+      </p>
+    </div>
+
+    <!-- Properties Grid -->
+    <div id="propertiesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- Residence 1 -->
+      <article class="property-card group rounded-3xl glass-dark border border-white/10 hover:border-gold-400/50 overflow-hidden transition-all duration-500 hover:-translate-y-2 luxury-card-shadow" data-location="Downtown Dubai" data-type="Sky Penthouse" data-price="95000000">
+        <div class="relative aspect-[16/11] overflow-hidden bg-surface cursor-pointer" onclick="openPropertyModal(0)">
+          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85" alt="The Lana Residences Dorchester Collection" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-noir/90 via-transparent to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-noir/80 backdrop-blur-md text-gold-300 border border-gold-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Downtown Dubai</span>
+          <span class="absolute top-4 right-4 bg-amber-500/20 backdrop-blur-md text-amber-300 border border-amber-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Foster + Partners</span>
+          <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+            <div>
+              <span class="text-[10px] text-slate-300 uppercase tracking-widest block">Acquisition</span>
+              <span class="font-display font-bold text-xl text-gold-300 price-val" data-aed="95000000">AED 95,000,000</span>
+            </div>
+            <span class="text-xs text-white font-semibold group-hover:text-gold-400 transition-colors">Inspect Dossier →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Dorchester Collection · 14,200 Sq. Ft</span>
+          <h3 class="font-serif font-bold text-2xl text-white mt-1 group-hover:text-gold-300 transition-colors">The Lana Sky Penthouse</h3>
+          <p class="text-xs text-slate-400 mt-2.5 line-clamp-2 leading-relaxed">
+            Duplex penthouse managed by Dorchester Collection. Double-height ceilings, private 18m cantilevered pool, and sunset Burj Khalifa panoramas.
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-300">
+            <span>6 Master Suites</span>
+            <span>·</span>
+            <span>8 Marble Baths</span>
+            <span>·</span>
+            <span>Private Elevator</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Residence 2 -->
+      <article class="property-card group rounded-3xl glass-dark border border-white/10 hover:border-gold-400/50 overflow-hidden transition-all duration-500 hover:-translate-y-2 luxury-card-shadow" data-location="Palm Jumeirah" data-type="Waterfront Villa" data-price="115000000">
+        <div class="relative aspect-[16/11] overflow-hidden bg-surface cursor-pointer" onclick="openPropertyModal(1)">
+          <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=85" alt="Atlantis The Royal Residences" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-noir/90 via-transparent to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-noir/80 backdrop-blur-md text-sky-300 border border-sky-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Palm Jumeirah</span>
+          <span class="absolute top-4 right-4 bg-white/10 backdrop-blur-md text-white border border-white/20 text-[10px] font-bold uppercase px-3 py-1 rounded-full">KPF Architecture</span>
+          <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+            <div>
+              <span class="text-[10px] text-slate-300 uppercase tracking-widest block">Acquisition</span>
+              <span class="font-display font-bold text-xl text-gold-300 price-val" data-aed="115000000">AED 115,000,000</span>
+            </div>
+            <span class="text-xs text-white font-semibold group-hover:text-gold-400 transition-colors">Inspect Dossier →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Trophy Residence · 16,800 Sq. Ft</span>
+          <h3 class="font-serif font-bold text-2xl text-white mt-1 group-hover:text-gold-300 transition-colors">Atlantis The Royal Sky Villa</h3>
+          <p class="text-xs text-slate-400 mt-2.5 line-clamp-2 leading-relaxed">
+            Suspended 180 meters above the Arabian Sea. Unobstructed 360-degree horizon with infinity edge pool directly over the ocean.
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-300">
+            <span>5 Ocean Suites</span>
+            <span>·</span>
+            <span>Private Beach</span>
+            <span>·</span>
+            <span>Helipad Access</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Residence 3 -->
+      <article class="property-card group rounded-3xl glass-dark border border-white/10 hover:border-gold-400/50 overflow-hidden transition-all duration-500 hover:-translate-y-2 luxury-card-shadow" data-location="Jumeira Bay Island" data-type="Sky Penthouse" data-price="140000000">
+        <div class="relative aspect-[16/11] overflow-hidden bg-surface cursor-pointer" onclick="openPropertyModal(2)">
+          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85" alt="Bulgari Lighthouse Penthouse" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-noir/90 via-transparent to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-noir/80 backdrop-blur-md text-emerald-300 border border-emerald-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Jumeira Bay Island</span>
+          <span class="absolute top-4 right-4 bg-emerald-500/20 backdrop-blur-md text-emerald-300 border border-emerald-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Antonio Citterio</span>
+          <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+            <div>
+              <span class="text-[10px] text-slate-300 uppercase tracking-widest block">Acquisition</span>
+              <span class="font-display font-bold text-xl text-gold-300 price-val" data-aed="140000000">AED 140,000,000</span>
+            </div>
+            <span class="text-xs text-white font-semibold group-hover:text-gold-400 transition-colors">Inspect Dossier →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Island Lighthouse · 19,500 Sq. Ft</span>
+          <h3 class="font-serif font-bold text-2xl text-white mt-1 group-hover:text-gold-300 transition-colors">Bulgari Lighthouse Penthouse</h3>
+          <p class="text-xs text-slate-400 mt-2.5 line-clamp-2 leading-relaxed">
+            Private full-floor sky sanctuary on Seahorse Island. Custom Italian oak, bookmatched Calacatta marble, and private yacht berth.
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-300">
+            <span>7 Master Suites</span>
+            <span>·</span>
+            <span>Private Marina</span>
+            <span>·</span>
+            <span>Full-Floor 360°</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Residence 4 -->
+      <article class="property-card group rounded-3xl glass-dark border border-white/10 hover:border-gold-400/50 overflow-hidden transition-all duration-500 hover:-translate-y-2 luxury-card-shadow" data-location="Dubai Water Canal" data-type="Sky Penthouse" data-price="72000000">
+        <div class="relative aspect-[16/11] overflow-hidden bg-surface cursor-pointer" onclick="openPropertyModal(3)">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85" alt="One Canal Safa Park" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-noir/90 via-transparent to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-noir/80 backdrop-blur-md text-amber-300 border border-amber-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Dubai Water Canal</span>
+          <span class="absolute top-4 right-4 bg-white/10 backdrop-blur-md text-white border border-white/20 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Fendi Casa</span>
+          <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+            <div>
+              <span class="text-[10px] text-slate-300 uppercase tracking-widest block">Acquisition</span>
+              <span class="font-display font-bold text-xl text-gold-300 price-val" data-aed="72000000">AED 72,000,000</span>
+            </div>
+            <span class="text-xs text-white font-semibold group-hover:text-gold-400 transition-colors">Inspect Dossier →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Canal Penthouse · 11,500 Sq. Ft</span>
+          <h3 class="font-serif font-bold text-2xl text-white mt-1 group-hover:text-gold-300 transition-colors">One Canal Sky Villa</h3>
+          <p class="text-xs text-slate-400 mt-2.5 line-clamp-2 leading-relaxed">
+            Curated by Fendi Casa with uninterrupted views of Safa Park and the Burj Khalifa. Private rooftop pool terrace and champagne lounge.
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-300">
+            <span>5 Bedrooms</span>
+            <span>·</span>
+            <span>Private Teppanyaki</span>
+            <span>·</span>
+            <span>Canal Front</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Residence 5 -->
+      <article class="property-card group rounded-3xl glass-dark border border-white/10 hover:border-gold-400/50 overflow-hidden transition-all duration-500 hover:-translate-y-2 luxury-card-shadow" data-location="Downtown Dubai" data-type="Triplex Mansion" data-price="120000000">
+        <div class="relative aspect-[16/11] overflow-hidden bg-surface cursor-pointer" onclick="openPropertyModal(4)">
+          <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1200&q=85" alt="Burj Crown Presidential Triplex" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-noir/90 via-transparent to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-noir/80 backdrop-blur-md text-rose-300 border border-rose-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Downtown Dubai</span>
+          <span class="absolute top-4 right-4 bg-rose-500/20 backdrop-blur-md text-rose-300 border border-rose-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Triplex Crown</span>
+          <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+            <div>
+              <span class="text-[10px] text-slate-300 uppercase tracking-widest block">Acquisition</span>
+              <span class="font-display font-bold text-xl text-gold-300 price-val" data-aed="120000000">AED 120,000,000</span>
+            </div>
+            <span class="text-xs text-white font-semibold group-hover:text-gold-400 transition-colors">Inspect Dossier →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Presidential Triplex · 18,200 Sq. Ft</span>
+          <h3 class="font-serif font-bold text-2xl text-white mt-1 group-hover:text-gold-300 transition-colors">Burj Crown Presidential</h3>
+          <p class="text-xs text-slate-400 mt-2.5 line-clamp-2 leading-relaxed">
+            3-story sky mansion occupying the pinnacle floors. Private internal pneumatic glass elevator, bulletproof glazing, and 7 en-suite bedrooms.
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-300">
+            <span>7 Suites</span>
+            <span>·</span>
+            <span>Private Cinema</span>
+            <span>·</span>
+            <span>Armored Security</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Residence 6 -->
+      <article class="property-card group rounded-3xl glass-dark border border-white/10 hover:border-gold-400/50 overflow-hidden transition-all duration-500 hover:-translate-y-2 luxury-card-shadow" data-location="Palm Jumeirah" data-type="Waterfront Villa" data-price="65000000">
+        <div class="relative aspect-[16/11] overflow-hidden bg-surface cursor-pointer" onclick="openPropertyModal(5)">
+          <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=85" alt="The Palm Seaside Villa" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-noir/90 via-transparent to-transparent"></div>
+          <span class="absolute top-4 left-4 bg-noir/80 backdrop-blur-md text-sky-300 border border-sky-400/30 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Palm Jumeirah</span>
+          <span class="absolute top-4 right-4 bg-white/10 backdrop-blur-md text-white border border-white/20 text-[10px] font-bold uppercase px-3 py-1 rounded-full">Private Frond</span>
+          <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
+            <div>
+              <span class="text-[10px] text-slate-300 uppercase tracking-widest block">Acquisition</span>
+              <span class="font-display font-bold text-xl text-gold-300 price-val" data-aed="65000000">AED 65,000,000</span>
+            </div>
+            <span class="text-xs text-white font-semibold group-hover:text-gold-400 transition-colors">Inspect Dossier →</span>
+          </div>
+        </div>
+        <div class="p-6">
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Bespoke Beachfront · 9,800 Sq. Ft</span>
+          <h3 class="font-serif font-bold text-2xl text-white mt-1 group-hover:text-gold-300 transition-colors">The Palm Frond Sanctuary</h3>
+          <p class="text-xs text-slate-400 mt-2.5 line-clamp-2 leading-relaxed">
+            Direct access to private white-sand beach with 8-berth private yacht mooring. Sunset horizons, outdoor firepit lounge, and smart-home automation.
+          </p>
+          <div class="mt-5 pt-4 border-t border-white/5 flex items-center justify-between text-xs text-slate-300">
+            <span>5 Master Beds</span>
+            <span>·</span>
+            <span>Private Marina</span>
+            <span>·</span>
+            <span>Infinity Pool</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 4. CONTINUOUS FORMA EDITORIAL INTERIOR WALKTHROUGH       -->
+  <!-- ======================================================== -->
+  <section id="forma-showcase" class="py-24 px-4 sm:px-6 lg:px-8 bg-obsidian border-t border-white/5">
+    <div class="max-w-6xl mx-auto">
+      
+      <!-- Section Title -->
+      <div class="text-center max-w-3xl mx-auto mb-20">
+        <span class="text-gold-400 text-xs font-semibold tracking-[0.25em] uppercase block mb-2">Architectural Walkthrough</span>
+        <h2 class="font-serif text-3xl sm:text-5xl font-bold uppercase text-white tracking-tight">FORMA Residential Interiors</h2>
+        <p class="mt-4 text-slate-400 text-sm sm:text-base font-light leading-relaxed">
+          An editorial spatial progression across curated rooms — crafted with Italian stone, floor-to-ceiling glass, and minimalist luxury.
+        </p>
+      </div>
+
+      <!-- Alternating Editorial Storyboard (Left -> Right -> Left -> Right -> Left -> Right -> Center) -->
+      <div class="space-y-28">
+
+        <!-- 01 / LIVING: "THE LIVING SPACE" (Left Aligned) -->
+        <div class="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
+          <div class="w-full md:w-1/2 text-left">
+            <span class="text-gold-400 font-mono text-xs tracking-[0.3em] uppercase block mb-2">01 / LIVING</span>
+            <h3 class="font-serif text-3xl sm:text-4xl font-bold uppercase text-white mb-4">THE LIVING SPACE</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              Dramatic 7-meter double-height volume framed by monolithic floor-to-ceiling glass envelopes. Features custom Minotti seating arrangements, a 4-meter hand-chiseled travertine fireplace, and panoramic views of the Dubai skyline.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2 text-xs">
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">7-Meter Double Height</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Minotti Italian Furnishings</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Travertine Fireplace</span>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 rounded-3xl overflow-hidden glass-dark border border-white/10 aspect-[4/3] luxury-card-shadow">
+            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=85" alt="The Living Space" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+          </div>
+        </div>
+
+        <!-- 02 / DINING: "THE DINING ROOM" (Right Aligned) -->
+        <div class="flex flex-col md:flex-row-reverse items-center gap-10 lg:gap-16">
+          <div class="w-full md:w-1/2 text-left md:text-right">
+            <span class="text-gold-400 font-mono text-xs tracking-[0.3em] uppercase block mb-2">02 / DINING</span>
+            <h3 class="font-serif text-3xl sm:text-4xl font-bold uppercase text-white mb-4">THE DINING ROOM</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              Bespoke culinary banquet setting accommodating 14 guests around a monolithic Nero Marquina marble table. Anchored by a celestial hand-blown Murano glass chandelier with integrated ambient mood transitions.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2 text-xs justify-start md:justify-end">
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">14-Seat Nero Marquina</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Murano Glass Chandelier</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Acoustic Cedar Paneling</span>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 rounded-3xl overflow-hidden glass-dark border border-white/10 aspect-[4/3] luxury-card-shadow">
+            <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=85" alt="The Dining Room" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+          </div>
+        </div>
+
+        <!-- 03 / KITCHEN: "THE KITCHEN" (Left Aligned) -->
+        <div class="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
+          <div class="w-full md:w-1/2 text-left">
+            <span class="text-gold-400 font-mono text-xs tracking-[0.3em] uppercase block mb-2">03 / KITCHEN</span>
+            <h3 class="font-serif text-3xl sm:text-4xl font-bold uppercase text-white mb-4">THE KITCHEN</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              Architectural minimalist show kitchen featuring concealed Gaggenau 400 Series appliances, Poliform smoked fluted oak joinery, and an adjoining sommelier walk-in climate-controlled wine cellar.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2 text-xs">
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Gaggenau 400 Series</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Poliform Custom Joinery</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Sommelier Wine Vault</span>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 rounded-3xl overflow-hidden glass-dark border border-white/10 aspect-[4/3] luxury-card-shadow">
+            <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=85" alt="The Kitchen" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+          </div>
+        </div>
+
+        <!-- 04 / SUITE: "PRIMARY SUITE" (Right Aligned) -->
+        <div class="flex flex-col md:flex-row-reverse items-center gap-10 lg:gap-16">
+          <div class="w-full md:w-1/2 text-left md:text-right">
+            <span class="text-gold-400 font-mono text-xs tracking-[0.3em] uppercase block mb-2">04 / SUITE</span>
+            <h3 class="font-serif text-3xl sm:text-4xl font-bold uppercase text-white mb-4">PRIMARY SUITE</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              A private residential sanctuary with Italian silk wall paneling, dual bespoke dressing salons with saddle leather trim, motorized acoustic blackout drapes, and an exclusive sunrise balcony.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2 text-xs justify-start md:justify-end">
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Dual Couture Closets</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Italian Silk Paneling</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Sunrise Terrace</span>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 rounded-3xl overflow-hidden glass-dark border border-white/10 aspect-[4/3] luxury-card-shadow">
+            <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=85" alt="Primary Suite" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+          </div>
+        </div>
+
+        <!-- 05 / GARDEN: "THE GARDEN ROOM" (Left Aligned) -->
+        <div class="flex flex-col md:flex-row items-center gap-10 lg:gap-16">
+          <div class="w-full md:w-1/2 text-left">
+            <span class="text-gold-400 font-mono text-xs tracking-[0.3em] uppercase block mb-2">05 / GARDEN</span>
+            <h3 class="font-serif text-3xl sm:text-4xl font-bold uppercase text-white mb-4">THE GARDEN ROOM</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              Climate-regulated indoor biophilic winter garden featuring an 80-year-old sculpted Japanese black pine, living preserved moss acoustic walls, and a black Zimbabwe granite reflecting pool.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2 text-xs">
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">80-Yr Japanese Bonsai</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Reflecting Pool</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Biophilic Air Purifier</span>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 rounded-3xl overflow-hidden glass-dark border border-white/10 aspect-[4/3] luxury-card-shadow">
+            <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1200&q=85" alt="The Garden Room" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+          </div>
+        </div>
+
+        <!-- 06 / BATH: "THE BATH" (Right Aligned) -->
+        <div class="flex flex-col md:flex-row-reverse items-center gap-10 lg:gap-16">
+          <div class="w-full md:w-1/2 text-left md:text-right">
+            <span class="text-gold-400 font-mono text-xs tracking-[0.3em] uppercase block mb-2">06 / BATH</span>
+            <h3 class="font-serif text-3xl sm:text-4xl font-bold uppercase text-white mb-4">THE BATH</h3>
+            <p class="text-slate-400 text-sm sm:text-base leading-relaxed font-light">
+              Monolithic hand-carved basalt soaking tub placed directly against floor-to-ceiling horizon glass. Complemented by heated bookmatched Calacatta Gold marble, double rain showers, and an integrated private steam sauna.
+            </p>
+            <div class="mt-6 flex flex-wrap gap-2 text-xs justify-start md:justify-end">
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Carved Basalt Monolith</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Calacatta Gold Heated Floors</span>
+              <span class="px-3 py-1 rounded-full bg-surface border border-white/10 text-slate-300">Private Steam Sauna</span>
+            </div>
+          </div>
+          <div class="w-full md:w-1/2 rounded-3xl overflow-hidden glass-dark border border-white/10 aspect-[4/3] luxury-card-shadow">
+            <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=85" alt="The Bath" class="w-full h-full object-cover hover:scale-105 transition-all duration-700">
+          </div>
+        </div>
+
+        <!-- 07 / GRAND VIEW: "THE GRAND VIEW" (Center Aligned) -->
+        <div class="text-center max-w-4xl mx-auto pt-10">
+          <span class="text-gold-400 font-mono text-xs tracking-[0.3em] uppercase block mb-2">07 / GRAND VIEW</span>
+          <h3 class="font-serif text-3xl sm:text-5xl font-bold uppercase text-white mb-6">THE GRAND VIEW</h3>
+          <p class="text-slate-400 text-base sm:text-lg leading-relaxed max-w-2xl mx-auto mb-10 font-light">
+            An unobstructed 360-degree horizon where the azure Arabian Gulf meets the futuristic Dubai skyline. Infinite golden hour sunsets in complete sovereignty.
+          </p>
+          <div class="rounded-3xl overflow-hidden glass-dark border border-white/15 aspect-[21/9] shadow-2xl relative group">
+            <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=1800&q=90" alt="The Grand View Dubai" class="w-full h-full object-cover group-hover:scale-105 transition-all duration-1000">
+            <div class="absolute inset-0 bg-gradient-to-t from-noir/90 via-noir/20 to-transparent flex items-end justify-center pb-10">
+              <button onclick="openAppointmentModal()" class="px-8 py-3.5 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-noir font-bold text-xs uppercase tracking-widest hover:brightness-110 shadow-xl transition-all">
+                Schedule Sunset Helicopter Viewing
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 5. MARKET INTELLIGENCE & ADVISORY                        -->
+  <!-- ======================================================== -->
+  <section id="market-intelligence" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+    
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-gold-400 text-xs font-semibold tracking-[0.25em] uppercase block mb-2">Market Advisory</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold uppercase text-white">Dubai Super-Prime Intelligence</h2>
+      <p class="text-slate-400 text-sm mt-3 font-light">Why ultra-high-net-worth investors allocate sovereign capital into Dubai trophy real estate.</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div class="p-6 rounded-2xl glass-dark border border-white/10 text-center">
+        <span class="font-display font-bold text-3xl sm:text-4xl text-gold-400 block mb-2">0%</span>
+        <h4 class="font-bold text-sm text-white mb-1 uppercase tracking-wider">Zero Tax Environment</h4>
+        <p class="text-xs text-slate-400 font-light">Zero capital gains tax, zero personal income tax, and zero property ownership taxes.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl glass-dark border border-white/10 text-center">
+        <span class="font-display font-bold text-3xl sm:text-4xl text-gold-400 block mb-2">10-YR</span>
+        <h4 class="font-bold text-sm text-white mb-1 uppercase tracking-wider">UAE Golden Visa</h4>
+        <p class="text-xs text-slate-400 font-light">100% renewable residency for investor, spouse, children, and domestic staff with full sponsor rights.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl glass-dark border border-white/10 text-center">
+        <span class="font-display font-bold text-3xl sm:text-4xl text-gold-400 block mb-2">+18.4%</span>
+        <h4 class="font-bold text-sm text-white mb-1 uppercase tracking-wider">Prime Capital Growth</h4>
+        <p class="text-xs text-slate-400 font-light">Leading global prime residential index growth, surpassing London, New York, and Geneva.</p>
+      </div>
+
+      <div class="p-6 rounded-2xl glass-dark border border-white/10 text-center">
+        <span class="font-display font-bold text-3xl sm:text-4xl text-gold-400 block mb-2">100%</span>
+        <h4 class="font-bold text-sm text-white mb-1 uppercase tracking-wider">Freehold Ownership</h4>
+        <p class="text-xs text-slate-400 font-light">Complete perpetual foreign ownership backed by the Dubai Land Department (DLD).</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 6. WHITE-GLOVE VIP SERVICES                              -->
+  <!-- ======================================================== -->
+  <section id="private-services" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto border-t border-white/5">
+    
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-gold-400 text-xs font-semibold tracking-[0.25em] uppercase block mb-2">VIP Private Office</span>
+      <h2 class="font-serif text-3xl sm:text-4xl font-bold uppercase text-white">White-Glove Acquisition Advisory</h2>
+      <p class="text-slate-400 text-sm mt-3 font-light">Confidential representation for family offices, royal dignitaries, and institutional investors.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <div class="rounded-3xl glass-dark border border-white/10 p-8 hover:border-gold-400/40 transition-all">
+        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-xl mb-6">
+          🚘
+        </div>
+        <h3 class="font-serif font-bold text-xl text-white mb-2">Rolls-Royce & Jet Transfers</h3>
+        <p class="text-slate-400 text-xs leading-relaxed font-light">
+          VIP tarmac greeting at Al Maktoum International Airport (DWC) or DXB VIP terminal, with Rolls-Royce Ghost chauffeur transfers directly to private viewings.
+        </p>
+      </div>
+
+      <div class="rounded-3xl glass-dark border border-white/10 p-8 hover:border-gold-400/40 transition-all">
+        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-xl mb-6">
+          🛡️
+        </div>
+        <h3 class="font-serif font-bold text-xl text-white mb-2">Confidential Escrow & Crypto</h3>
+        <p class="text-slate-400 text-xs leading-relaxed font-light">
+          Seamless cross-border settlement in AED, USD, EUR, or major digital assets (BTC, ETH, USDT) through regulated tier-1 UAE escrow institutions.
+        </p>
+      </div>
+
+      <div class="rounded-3xl glass-dark border border-white/10 p-8 hover:border-gold-400/40 transition-all">
+        <div class="w-12 h-12 rounded-2xl bg-gold-500/10 border border-gold-400/30 flex items-center justify-center text-gold-400 text-xl mb-6">
+          📜
+        </div>
+        <h3 class="font-serif font-bold text-xl text-white mb-2">Bespoke Off-Market Dossiers</h3>
+        <p class="text-slate-400 text-xs leading-relaxed font-light">
+          Access unlisted penthouses and private islands whose owners require strict non-disclosure agreements (NDAs) before property release.
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Booking CTA Banner -->
+    <div class="mt-16 rounded-3xl glass-gold p-8 md:p-12 text-center max-w-4xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-6 shadow-2xl">
+      <div class="text-left">
+        <h3 class="font-serif text-2xl sm:text-3xl font-bold text-white uppercase">Schedule Confidential Viewing</h3>
+        <p class="text-gold-200 text-xs mt-1.5 font-light">Direct private consultation with our Senior Managing Partner in Dubai.</p>
+      </div>
+      <div class="flex items-center gap-3">
+        <button onclick="openAppointmentModal()" class="px-6 py-3.5 rounded-full bg-white text-noir font-bold text-xs uppercase tracking-wider hover:bg-gold-100 transition-all shadow-lg">
+          Book Private Tour
+        </button>
+        <a href="https://wa.me/971501234567?text=Hello%20Realtor%20Dubai%2C%20please%20send%20the%20Confidential%20Off-Market%20Brochure." target="_blank" class="px-5 py-3.5 rounded-full bg-noir/60 border border-white/20 text-white font-bold text-xs uppercase tracking-wider hover:bg-noir/90 transition-all">
+          WhatsApp Direct
+        </a>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ======================================================== -->
+  <!-- 7. FOOTER                                                -->
+  <!-- ======================================================== -->
+  <footer class="border-t border-white/5 py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto text-center md:text-left text-xs text-slate-500 flex flex-col md:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="font-display font-bold tracking-widest text-slate-300">REALTOR® DUBAI</span>
+      <span>· Licensed Real Estate Brokerage #94821</span>
+    </div>
+    <div class="flex items-center gap-6">
+      <a href="#" class="hover:text-gold-400 transition-colors">Back to Top ↑</a>
+      <a href="#" class="hover:text-gold-400 transition-colors">Client Confidentiality</a>
+      <a href="#" class="hover:text-gold-400 transition-colors">DLD Escrow Policy</a>
+    </div>
+    <div>
+      © 2026 REALTOR Signature Luxury Realty LLC. All Rights Reserved.
+    </div>
+  </footer>
+
+  <!-- ======================================================== -->
+  <!-- 8. INTERACTIVE PROPERTY DETAIL MODAL                     -->
+  <!-- ======================================================== -->
+  <div id="propertyModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4">
+    <div class="relative w-full max-w-3xl glass-dark border border-gold-400/40 rounded-3xl p-6 sm:p-8 max-h-[92vh] overflow-y-auto luxury-card-shadow">
+      
+      <!-- Close Button -->
+      <button onclick="closePropertyModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition-all">✕</button>
+
+      <div class="flex items-center gap-2 mb-2">
+        <span id="modalBadge" class="text-[10px] font-bold uppercase tracking-wider text-gold-400 bg-gold-500/10 border border-gold-400/30 px-3 py-1 rounded-full">Downtown Dubai</span>
+        <span id="modalArch" class="text-[10px] text-slate-400 uppercase tracking-widest font-semibold">Foster + Partners</span>
+      </div>
+
+      <h2 id="modalTitle" class="font-serif text-2xl sm:text-4xl font-bold text-white mb-1.5">The Lana Sky Penthouse</h2>
+      <p id="modalSubtitle" class="text-xs text-slate-400 mb-6 font-light">Panoramic Burj Khalifa view with private 18m cantilevered infinity pool.</p>
+
+      <!-- Modal Gallery Image -->
+      <div class="rounded-2xl overflow-hidden aspect-[16/9] mb-6 bg-surface shadow-2xl">
+        <img id="modalImage" src="" alt="Property Preview" class="w-full h-full object-cover">
+      </div>
+
+      <!-- Specs Grid -->
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 text-center">
+        <div class="p-3 rounded-xl bg-surface/60 border border-white/5">
+          <span class="text-[9px] uppercase tracking-widest text-slate-400 block mb-1">Total Built Area</span>
+          <span id="modalArea" class="font-bold text-sm text-white">14,200 Sq. Ft</span>
+        </div>
+        <div class="p-3 rounded-xl bg-surface/60 border border-white/5">
+          <span class="text-[9px] uppercase tracking-widest text-slate-400 block mb-1">Bedrooms</span>
+          <span id="modalBeds" class="font-bold text-sm text-white">6 Master Suites</span>
+        </div>
+        <div class="p-3 rounded-xl bg-surface/60 border border-white/5">
+          <span class="text-[9px] uppercase tracking-widest text-slate-400 block mb-1">Horizon View</span>
+          <span id="modalView" class="font-bold text-sm text-white">Burj Khalifa Sunset</span>
+        </div>
+        <div class="p-3 rounded-xl bg-surface/60 border border-white/5">
+          <span class="text-[9px] uppercase tracking-widest text-slate-400 block mb-1">Interior Design</span>
+          <span id="modalFurnishing" class="font-bold text-sm text-white">Dorchester Standard</span>
+        </div>
+      </div>
+
+      <!-- Price & Actions -->
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-white/10">
+        <div>
+          <span class="text-[10px] text-slate-400 uppercase tracking-widest block">Guide Acquisition Price</span>
+          <span id="modalPrice" class="font-display font-bold text-2xl text-gold-400">AED 95,000,000</span>
+        </div>
+        <div class="flex items-center gap-3 w-full sm:w-auto">
+          <a id="modalWhatsAppBtn" href="#" target="_blank" class="flex-1 sm:flex-none text-center px-5 py-3 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs uppercase tracking-wider transition-all">
+            WhatsApp Concierge
           </a>
+          <button onclick="openAppointmentModal()" class="flex-1 sm:flex-none px-5 py-3 rounded-full bg-gold-500 hover:bg-gold-400 text-noir font-bold text-xs uppercase tracking-wider transition-all">
+            Schedule Viewing
+          </button>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="bg-[#080D1A] border-t border-white/10 py-12 text-xs text-slate-400">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-      <div>
-        <span class="font-serif font-bold text-white text-sm">REALTOR SIGNATURE PROPERTIES</span>
-        <p class="text-slate-400 text-xs mt-1">Licensed by Dubai Land Department • RERA #59128</p>
-      </div>
-      <span>Suite 107-A29, White Swan Building, Sheikh Zayed Road, Dubai</span>
+  <!-- ======================================================== -->
+  <!-- 9. APPOINTMENT VIEWING MODAL                             -->
+  <!-- ======================================================== -->
+  <div id="appointmentModal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-xl hidden items-center justify-center p-4">
+    <div class="relative w-full max-w-lg glass-dark border border-gold-400/40 rounded-3xl p-6 sm:p-8 luxury-card-shadow">
+      <button onclick="closeAppointmentModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center text-sm transition-all">✕</button>
+
+      <span class="text-[10px] font-bold uppercase tracking-wider text-gold-400 bg-gold-500/10 border border-gold-400/30 px-3 py-1 rounded-full">Private Viewing</span>
+      <h2 class="font-serif text-2xl sm:text-3xl font-bold text-white mt-3 mb-1">Schedule VIP Viewing</h2>
+      <p class="text-xs text-slate-400 mb-6 font-light">Select your preferred date and VIP transport accommodation.</p>
+
+      <form onsubmit="handleAppointmentSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Full Legal Name / Title</label>
+          <input type="text" required placeholder="Lord / Sheikh / Dr. / Full Name" class="w-full bg-surface border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-gold-400">
+        </div>
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">WhatsApp / Contact Number</label>
+          <input type="tel" required placeholder="+971 50 000 0000" class="w-full bg-surface border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-gold-400">
+        </div>
+        <div>
+          <label class="block text-xs uppercase tracking-wider text-slate-400 mb-1">Preferred VIP Transport</label>
+          <select class="w-full bg-surface border border-white/10 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-gold-400 cursor-pointer">
+            <option>Rolls-Royce Ghost Chauffeur (Airport or Hotel Pickup)</option>
+            <option>Private Sunset Helicopter Transfer to Viewing Deck</option>
+            <option>Direct Drive & VIP Valet at Residence</option>
+            <option>Confidential 4K Virtual Walkthrough</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-3.5 rounded-full bg-gradient-to-r from-gold-500 to-gold-600 text-noir font-bold text-xs uppercase tracking-widest hover:brightness-110 shadow-lg transition-all mt-2">
+          Confirm Confidential Viewing
+        </button>
+      </form>
     </div>
-  </footer>
+  </div>
 
   <!-- ======================================================== -->
-  <!-- JAVASCRIPT: THE DUAL CINEMATIC ENGINE                    -->
+  <!-- 10. JAVASCRIPT: CURRENCY, FILTERING & MODAL ENGINE       -->
   <!-- ======================================================== -->
   <script>
-    // --------------------------------------------------------
-    // PART 1: VIDEO 1 AUTOMATIC CINEMATIC SEQUENCE
-    // --------------------------------------------------------
-    const s1 = document.getElementById('v1Scene1');
-    const s2 = document.getElementById('v1Scene2');
-    const sheikh = document.getElementById('sheikhFigure');
-    const cards = [
-      document.getElementById('c1'),
-      document.getElementById('c2'),
-      document.getElementById('c3'),
-      document.getElementById('c4')
-    ];
-
-    let currentScene = 1;
-    let sceneTimer = null;
-
-    function playVideo1Flow() {
-      // Scene 1: Skyline & Invest in DUBAI (0s - 3.8s)
-      currentScene = 1;
-      s1.style.opacity = '1';
-      s2.style.opacity = '0';
-      s2.style.pointerEvents = 'none';
-      sheikh.style.opacity = '0';
-      sheikh.style.transform = 'translateY(2.5rem)';
-
-      [cards[0], cards[1]].forEach(c => { c.style.transform = 'translateX(-3rem)'; c.style.opacity = '0'; });
-      [cards[2], cards[3]].forEach(c => { c.style.transform = 'translateX(3rem)'; c.style.opacity = '0'; });
-
-      // Scene 2: Penthouse Zoom-Out & Sheikh (at 3.8s)
-      sceneTimer = setTimeout(() => {
-        currentScene = 2;
-        s1.style.opacity = '0';
-        s2.style.opacity = '1';
-        s2.style.pointerEvents = 'auto';
-
-        sheikh.style.opacity = '1';
-        sheikh.style.transform = 'translateY(0)';
-
-        // Scene 3: The 4 White Cards Fly In (at 5.0s)
-        setTimeout(() => {
-          cards.forEach(c => {
-            c.style.transform = 'translateX(0)';
-            c.style.opacity = '1';
-          });
-        }, 1100);
-
-      }, 3800);
-    }
-
-    playVideo1Flow();
-
-    function jumpToHeroScene(num) {
-      clearTimeout(sceneTimer);
-      if (num === 1) {
-        playVideo1Flow();
-      } else {
-        s1.style.opacity = '0';
-        s2.style.opacity = '1';
-        s2.style.pointerEvents = 'auto';
-        sheikh.style.opacity = '1';
-        sheikh.style.transform = 'translateY(0)';
-        cards.forEach(c => {
-          c.style.transform = 'translateX(0)';
-          c.style.opacity = '1';
-        });
-      }
-    }
-
-    // --------------------------------------------------------
-    // 4 CARDS DATA & MODAL
-    // --------------------------------------------------------
-    const propertiesData = [
+    // Properties Data (Sotheby's Tier)
+    const PROPERTIES = [
       {
-        title: "Ellington Water Villa",
-        location: "Palm Jumeirah • Frond G",
-        priceAED: "AED 38,000,000",
-        priceUSD: "~$10,340,000 USD",
-        beds: "6 Suites",
-        baths: "8 Baths",
-        area: "11,500 Sq. Ft.",
-        yield: "8.6% Tax-Free",
-        desc: "Architectural masterpiece on Palm Jumeirah Frond G. Features double-height ocean-facing atrium, private boat mooring, and bespoke European minimalist interior craft.",
-        mainImg: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85",
-        highlights: ["Private Sand Beach", "Infinity Heated Lap Pool", "Calacatta Gold Marble", "10-Year Golden Visa", "DLD Escrow Secured"]
+        title: "The Lana Sky Penthouse",
+        subtitle: "Duplex penthouse managed by Dorchester Collection with private 18m cantilevered pool.",
+        badge: "Downtown Dubai",
+        arch: "Foster + Partners",
+        priceAed: 95000000,
+        area: "14,200 Sq. Ft",
+        beds: "6 Master Suites",
+        view: "Burj Khalifa Sunset",
+        furnishing: "Dorchester Bespoke",
+        image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=85"
       },
       {
-        title: "Horizon Beachfront Mansion",
-        location: "Dubai Islands • Coastal Belt",
-        priceAED: "AED 19,500,000",
-        priceUSD: "~$5,310,000 USD",
-        beds: "5 Suites",
-        baths: "6 Baths",
-        area: "8,200 Sq. Ft.",
-        yield: "8.2% Tax-Free",
-        desc: "Serene waterfront estate located in the newly reimagined Dubai Islands archipelago, offering direct access to open sea waters, private yacht berth, and private beach promenade.",
-        mainImg: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=85",
-        highlights: ["Private Yacht Mooring", "Floor-to-Ceiling Glazing", "High-Speed Private Lift", "10-Year Golden Visa", "DLD Escrow Secured"]
+        title: "Atlantis The Royal Sky Villa",
+        subtitle: "Suspended 180 meters above the sea with unobstructed panoramic Arabian Gulf horizon.",
+        badge: "Palm Jumeirah",
+        arch: "KPF Architecture",
+        priceAed: 115000000,
+        area: "16,800 Sq. Ft",
+        beds: "5 Ocean Suites",
+        view: "Open Arabian Gulf Horizon",
+        furnishing: "Sybille de Margerie",
+        image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85"
       },
       {
-        title: "Downtown Burj Sky Duplex",
-        location: "Downtown Dubai • Burj District",
-        priceAED: "AED 14,800,000",
-        priceUSD: "~$4,030,000 USD",
-        beds: "4 Suites",
-        baths: "5 Baths",
-        area: "5,900 Sq. Ft.",
-        yield: "8.9% Tax-Free",
-        desc: "Ultra-luxury sky residence positioned right in front of the Dubai Fountain and Burj Khalifa with soaring 7-meter ceilings and wraparound entertainment terraces.",
-        mainImg: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1400&q=85",
-        highlights: ["Direct Burj Khalifa View", "Private Sky Terrace", "24/7 White-Glove Valet", "10-Year Golden Visa", "DLD Escrow Secured"]
+        title: "Bulgari Lighthouse Penthouse",
+        subtitle: "Private full-floor sanctuary on Seahorse Island with private yacht berth and private elevator.",
+        badge: "Jumeira Bay Island",
+        arch: "Antonio Citterio",
+        priceAed: 140000000,
+        area: "19,500 Sq. Ft",
+        beds: "7 Master Suites",
+        view: "360° Island & Skyline",
+        furnishing: "Bulgari Casa",
+        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85"
       },
       {
-        title: "Fairway Golf Estate",
-        location: "Dubai Hills • Fairway Vistas",
-        priceAED: "AED 24,000,000",
-        priceUSD: "~$6,530,000 USD",
-        beds: "6 Suites",
-        baths: "7 Baths",
-        area: "10,800 Sq. Ft.",
-        yield: "8.0% Tax-Free",
-        desc: "Exclusive fairway-fronting villa surrounded by rolling championship greens, crafted for discerning collectors requiring private gallery car display and wellness spa amenities.",
-        mainImg: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1400&q=85",
-        highlights: ["18-Hole Championship View", "8-Car Temperature-Controlled Gallery", "Private Wellness Spa", "10-Year Golden Visa", "DLD Escrow Secured"]
+        title: "One Canal Sky Villa",
+        subtitle: "Curated by Fendi Casa with uninterrupted views of Safa Park and Dubai Water Canal.",
+        badge: "Dubai Water Canal",
+        arch: "Fendi Casa",
+        priceAed: 72000000,
+        area: "11,500 Sq. Ft",
+        beds: "5 Bedrooms",
+        view: "Dubai Canal & Fountains",
+        furnishing: "Fendi Casa Bespoke",
+        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=85"
+      },
+      {
+        title: "Burj Crown Presidential",
+        subtitle: "Triple-level crown residence with private rooftop helipad access and armored security salon.",
+        badge: "Downtown Dubai",
+        arch: "Triplex Crown",
+        priceAed: 120000000,
+        area: "18,200 Sq. Ft",
+        beds: "7 Master Suites",
+        view: "360° Dubai Horizon",
+        furnishing: "Armani Casa Bespoke",
+        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=85"
+      },
+      {
+        title: "The Palm Frond Sanctuary",
+        subtitle: "Direct private white-sand beach access with private 8-berth yacht mooring.",
+        badge: "Palm Jumeirah",
+        arch: "Private Frond",
+        priceAed: 65000000,
+        area: "9,800 Sq. Ft",
+        beds: "5 Master Beds",
+        view: "Sunset Arabian Sea",
+        furnishing: "Poliform Custom",
+        image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1400&q=85"
       }
     ];
 
-    function triggerCardClick(event, index) {
-      if (event) event.stopPropagation();
-      const card = cards[index];
-      if (!card) return;
+    // Currency Rates
+    const RATES = {
+      AED: { symbol: 'AED ', rate: 1 },
+      USD: { symbol: '$', rate: 0.2723 },
+      EUR: { symbol: '€', rate: 0.2540 },
+      GBP: { symbol: '£', rate: 0.2180 },
+      BTC: { symbol: '₿', rate: 0.0000031 }
+    };
+    let currentCurrency = 'AED';
 
-      // 1. Physical 3D Press Back
-      card.classList.add('pressed');
-
-      // 2. Open Modal after 140ms
-      setTimeout(() => {
-        card.classList.remove('pressed');
-        openPropertyModal(index);
-      }, 140);
+    function formatCurrency(aedVal) {
+      const c = RATES[currentCurrency];
+      const converted = aedVal * c.rate;
+      if (currentCurrency === 'BTC') return c.symbol + converted.toFixed(2);
+      return c.symbol + Math.round(converted).toLocaleString();
     }
 
-    const modal = document.getElementById('propModal');
-    const modalImg = document.getElementById('mImg');
+    function updateCurrency(curr) {
+      currentCurrency = curr;
+      document.querySelectorAll('.price-val').forEach(el => {
+        const aed = parseFloat(el.getAttribute('data-aed'));
+        if (!isNaN(aed)) el.innerText = formatCurrency(aed);
+      });
+      const modalPrice = document.getElementById('modalPrice');
+      if (modalPrice && modalPrice.getAttribute('data-aed')) {
+        modalPrice.innerText = formatCurrency(parseFloat(modalPrice.getAttribute('data-aed')));
+      }
+    }
+
+    // Filter Logic
+    function applyFilters() {
+      const loc = document.getElementById('filterLocation').value;
+      const typ = document.getElementById('filterType').value;
+      const prc = document.getElementById('filterPrice').value;
+
+      document.querySelectorAll('.property-card').forEach(card => {
+        const cardLoc = card.getAttribute('data-location');
+        const cardTyp = card.getAttribute('data-type');
+        const cardPrc = parseFloat(card.getAttribute('data-price'));
+
+        let locMatch = (loc === 'all' || cardLoc === loc);
+        let typMatch = (typ === 'all' || cardTyp === typ);
+        let prcMatch = true;
+
+        if (prc === '50-80') prcMatch = (cardPrc >= 50000000 && cardPrc <= 80000000);
+        else if (prc === '80-120') prcMatch = (cardPrc > 80000000 && cardPrc <= 120000000);
+        else if (prc === '120+') prcMatch = (cardPrc > 120000000);
+
+        if (locMatch && typMatch && prcMatch) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    // Modal Operations
+    const propertyModal = document.getElementById('propertyModal');
+    const appointmentModal = document.getElementById('appointmentModal');
 
     function openPropertyModal(index) {
-      const data = propertiesData[index];
-      if (!data || !modal) return;
+      const p = PROPERTIES[index];
+      if (!p) return;
+      document.getElementById('modalBadge').innerText = p.badge;
+      document.getElementById('modalArch').innerText = p.arch;
+      document.getElementById('modalTitle').innerText = p.title;
+      document.getElementById('modalSubtitle').innerText = p.subtitle;
+      document.getElementById('modalImage').src = p.image;
+      document.getElementById('modalArea').innerText = p.area;
+      document.getElementById('modalBeds').innerText = p.beds;
+      document.getElementById('modalView').innerText = p.view;
+      document.getElementById('modalFurnishing').innerText = p.furnishing;
 
-      document.getElementById('mLocation').textContent = data.location;
-      document.getElementById('mTitle').textContent = data.title;
-      document.getElementById('mPriceAED').textContent = data.priceAED;
-      document.getElementById('mPriceUSD').textContent = data.priceUSD;
-      document.getElementById('mPriceMobile').textContent = data.priceAED;
-      document.getElementById('mBeds').textContent = data.beds;
-      document.getElementById('mBaths').textContent = data.baths;
-      document.getElementById('mArea').textContent = data.area;
-      document.getElementById('mYield').textContent = data.yield;
-      document.getElementById('mDesc').textContent = data.desc;
-      modalImg.src = data.mainImg;
+      const modalPrice = document.getElementById('modalPrice');
+      modalPrice.setAttribute('data-aed', p.priceAed);
+      modalPrice.innerText = formatCurrency(p.priceAed);
 
-      const hlContainer = document.getElementById('mHighlights');
-      hlContainer.innerHTML = '';
-      data.highlights.forEach(h => {
-        const span = document.createElement('span');
-        span.className = 'bg-white/5 border border-white/10 text-white/80 text-[11px] px-3 py-1 rounded-full flex items-center space-x-1.5';
-        span.innerHTML = `<i class="fa-solid fa-check text-amber-400 text-[10px]"></i><span>${h}</span>`;
-        hlContainer.appendChild(span);
-      });
+      document.getElementById('modalWhatsAppBtn').href = 
+        `https://wa.me/971501234567?text=${encodeURIComponent('Hello Realtor Dubai, I am inquiring regarding private acquisition of ' + p.title + ' (' + p.badge + ') listed for ' + formatCurrency(p.priceAed))}`;
 
-      document.getElementById('mWhatsAppBtn').href = `https://wa.me/971566037833?text=Hi%20Realtor%20UAE,%20I%20am%20inquiring%20about%20${encodeURIComponent(data.title)}%20(${encodeURIComponent(data.priceAED)}).%20Please%20send%20the%20viewing%20schedule.`;
-
-      modal.classList.remove('opacity-0', 'pointer-events-none');
-      modal.classList.add('opacity-100');
+      propertyModal.classList.remove('hidden');
+      propertyModal.classList.add('flex');
     }
 
-    function closePropModal() {
-      if (!modal) return;
-      modal.classList.add('opacity-0', 'pointer-events-none');
-      modal.classList.remove('opacity-100');
+    function closePropertyModal() {
+      propertyModal.classList.add('hidden');
+      propertyModal.classList.remove('flex');
     }
 
-    function handleModalBackdrop(e) {
-      if (e.target === modal) closePropModal();
+    function openAppointmentModal() {
+      closePropertyModal();
+      appointmentModal.classList.remove('hidden');
+      appointmentModal.classList.add('flex');
     }
 
+    function closeAppointmentModal() {
+      appointmentModal.classList.add('hidden');
+      appointmentModal.classList.remove('flex');
+    }
+
+    function handleAppointmentSubmit(e) {
+      e.preventDefault();
+      alert('✨ Thank you. Your confidential viewing dossier has been logged. Our Managing Partner in Dubai will contact you within 15 minutes.');
+      closeAppointmentModal();
+    }
+
+    function scrollToSection(id) {
+      const el = document.getElementById(id);
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Escape listener
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closePropModal();
+      if (e.key === 'Escape') {
+        closePropertyModal();
+        closeAppointmentModal();
+      }
     });
 
-    // --------------------------------------------------------
-    // PART 2: VIDEO 2 FORMA CONTINUOUS WALKTHROUGH
-    // --------------------------------------------------------
-    const formaRooms = [
-      {
-        num: "01 / LIVING",
-        title: "THE LIVING SPACE",
-        sub: "WHERE THE DAY GATHERS.",
-        align: "text-left",
-        img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2600&q=95"
-      },
-      {
-        num: "02 / DINING",
-        title: "THE DINING ROOM",
-        sub: "MADE FOR LONG TABLES, LINGER OVERTIME.",
-        align: "text-right",
-        img: "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=2600&q=95"
-      },
-      {
-        num: "03 / KITCHEN",
-        title: "THE KITCHEN",
-        sub: "FINEST MATERIALS, QUIET FUNCTION.",
-        align: "text-left",
-        img: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=2600&q=95"
-      },
-      {
-        num: "04 / SUITE",
-        title: "PRIMARY SUITE",
-        sub: "A SANCTUARY OF QUIET CALM.",
-        align: "text-right",
-        img: "https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=2600&q=95"
-      },
-      {
-        num: "05 / GARDEN",
-        title: "THE GARDEN ROOM",
-        sub: "WHERE THE INTERIOR MEETS THE OUTSIDE.",
-        align: "text-left",
-        img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2600&q=95"
-      },
-      {
-        num: "06 / BATH",
-        title: "THE BATH",
-        sub: "STONE, WATER, STILLNESS.",
-        align: "text-right",
-        img: "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=2600&q=95"
-      },
-      {
-        num: "07 / GRAND VIEW",
-        title: "THE GRAND VIEW",
-        sub: "WHERE SEA & SKY MEET.",
-        align: "text-center",
-        img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2600&q=95"
-      }
-    ];
-
-    let formaIdx = 0;
-    let formaAutoActive = true;
-    let formaTimer = null;
-
-    const fImg = document.getElementById('formaImg');
-    const fNum = document.getElementById('formaRoomNum');
-    const fTitle = document.getElementById('formaRoomTitle');
-    const fSub = document.getElementById('formaRoomSub');
-    const fBlock = document.getElementById('formaTextBlock');
-    const fPills = document.getElementById('formaPillContainer');
-
-    formaRooms.forEach((r, idx) => {
-      const p = document.createElement('div');
-      p.className = `forma-pill-bar h-1 rounded-full cursor-pointer transition-all ${idx === 0 ? 'w-10 bg-amber-400' : 'w-4 bg-white/20'}`;
-      p.onclick = () => jumpToForma(idx);
-      fPills.appendChild(p);
+    propertyModal.addEventListener('click', (e) => {
+      if (e.target === propertyModal) closePropertyModal();
     });
-
-    function renderFormaRoom() {
-      const room = formaRooms[formaIdx];
-
-      fImg.style.opacity = '0.35';
-      fTitle.style.opacity = '0';
-      fTitle.style.transform = 'translateY(1.5rem)';
-      fSub.style.opacity = '0';
-
-      setTimeout(() => {
-        fImg.src = room.img;
-        fNum.textContent = room.num;
-        fTitle.textContent = room.title;
-        fSub.textContent = room.sub;
-
-        fBlock.className = `my-auto transition-all duration-700 max-w-2xl ${room.align === 'text-right' ? 'ml-auto text-right' : room.align === 'text-center' ? 'mx-auto text-center' : 'text-left'}`;
-
-        fImg.style.opacity = '0.85';
-        fTitle.style.opacity = '1';
-        fTitle.style.transform = 'translateY(0)';
-        fSub.style.opacity = '1';
-
-        Array.from(fPills.children).forEach((pill, i) => {
-          if (i === formaIdx) {
-            pill.className = 'forma-pill-bar h-1 rounded-full cursor-pointer transition-all w-10 bg-amber-400';
-          } else {
-            pill.className = 'forma-pill-bar h-1 rounded-full cursor-pointer transition-all w-4 bg-white/20';
-          }
-        });
-      }, 350);
-    }
-
-    function navigateForma(delta) {
-      formaIdx = (formaIdx + delta + formaRooms.length) % formaRooms.length;
-      renderFormaRoom();
-    }
-
-    function jumpToForma(idx) {
-      formaIdx = idx;
-      renderFormaRoom();
-    }
-
-    function toggleFormaPlay() {
-      formaAutoActive = !formaAutoActive;
-      const btn = document.getElementById('formaPlayBtn');
-      if (formaAutoActive) {
-        btn.innerHTML = '<i class="fa-solid fa-pause mr-1"></i> Auto Glide';
-        startFormaLoop();
-      } else {
-        btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Play';
-        clearInterval(formaTimer);
-      }
-    }
-
-    function startFormaLoop() {
-      clearInterval(formaTimer);
-      formaTimer = setInterval(() => {
-        if (formaAutoActive) navigateForma(1);
-      }, 4200);
-    }
-
-    startFormaLoop();
-
-    // --------------------------------------------------------
-    // PART 3: GOLDEN VISA CALCULATOR
-    // --------------------------------------------------------
-    const slider = document.getElementById('sliderInput');
-    const display = document.getElementById('sliderDisplay');
-    const rental = document.getElementById('rentalYield');
-    const gain = document.getElementById('capitalGain');
-    const visa = document.getElementById('visaTier');
-    const banner = document.getElementById('visaBanner');
-    const waBtn = document.getElementById('btnWhatsAppCalc');
-
-    function updateCalculator() {
-      const val = parseInt(slider.value);
-      const usd = Math.round(val / 3.6725);
-      display.textContent = `AED ${val.toLocaleString()} (~$${usd.toLocaleString()})`;
-
-      const r = Math.round(val * 0.084);
-      rental.textContent = `AED ${r.toLocaleString()}/yr`;
-
-      const g = Math.round(val * 0.38);
-      gain.textContent = `+AED ${g.toLocaleString()}`;
-
-      if (val >= 2000000) {
-        visa.textContent = '10-Year Golden Visa';
-        visa.className = 'font-serif text-lg font-extrabold text-emerald-800';
-        banner.className = 'p-4 rounded-xl bg-emerald-100 border border-emerald-300 flex items-center space-x-3 text-xs text-emerald-950 mb-8';
-        banner.innerHTML = `<i class="fa-solid fa-circle-check text-lg text-emerald-700 flex-shrink-0"></i><span><strong>Eligible for 10-Year UAE Golden Visa:</strong> Your allocation clears the AED 2,000,000 threshold. Realtor Signature Properties manages complete DLD title deed verification and residency paperwork.</span>`;
-      } else {
-        visa.textContent = '2-Year Investor Visa';
-        visa.className = 'font-serif text-lg font-extrabold text-slate-700';
-        banner.className = 'p-4 rounded-xl bg-amber-50 border border-amber-200 flex items-center space-x-3 text-xs text-amber-900 mb-8';
-        banner.innerHTML = `<i class="fa-solid fa-triangle-exclamation text-lg text-amber-600 flex-shrink-0"></i><span><strong>2-Year Renewable Visa:</strong> Upgrade to AED 2,000,000 to unlock the 10-Year UAE Golden Visa for yourself and family.</span>`;
-      }
-
-      waBtn.href = `https://wa.me/971566037833?text=Hi%20Realtor%20UAE,%20I%20used%20your%20Golden%20Visa%20calculator%20for%20AED%20${val.toLocaleString()}%20allocation.%20Please%20send%20matching%20developer%20options.`;
-    }
-
-    slider.addEventListener('input', updateCalculator);
+    appointmentModal.addEventListener('click', (e) => {
+      if (e.target === appointmentModal) closeAppointmentModal();
+    });
   </script>
+
 </body>
 </html>
