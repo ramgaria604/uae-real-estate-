@@ -3,19 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>REALTOR SIGNATURE | Cinematic Dubai Penthouse & FORMA Walkthrough</title>
-  <meta name="description" content="Realtor Signature Properties (RERA #59128) - Ultra-luxury cinematic Dubai real estate advisory, trophy penthouses, and architectural interior walkthroughs.">
+  <title>LUXESTATE | Dubai Luxury Real Estate & FORMA Architectural Walkthrough</title>
+  <meta name="description" content="Official cinematic luxury real estate experience featuring Dubai penthouse skyline, Sheikh architectural showcase, and FORMA continuous interior walkthrough.">
   
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- GSAP for Ultra-Smooth Cinematic Sequencing -->
+  <!-- GSAP for Smooth Cinematic Sequencing -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
   <!-- Google Fonts & FontAwesome -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@600;700;800;900&family=Italiana&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Cinzel:wght@600;700;800;900&family=Italiana&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <script>
@@ -23,20 +23,18 @@
       theme: {
         extend: {
           fontFamily: {
-            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            sans: ['"Plus Jakarta Sans"', '"Inter"', 'sans-serif'],
             editorial: ['"Playfair Display"', 'serif'],
             serif: ['"Cinzel"', 'serif'],
             italiana: ['"Italiana"', 'serif'],
           },
           colors: {
-            navy: {
-              800: '#0F1A30',
-              900: '#0B1325',
-              950: '#060B14',
-            },
-            gold: {
-              400: '#F5B041',
-              500: '#E59866',
+            studio: {
+              bg: '#F5F7FB',
+              card: '#FFFFFF',
+              dark: '#0A1120',
+              navy: '#0E172A',
+              border: '#E2E8F0',
             }
           }
         }
@@ -52,168 +50,167 @@
     }
 
     body {
-      background-color: #060B14;
-      color: #FFFFFF;
+      background-color: #F0F3F8;
+      color: #0F172A;
       overflow-x: hidden;
       font-family: "Plus Jakarta Sans", sans-serif;
     }
 
-    /* Reference 1: Huge Bold "D U B A I" with Burj Spire Piercing Through */
-    .dubai-title-bold {
+    /* Video 1 3D Studio Mockup Shadow */
+    .studio-mockup-frame {
+      box-shadow: 0 40px 100px -20px rgba(15, 23, 42, 0.35), 0 20px 45px -10px rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Video 1 Massive "D U B A I" with Spire Piercing Through */
+    .dubai-title-massive {
       font-family: 'Cinzel', serif;
-      letter-spacing: 0.28em;
-      text-indent: 0.28em;
-      text-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 175, 75, 0.25);
+      letter-spacing: 0.24em;
+      text-indent: 0.24em;
+      text-shadow: 0 15px 40px rgba(0, 0, 0, 0.75), 0 0 35px rgba(255, 180, 80, 0.3);
     }
 
-    /* Reference 1 Cursive Script "Invest in" */
-    .invest-in-script {
+    .invest-cursive {
       font-family: 'Italiana', 'Playfair Display', serif;
-      letter-spacing: 0.12em;
       font-style: italic;
+      letter-spacing: 0.08em;
     }
 
-    /* Reference 1: Crisp Clean White Luxury Cards on Midnight Navy */
-    .ref-white-card {
+    /* Video 1: Pristine White Luxury Cards */
+    .v1-white-card {
       background: #FFFFFF;
       color: #0F172A;
-      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.15);
-      border: 1px solid rgba(255, 255, 255, 0.9);
+      box-shadow: 0 20px 45px -10px rgba(0, 0, 0, 0.55), 0 0 15px rgba(0, 0, 0, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.95);
       transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s ease, opacity 0.6s ease;
-      transform-style: preserve-3d;
       cursor: pointer;
       user-select: none;
     }
 
-    .ref-white-card:hover {
+    .v1-white-card:hover {
       transform: translateY(-4px) scale(1.03);
-      box-shadow: 0 30px 60px -10px rgba(0, 0, 0, 0.8), 0 0 25px rgba(245, 176, 65, 0.3);
+      box-shadow: 0 28px 55px -10px rgba(0, 0, 0, 0.7), 0 0 20px rgba(245, 176, 65, 0.25);
     }
 
-    /* Tactile 3D Physical Push-Back on Click */
-    .ref-white-card.card-pushed {
-      transform: perspective(800px) translateZ(-45px) scale(0.93) rotateX(4deg) !important;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(0,0,0,0.15) !important;
-      transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.15s ease !important;
+    /* Physical 3D Press-Back on Click */
+    .v1-white-card.pressed {
+      transform: perspective(800px) translateZ(-40px) scale(0.93) rotateX(4deg) !important;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.85), inset 0 0 15px rgba(0,0,0,0.12) !important;
+      transition: transform 0.14s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.14s ease !important;
     }
 
-    /* Reference 2 FORMA Continuous Panoramic Glide */
-    .forma-editorial-title {
+    /* Video 2 FORMA Continuous Walkthrough */
+    .forma-title-text {
       font-family: 'Playfair Display', serif;
-      letter-spacing: 0.08em;
+      letter-spacing: 0.06em;
       text-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
     }
 
-    .forma-pill {
-      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Smooth Progress Bar */
-    .timeline-bar {
-      transition: width 0.1s linear;
+    .forma-pill-bar {
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
   </style>
 </head>
 <body class="selection:bg-amber-400 selection:text-black">
 
   <!-- ======================================================== -->
-  <!-- TOP NAVIGATION BAR (EXACT REFERENCE 1 "LUXE STATE" STYLE)-->
+  <!-- VIDEO 1: THE STUDIO ENVIRONMENT (EXACT REFERENCE 1 FRAME) -->
+  <!-- Header: "Real estate" with UX design / Landing Page pills -->
   <!-- ======================================================== -->
-  <header class="fixed top-0 left-0 right-0 z-50 bg-[#060B14]/80 backdrop-blur-xl border-b border-white/10 transition-all">
-    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 flex items-center justify-between">
+  <section class="min-h-screen py-8 sm:py-14 px-3 sm:px-6 flex flex-col items-center justify-center relative overflow-hidden bg-[#EFF2F8]">
+    
+    <!-- Top Studio Title & Badges (Exact match to Video 1 frame 00:00) -->
+    <div class="text-center mb-6 sm:mb-8 z-10">
+      <h1 class="font-sans text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight mb-3">
+        Real estate
+      </h1>
+      <div class="flex items-center justify-center space-x-2 sm:space-x-3 text-xs sm:text-sm font-medium text-slate-600">
+        <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700">UX design</span>
+        <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700">Landing Page</span>
+        <span class="px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700">Dashboard</span>
+      </div>
+    </div>
+
+    <!-- ===================================================== -->
+    <!-- THE FLOATING 3D BROWSER VIEWPORT (EXACT VIDEO 1 SCREEN) -->
+    <!-- ===================================================== -->
+    <div id="mockupViewport" class="w-full max-w-5xl rounded-[28px] sm:rounded-[36px] overflow-hidden studio-mockup-frame bg-[#080D1A] relative h-[560px] sm:h-[680px] flex flex-col justify-between select-none">
       
-      <!-- Brand Logo -->
-      <a href="#" class="flex items-center space-x-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-amber-500 to-yellow-300 text-black flex items-center justify-center font-serif font-black text-sm shadow-lg shadow-amber-500/20">
-          <span>R</span>
-        </div>
-        <div>
-          <span class="font-serif tracking-widest text-sm sm:text-base font-extrabold text-white block leading-none">REALTOR SIGNATURE</span>
-          <span class="text-[9px] uppercase tracking-[0.25em] text-amber-300/90 font-semibold block mt-1">DUBAI REAL ESTATE ADVISORY • RERA #59128</span>
-        </div>
-      </a>
-
-      <!-- Center Pill Menu (Exact Video 1 Navigation) -->
-      <nav class="hidden md:flex items-center space-x-1 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 text-xs text-white/90 font-medium">
-        <a href="#cinematic-hero" class="px-4 py-1.5 rounded-full bg-white/20 text-white font-semibold shadow-sm">Home</a>
-        <a href="#forma-showcase" class="px-4 py-1.5 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">FORMA Interiors</a>
-        <a href="#calculator" class="px-4 py-1.5 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">Golden Visa & ROI</a>
-        <a href="#contact" class="px-4 py-1.5 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">Office</a>
-      </nav>
-
-      <!-- Right Action: Search & VIP Access -->
-      <div class="flex items-center space-x-3">
-        <div class="hidden sm:flex items-center space-x-2 bg-white/10 px-3 py-1.5 rounded-full text-xs text-white/80 border border-white/15">
-          <i class="fa-solid fa-magnifying-glass text-[11px] text-amber-300"></i>
-          <span>EN</span>
+      <!-- Top Navigation Bar Inside Viewport (Exact Video 1) -->
+      <div class="absolute top-0 left-0 right-0 z-40 px-5 sm:px-8 py-5 flex items-center justify-between">
+        
+        <!-- Logo: LUXESTATE -->
+        <div class="flex items-center space-x-2">
+          <span class="font-bold text-white text-base sm:text-lg tracking-wider font-sans">LUXESTATE</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
         </div>
 
-        <a href="https://wa.me/971566037833?text=Hello%20Realtor%20Signature,%20I%20am%20in%20Dubai%20and%20interested%20in%20your%20luxury%20developer%20allocations." target="_blank" class="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 hover:from-amber-300 hover:to-yellow-400 text-black font-bold text-xs px-5 py-2.5 rounded-full shadow-lg shadow-amber-500/25 transition-all hover:scale-105">
-          <i class="fa-brands fa-whatsapp text-sm"></i>
-          <span>VIP Broker Desk</span>
-        </a>
+        <!-- Center Navigation Pill -->
+        <div class="hidden md:flex items-center space-x-1 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 text-xs text-white">
+          <button onclick="jumpToHeroScene(1)" class="px-3.5 py-1 rounded-full bg-white text-slate-900 font-bold shadow-sm">Home</button>
+          <button onclick="jumpToHeroScene(2)" class="px-3.5 py-1 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">Penthouse View</button>
+          <a href="#forma-section" class="px-3.5 py-1 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">Property List</a>
+          <a href="#calculator-section" class="px-3.5 py-1 rounded-full hover:bg-white/10 text-white/80 hover:text-white transition-colors">Contact Us</a>
+        </div>
+
+        <!-- Right Action Pill: Search & Sign In -->
+        <div class="flex items-center space-x-2 text-xs">
+          <div class="flex items-center space-x-1.5 bg-white/10 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/15 text-white/80">
+            <i class="fa-solid fa-magnifying-glass text-[10px]"></i>
+            <span class="text-[11px]">Eng</span>
+          </div>
+          <a href="https://wa.me/971566037833" target="_blank" class="px-4 py-1.5 rounded-full bg-white text-slate-900 font-bold hover:bg-slate-100 transition-colors shadow-sm">
+            Sign In
+          </a>
+        </div>
+
       </div>
 
-    </div>
-  </header>
-
-  <!-- ======================================================== -->
-  <!-- SECTION 1: THE EXACT REFERENCE 1 CINEMATIC EXPERIENCE     -->
-  <!-- Skyline -> "INVEST IN DUBAI" -> Sheikh in Penthouse      -->
-  <!-- -> 4 Crisp White Luxury Cards framing the window          -->
-  <!-- ======================================================== -->
-  <section id="cinematic-hero" class="relative min-h-screen flex items-center justify-center pt-20 pb-12 overflow-hidden bg-[#060B14] select-none">
-    
-    <!-- Warm Sunset Horizon Backdrop (Exact Video 1 Colors) -->
-    <div class="absolute inset-0 z-0">
-      <img id="sunsetDubaiBg" src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2600&q=95" alt="Dubai Sunset Burj Khalifa" class="w-full h-full object-cover object-center filter brightness-95 contrast-110">
-      <div class="absolute inset-0 bg-gradient-to-t from-[#060B14] via-[#060B14]/30 to-[#060B14]/60"></div>
-    </div>
-
-    <!-- MAIN VIEWPORT CONTAINER (MATCHES VIDEO 1 STAGE FRAME) -->
-    <div class="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 h-[600px] sm:h-[680px] flex items-center justify-center">
-
       <!-- ===================================================== -->
-      <!-- STAGE 1: "Invest in DUBAI" (BURJ KHALIFA CENTERPIECE) -->
+      <!-- SCENE 1: SUNSET DUBAI SKYLINE & "Invest in DUBAI"     -->
       <!-- ===================================================== -->
-      <div id="stage1InvestDubai" class="absolute inset-0 flex flex-col justify-between p-6 sm:p-12 z-20 transition-all duration-1000 opacity-100">
+      <div id="v1Scene1" class="absolute inset-0 z-10 transition-opacity duration-1000 opacity-100 flex flex-col justify-between p-6 sm:p-10">
         
-        <!-- Top Status Subline -->
-        <div class="flex items-center justify-between text-xs tracking-widest uppercase font-bold text-white/80">
-          <span class="text-amber-300 flex items-center space-x-2">
-            <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse"></span>
-            <span>HIGH CAPITAL GROWTH • TAX-FREE ALLOCATIONS</span>
-          </span>
-          <span class="bg-black/50 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[10px] text-white/90">
-            Official DLD Escrow Law
-          </span>
+        <!-- Horizon Backdrop with Burj Khalifa & Crescent Moon -->
+        <div class="absolute inset-0 z-0">
+          <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2400&q=95" alt="Dubai Sunset Horizon" class="w-full h-full object-cover object-center filter brightness-95 contrast-110">
+          <div class="absolute inset-0 bg-gradient-to-t from-[#060B14] via-[#060B14]/20 to-[#060B14]/40"></div>
+          
+          <!-- Crescent Moon in Upper Right (as Video 1 frame 00:00) -->
+          <div class="absolute top-16 sm:top-20 right-16 sm:right-28 text-white/70 text-xs sm:text-sm">
+            <i class="fa-regular fa-moon"></i>
+          </div>
         </div>
 
-        <!-- Huge Centerpiece Typography: Exact Match to Video 1 -->
+        <!-- Spacer for top nav -->
+        <div class="h-16"></div>
+
+        <!-- Centerpiece: "Invest in DUBAI" (Burj Khalifa Pierces Through 'B') -->
         <div class="text-center my-auto relative z-10">
-          <span class="invest-in-script text-3xl sm:text-5xl md:text-6xl text-amber-100/95 block mb-1">
+          <span class="invest-cursive text-3xl sm:text-5xl md:text-6xl text-amber-100/90 block mb-0.5">
             Invest in
           </span>
-          <h1 class="dubai-title-bold text-5xl sm:text-7xl md:text-9xl font-black text-white uppercase leading-none tracking-widest">
+          <h2 class="dubai-title-massive text-5xl sm:text-7xl md:text-9xl font-black text-white uppercase leading-none">
             DUBAI
-          </h1>
+          </h2>
         </div>
 
-        <!-- Bottom Row: Build Your Future (Left) & Narrative (Right) -->
-        <div class="flex flex-col sm:flex-row items-end justify-between gap-4">
-          <div class="flex items-center space-x-3.5 bg-black/70 backdrop-blur-2xl p-3.5 sm:p-4 rounded-2xl border border-white/20 shadow-2xl">
-            <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-black flex items-center justify-center font-bold text-sm shadow-lg shadow-amber-500/30">
+        <!-- Bottom Row: Build Your Future & Description -->
+        <div class="relative z-10 flex flex-col sm:flex-row items-end justify-between gap-4">
+          <div class="flex items-center space-x-3 bg-black/60 backdrop-blur-xl p-3 sm:p-3.5 rounded-2xl border border-white/20 shadow-xl">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-400 to-yellow-300 text-black flex items-center justify-center font-bold text-xs shadow-md shadow-amber-500/30">
               <i class="fa-solid fa-play ml-0.5"></i>
             </div>
             <div>
-              <span class="text-xs sm:text-sm font-bold text-white block leading-snug">Build Your Future.</span>
+              <span class="text-xs sm:text-sm font-bold text-white block">Build Your Future.</span>
               <span class="text-[10px] text-amber-300 font-medium">Automatic Cinematic Mode</span>
             </div>
           </div>
 
-          <div class="max-w-md text-right hidden sm:block bg-black/40 backdrop-blur-md p-4 rounded-2xl border border-white/10">
-            <p class="text-xs text-white/90 leading-relaxed font-normal">
-              Direct developer allocations across Palm Jumeirah, Dubai Islands & Downtown. Zero foreign investor taxes and guaranteed 10-Year UAE Golden Visa structuring.
+          <div class="max-w-xs text-right hidden sm:block">
+            <p class="text-[11px] text-white/80 leading-relaxed">
+              Prime off-plan allocations, waterfront trophy estates, and 10-Year UAE Golden Visa structuring.
             </p>
           </div>
         </div>
@@ -221,92 +218,84 @@
       </div>
 
       <!-- ===================================================== -->
-      <!-- STAGE 2: PENTHOUSE WINDOW WITH SHEIKH + 4 WHITE CARDS  -->
+      <!-- SCENE 2: PENTHOUSE WINDOW + SHEIKH + 4 WHITE CARDS    -->
       <!-- ===================================================== -->
-      <div id="stage2Penthouse" class="absolute inset-0 z-30 transition-all duration-1000 opacity-0 pointer-events-none flex items-center justify-center">
+      <div id="v1Scene2" class="absolute inset-0 z-20 transition-opacity duration-1000 opacity-0 pointer-events-none flex items-center justify-center">
         
-        <!-- Penthouse Architectural Window Frame (Exact 3-Pane Geometry from Video 1) -->
-        <div class="absolute inset-0 border-[16px] sm:border-[28px] border-[#080D1A] pointer-events-none shadow-2xl"></div>
-        <div class="absolute inset-0 flex justify-between pointer-events-none px-24 sm:px-44">
-          <div class="w-2 sm:w-3.5 h-full bg-[#080D1A] shadow-2xl"></div>
-          <div class="w-2 sm:w-3.5 h-full bg-[#080D1A] shadow-2xl"></div>
+        <!-- Penthouse Interior Glass Columns (3-Pane Window Frame) -->
+        <div class="absolute inset-0 border-[14px] sm:border-[24px] border-[#080D1A] pointer-events-none shadow-2xl"></div>
+        <div class="absolute inset-0 flex justify-between pointer-events-none px-20 sm:px-36">
+          <div class="w-2 sm:w-3 h-full bg-[#080D1A] shadow-2xl"></div>
+          <div class="w-2 sm:w-3 h-full bg-[#080D1A] shadow-2xl"></div>
         </div>
 
-        <!-- The Sheikh Figure in White Thobe & Keffiyeh on Steps -->
-        <div id="sheikhFigure" class="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center pointer-events-none transition-transform duration-1000 translate-y-12 opacity-0">
-          <!-- Multi-tier Architectural Steps -->
-          <div class="w-64 sm:w-88 h-4 bg-[#0A1222] border-t border-slate-700/60 shadow-2xl"></div>
-          <div class="w-72 sm:w-96 h-5 bg-[#080E1C] border-t border-slate-700/60 shadow-2xl"></div>
-          <div class="w-80 sm:w-[420px] h-6 bg-[#060A14] border-t border-slate-700/60 shadow-2xl"></div>
-          <!-- Sheikh Silhouette Overlooking Dubai Sunset -->
-          <div class="relative -mt-80 flex flex-col items-center">
-            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=85" alt="Sheikh Overlooking Dubai" class="w-48 sm:w-56 h-72 sm:h-80 object-cover object-top filter contrast-125 brightness-90 rounded-t-full shadow-2xl">
+        <!-- The Sheikh Figure in White Thobe on Steps -->
+        <div id="sheikhFigure" class="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center pointer-events-none transition-transform duration-1000 translate-y-10 opacity-0">
+          <!-- 3 Steps -->
+          <div class="w-56 sm:w-72 h-3.5 bg-[#09101E] border-t border-slate-700/60 shadow-xl"></div>
+          <div class="w-64 sm:w-80 h-4.5 bg-[#070D18] border-t border-slate-700/60 shadow-xl"></div>
+          <div class="w-72 sm:w-96 h-5.5 bg-[#050912] border-t border-slate-700/60 shadow-xl"></div>
+          <!-- Sheikh Portrait Silhouette Gazing at Sunset Burj -->
+          <div class="relative -mt-64 sm:-mt-72 flex flex-col items-center">
+            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=85" alt="Sheikh Overlooking Dubai" class="w-44 sm:w-52 h-64 sm:h-72 object-cover object-top filter contrast-125 brightness-90 rounded-t-full shadow-2xl">
             <div class="absolute inset-0 bg-gradient-to-t from-[#060B14] via-transparent to-transparent"></div>
           </div>
         </div>
 
         <!-- =================================================== -->
         <!-- THE 4 WHITE LUXURY CARDS (EXACT MATCH TO VIDEO 1)   -->
-        <!-- 2 ON LEFT, 2 ON RIGHT FRAMING THE WINDOW VIEW       -->
+        <!-- 2 on Left, 2 on Right framing the window            -->
         <!-- =================================================== -->
 
-        <!-- Card 1: Top-Left (Water Villa) -->
-        <div id="card1" onclick="handleCardClick(event, 0)" class="ref-white-card absolute top-6 sm:top-12 left-3 sm:left-8 z-40 p-2.5 sm:p-3 rounded-2xl w-44 sm:w-60 transform -translate-x-12 opacity-0">
-          <div class="relative h-24 sm:h-32 rounded-xl overflow-hidden mb-2 bg-slate-100">
-            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=85" alt="Palm Jumeirah Villa" class="w-full h-full object-cover">
-            <span class="absolute top-2 left-2 bg-[#0F172A] text-white text-[8px] sm:text-[9px] font-bold px-2 py-0.5 rounded-full">Palm Jumeirah</span>
+        <!-- Card 1: Top-Left -->
+        <div id="c1" onclick="triggerCardClick(event, 0)" class="v1-white-card absolute top-16 sm:top-20 left-3 sm:left-8 z-30 p-2 sm:p-2.5 rounded-2xl w-40 sm:w-52 transform -translate-x-12 opacity-0">
+          <div class="relative h-20 sm:h-28 rounded-xl overflow-hidden mb-1.5 bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=700&q=85" alt="Ellington Water Villa" class="w-full h-full object-cover">
+            <span class="absolute top-1.5 left-1.5 bg-slate-900 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">Palm Jumeirah</span>
           </div>
-          <div class="px-0.5">
-            <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Ellington Water Villa</h4>
-            <div class="flex items-center justify-between mt-1 text-[10px] sm:text-[11px] text-slate-500">
-              <span>6 Suites • Oceanfront</span>
-              <span class="font-extrabold text-amber-600 text-xs sm:text-sm">AED 38M</span>
-            </div>
+          <h4 class="font-bold text-slate-900 text-[11px] sm:text-xs truncate">Ellington Water Villa</h4>
+          <div class="flex items-center justify-between mt-0.5 text-[9px] sm:text-[10px] text-slate-500">
+            <span>6 Suites • Ocean</span>
+            <span class="font-extrabold text-amber-600 text-[10px] sm:text-xs">AED 38M</span>
           </div>
         </div>
 
-        <!-- Card 2: Bottom-Left (Beachfront) -->
-        <div id="card2" onclick="handleCardClick(event, 1)" class="ref-white-card absolute bottom-8 sm:bottom-14 left-3 sm:left-8 z-40 p-2.5 sm:p-3 rounded-2xl w-44 sm:w-60 transform -translate-x-12 opacity-0">
-          <div class="relative h-24 sm:h-32 rounded-xl overflow-hidden mb-2 bg-slate-100">
-            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=800&q=85" alt="Beachfront Mansion" class="w-full h-full object-cover">
-            <span class="absolute top-2 left-2 bg-[#0F172A] text-white text-[8px] sm:text-[9px] font-bold px-2 py-0.5 rounded-full">Dubai Islands</span>
+        <!-- Card 2: Bottom-Left -->
+        <div id="c2" onclick="triggerCardClick(event, 1)" class="v1-white-card absolute bottom-10 sm:bottom-16 left-3 sm:left-8 z-30 p-2 sm:p-2.5 rounded-2xl w-40 sm:w-52 transform -translate-x-12 opacity-0">
+          <div class="relative h-20 sm:h-28 rounded-xl overflow-hidden mb-1.5 bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=700&q=85" alt="Horizon Beachfront Mansion" class="w-full h-full object-cover">
+            <span class="absolute top-1.5 left-1.5 bg-slate-900 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">Dubai Islands</span>
           </div>
-          <div class="px-0.5">
-            <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Horizon Beach Mansion</h4>
-            <div class="flex items-center justify-between mt-1 text-[10px] sm:text-[11px] text-slate-500">
-              <span>5 Suites • Private Dock</span>
-              <span class="font-extrabold text-amber-600 text-xs sm:text-sm">AED 19.5M</span>
-            </div>
+          <h4 class="font-bold text-slate-900 text-[11px] sm:text-xs truncate">Horizon Beach Mansion</h4>
+          <div class="flex items-center justify-between mt-0.5 text-[9px] sm:text-[10px] text-slate-500">
+            <span>5 Suites • Dock</span>
+            <span class="font-extrabold text-amber-600 text-[10px] sm:text-xs">AED 19.5M</span>
           </div>
         </div>
 
-        <!-- Card 3: Top-Right (Burj Sky Duplex) -->
-        <div id="card3" onclick="handleCardClick(event, 2)" class="ref-white-card absolute top-6 sm:top-12 right-3 sm:right-8 z-40 p-2.5 sm:p-3 rounded-2xl w-44 sm:w-60 transform translate-x-12 opacity-0">
-          <div class="relative h-24 sm:h-32 rounded-xl overflow-hidden mb-2 bg-slate-100">
-            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=800&q=85" alt="Burj Penthouse" class="w-full h-full object-cover">
-            <span class="absolute top-2 left-2 bg-[#0F172A] text-white text-[8px] sm:text-[9px] font-bold px-2 py-0.5 rounded-full">Downtown Burj</span>
+        <!-- Card 3: Top-Right -->
+        <div id="c3" onclick="triggerCardClick(event, 2)" class="v1-white-card absolute top-16 sm:top-20 right-3 sm:right-8 z-30 p-2 sm:p-2.5 rounded-2xl w-40 sm:w-52 transform translate-x-12 opacity-0">
+          <div class="relative h-20 sm:h-28 rounded-xl overflow-hidden mb-1.5 bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=700&q=85" alt="Burj Sky Duplex" class="w-full h-full object-cover">
+            <span class="absolute top-1.5 left-1.5 bg-slate-900 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">Downtown Burj</span>
           </div>
-          <div class="px-0.5">
-            <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Burj Sky Duplex</h4>
-            <div class="flex items-center justify-between mt-1 text-[10px] sm:text-[11px] text-slate-500">
-              <span>4 Suites • Skyline View</span>
-              <span class="font-extrabold text-amber-600 text-xs sm:text-sm">AED 14.8M</span>
-            </div>
+          <h4 class="font-bold text-slate-900 text-[11px] sm:text-xs truncate">Burj Sky Duplex</h4>
+          <div class="flex items-center justify-between mt-0.5 text-[9px] sm:text-[10px] text-slate-500">
+            <span>4 Suites • Skyline</span>
+            <span class="font-extrabold text-amber-600 text-[10px] sm:text-xs">AED 14.8M</span>
           </div>
         </div>
 
-        <!-- Card 4: Bottom-Right (Golf Estate) -->
-        <div id="card4" onclick="handleCardClick(event, 3)" class="ref-white-card absolute bottom-8 sm:bottom-14 right-3 sm:right-8 z-40 p-2.5 sm:p-3 rounded-2xl w-44 sm:w-60 transform translate-x-12 opacity-0">
-          <div class="relative h-24 sm:h-32 rounded-xl overflow-hidden mb-2 bg-slate-100">
-            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=85" alt="Golf Estate" class="w-full h-full object-cover">
-            <span class="absolute top-2 left-2 bg-[#0F172A] text-white text-[8px] sm:text-[9px] font-bold px-2 py-0.5 rounded-full">Dubai Hills</span>
+        <!-- Card 4: Bottom-Right -->
+        <div id="c4" onclick="triggerCardClick(event, 3)" class="v1-white-card absolute bottom-10 sm:bottom-16 right-3 sm:right-8 z-30 p-2 sm:p-2.5 rounded-2xl w-40 sm:w-52 transform translate-x-12 opacity-0">
+          <div class="relative h-20 sm:h-28 rounded-xl overflow-hidden mb-1.5 bg-slate-100">
+            <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=700&q=85" alt="Fairway Golf Estate" class="w-full h-full object-cover">
+            <span class="absolute top-1.5 left-1.5 bg-slate-900 text-white text-[8px] font-bold px-1.5 py-0.5 rounded-full">Dubai Hills</span>
           </div>
-          <div class="px-0.5">
-            <h4 class="font-bold text-slate-900 text-xs sm:text-sm leading-tight truncate">Fairway Golf Estate</h4>
-            <div class="flex items-center justify-between mt-1 text-[10px] sm:text-[11px] text-slate-500">
-              <span>6 Suites • 8-Car Gallery</span>
-              <span class="font-extrabold text-amber-600 text-xs sm:text-sm">AED 24M</span>
-            </div>
+          <h4 class="font-bold text-slate-900 text-[11px] sm:text-xs truncate">Fairway Golf Estate</h4>
+          <div class="flex items-center justify-between mt-0.5 text-[9px] sm:text-[10px] text-slate-500">
+            <span>6 Suites • Gallery</span>
+            <span class="font-extrabold text-amber-600 text-[10px] sm:text-xs">AED 24M</span>
           </div>
         </div>
 
@@ -314,67 +303,75 @@
 
     </div>
 
-    <!-- Bottom Indicator -->
-    <div class="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-2 text-white/70 text-[11px] uppercase tracking-widest font-semibold">
-      <span>Auto-Advancing • Tap card to inspect</span>
-      <i class="fa-solid fa-chevron-down animate-bounce text-amber-400"></i>
+    <!-- Studio Frame Footer Labels (Exact Video 1 frame 00:00) -->
+    <div class="w-full max-w-5xl flex items-center justify-between text-slate-400 text-[11px] sm:text-xs mt-4 px-2">
+      <span>© 2026 09. Real. All rights reserved.</span>
+      <span class="font-medium text-slate-500">@beast.graphicdesigner • Realtor Signature UAE</span>
     </div>
+
   </section>
 
   <!-- ======================================================== -->
-  <!-- SECTION 2: THE EXACT REFERENCE 2 "FORMA" RESIDENCES      -->
-  <!-- Continuous cinematic architectural walkthrough          -->
+  <!-- VIDEO 2: THE FORMA CONTINUOUS INTERIOR WALKTHROUGH       -->
+  <!-- Exact Video 2 (Video-249.mp4 - FORMA Residential)       -->
   <!-- ======================================================== -->
-  <section id="forma-showcase" class="relative min-h-screen flex items-center justify-center py-24 bg-[#090E17] overflow-hidden select-none">
+  <section id="forma-section" class="relative min-h-screen flex items-center justify-center py-20 bg-[#0A0E17] overflow-hidden select-none">
     
-    <!-- Ultra-Wide Cinematic Room Image with Smooth Camera Pan -->
+    <!-- Ultra-Wide Continuous Room Canvas -->
     <div class="absolute inset-0 z-0 overflow-hidden">
-      <img id="formaBgImg" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2600&q=95" alt="Forma Architecture" class="w-full h-full object-cover filter brightness-85 transition-all duration-1000 scale-105">
-      <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/60 pointer-events-none"></div>
+      <img id="formaImg" src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=2600&q=95" alt="FORMA Residence" class="w-full h-full object-cover filter brightness-85 transition-all duration-1000 scale-105">
+      <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/60 pointer-events-none"></div>
     </div>
 
-    <!-- Editorial Overlay: Exactly as Video 2 -->
-    <div class="relative z-10 max-w-7xl w-full mx-auto px-6 sm:px-12 flex flex-col justify-between min-h-[520px]">
+    <div class="relative z-10 max-w-7xl w-full mx-auto px-6 sm:px-12 flex flex-col justify-between min-h-[540px]">
       
-      <!-- Top Bar: FORMA Branding -->
+      <!-- Top FORMA Navigation (Exact Match to Video 2 frame 00:00) -->
       <div class="flex items-center justify-between border-b border-white/20 pb-4">
-        <div class="flex items-center space-x-3">
-          <span class="font-serif tracking-[0.3em] font-bold text-white text-base">FORMA</span>
-          <span class="text-xs text-slate-400 hidden sm:inline">• RESIDENTIAL INTERIORS</span>
+        <span class="font-serif tracking-[0.28em] font-bold text-white text-base">FORMA</span>
+        
+        <div class="hidden sm:flex items-center space-x-6 text-xs text-white/80 tracking-widest uppercase">
+          <span class="hover:text-white cursor-pointer transition-colors">PROJECTS</span>
+          <span class="hover:text-white cursor-pointer transition-colors">STUDIO</span>
+          <span class="hover:text-white cursor-pointer transition-colors">SERVICES</span>
+          <span class="hover:text-white cursor-pointer transition-colors">CONTACT</span>
         </div>
-        <div class="flex items-center space-x-2 text-xs text-amber-300 font-medium">
-          <span id="formaNumber" class="tracking-widest uppercase">01 / LIVING</span>
-        </div>
+
+        <span class="text-[10px] sm:text-xs tracking-widest uppercase text-slate-400 font-semibold bg-white/5 border border-white/10 px-3 py-1 rounded-full">
+          RESIDENTIAL INTERIORS
+        </span>
       </div>
 
-      <!-- Main Editorial Room Typography (Alternating Left/Right alignment) -->
-      <div id="formaTextContainer" class="my-auto transition-all duration-700 max-w-2xl text-left">
-        <h2 id="formaTitle" class="forma-editorial-title text-4xl sm:text-6xl md:text-7xl font-bold text-white uppercase leading-none mb-3">
+      <!-- Main Editorial Room Block (Alternating Left/Right Alignment) -->
+      <div id="formaTextBlock" class="my-auto transition-all duration-700 max-w-2xl text-left">
+        <span id="formaRoomNum" class="text-xs sm:text-sm tracking-[0.25em] uppercase text-amber-300 font-bold block mb-2">
+          01 / LIVING
+        </span>
+        <h2 id="formaRoomTitle" class="forma-title-text text-4xl sm:text-6xl md:text-7xl font-bold text-white uppercase leading-none mb-3">
           THE LIVING SPACE
         </h2>
-        <p id="formaSubtitle" class="text-xs sm:text-sm tracking-[0.22em] uppercase text-white/90 font-medium">
+        <p id="formaRoomSub" class="text-xs sm:text-sm tracking-[0.22em] uppercase text-white/90 font-medium">
           WHERE THE DAY GATHERS.
         </p>
       </div>
 
-      <!-- Bottom Progress & Walkthrough Controls -->
+      <!-- Bottom Walkthrough Controls & Pills -->
       <div class="flex flex-col sm:flex-row items-center justify-between border-t border-white/20 pt-6 gap-4">
         
-        <!-- Room Pills (01 to 07) -->
-        <div id="formaPills" class="flex items-center space-x-2 sm:space-x-3">
+        <!-- Progress Pills -->
+        <div id="formaPillContainer" class="flex items-center space-x-2 sm:space-x-3">
           <!-- Dynamically populated -->
         </div>
 
-        <!-- Touch/Swipe Navigation Buttons -->
+        <!-- Buttons -->
         <div class="flex items-center space-x-3">
-          <button onclick="stepForma(-1)" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-colors">
+          <button onclick="navigateForma(-1)" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
             <i class="fa-solid fa-chevron-left text-xs"></i>
           </button>
-          <button onclick="stepForma(1)" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-colors">
+          <button onclick="navigateForma(1)" class="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors">
             <i class="fa-solid fa-chevron-right text-xs"></i>
           </button>
-          <button onclick="toggleFormaAutoPlay()" id="formaPlayPauseBtn" class="px-4 py-2 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold hover:bg-amber-400/30 transition-colors">
-            <i class="fa-solid fa-pause mr-1"></i> Auto
+          <button id="formaPlayBtn" onclick="toggleFormaPlay()" class="px-4 py-2 rounded-full bg-amber-400/20 text-amber-300 border border-amber-400/30 text-xs font-bold hover:bg-amber-400/30 transition-colors">
+            <i class="fa-solid fa-pause mr-1"></i> Auto Glide
           </button>
         </div>
 
@@ -384,9 +381,9 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- SECTION 3: 10-YEAR UAE GOLDEN VISA & ROI CALCULATOR      -->
+  <!-- SECTION 3: 10-YEAR GOLDEN VISA & ROI ENGINE              -->
   <!-- ======================================================== -->
-  <section id="calculator" class="py-24 bg-white text-slate-900 border-t border-slate-200">
+  <section id="calculator-section" class="py-24 bg-white text-slate-900 border-t border-slate-200">
     <div class="max-w-4xl mx-auto px-6">
       
       <div class="text-center mb-12">
@@ -399,13 +396,12 @@
 
       <div class="bg-slate-50 p-6 sm:p-12 rounded-3xl border border-slate-200 shadow-xl relative">
         
-        <!-- Slider Section -->
         <div class="mb-10">
           <div class="flex justify-between items-center mb-3">
             <label class="text-xs font-bold uppercase tracking-wider text-slate-700">Planned Real Estate Allocation (AED)</label>
-            <span id="calcValText" class="font-serif text-2xl font-extrabold text-slate-900">AED 3,000,000 (~$816,000)</span>
+            <span id="sliderDisplay" class="font-serif text-2xl font-extrabold text-slate-900">AED 3,000,000 (~$816,000)</span>
           </div>
-          <input type="range" id="calcSlider" min="1500000" max="25000000" step="250000" value="3000000" class="w-full h-3 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-amber-500">
+          <input type="range" id="sliderInput" min="1500000" max="25000000" step="250000" value="3000000" class="w-full h-3 bg-slate-300 rounded-lg appearance-none cursor-pointer accent-amber-500">
           <div class="flex justify-between text-[11px] text-slate-500 font-medium mt-2">
             <span>AED 1.5M (Standard Visa)</span>
             <span class="text-emerald-700 font-extrabold">AED 2.0M (Golden Visa Minimum)</span>
@@ -413,34 +409,31 @@
           </div>
         </div>
 
-        <!-- 3 Output Metric Cards -->
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
           <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-sm">
             <span class="text-[11px] uppercase font-bold text-slate-500 tracking-wider block mb-1">Annual Rental Yield (8.4%)</span>
-            <span id="outRental" class="font-serif text-2xl font-extrabold text-slate-900">AED 252,000/yr</span>
+            <span id="rentalYield" class="font-serif text-2xl font-extrabold text-slate-900">AED 252,000/yr</span>
             <span class="text-[10px] text-emerald-700 font-bold block mt-1">100% Tax-Free In Hand</span>
           </div>
           <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-sm">
             <span class="text-[11px] uppercase font-bold text-slate-500 tracking-wider block mb-1">5-Yr Capital Gain (38%)</span>
-            <span id="outGain" class="font-serif text-2xl font-extrabold text-slate-900">+AED 1,140,000</span>
-            <span class="text-[10px] text-slate-500 block mt-1">Prime Off-Plan Spec</span>
+            <span id="capitalGain" class="font-serif text-2xl font-extrabold text-slate-900">+AED 1,140,000</span>
+            <span class="text-[10px] text-slate-500 block mt-1">Off-Plan Spec</span>
           </div>
           <div class="bg-white p-5 rounded-2xl border border-slate-200 text-center shadow-sm">
             <span class="text-[11px] uppercase font-bold text-slate-500 tracking-wider block mb-1">UAE Residency Track</span>
-            <span id="outVisa" class="font-serif text-lg font-extrabold text-emerald-800">10-Year Golden Visa</span>
+            <span id="visaTier" class="font-serif text-lg font-extrabold text-emerald-800">10-Year Golden Visa</span>
             <span class="text-[10px] text-emerald-700 font-bold block mt-1">Family & Domestic Staff</span>
           </div>
         </div>
 
-        <!-- Official Status Box -->
-        <div id="visaStatusBanner" class="p-4 rounded-xl bg-emerald-100 border border-emerald-300 flex items-center space-x-3 text-xs text-emerald-950 mb-8">
+        <div id="visaBanner" class="p-4 rounded-xl bg-emerald-100 border border-emerald-300 flex items-center space-x-3 text-xs text-emerald-950 mb-8">
           <i class="fa-solid fa-circle-check text-lg text-emerald-700 flex-shrink-0"></i>
           <span><strong>Eligible for 10-Year UAE Golden Visa:</strong> Your allocation clears the AED 2,000,000 threshold. Realtor Signature Properties manages complete DLD title deed verification and residency paperwork.</span>
         </div>
 
-        <!-- WhatsApp Action Button -->
         <div class="text-center">
-          <a id="calcWaBtn" href="https://wa.me/971566037833?text=Hi%20Realtor%20UAE,%20I%20used%20your%20Golden%20Visa%20calculator%20for%20AED%203,000,000.%20Please%20send%20matching%20developer%20options." target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm tracking-wide shadow-xl hover:scale-105 transition-all">
+          <a id="btnWhatsAppCalc" href="https://wa.me/971566037833?text=Hi%20Realtor%20UAE,%20I%20used%20your%20Golden%20Visa%20calculator%20for%20AED%203,000,000.%20Please%20send%20matching%20developer%20options." target="_blank" class="inline-flex items-center space-x-3 px-8 py-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm tracking-wide shadow-xl hover:scale-105 transition-all">
             <i class="fa-brands fa-whatsapp text-emerald-400 text-lg"></i>
             <span>Send My Golden Visa Property File on WhatsApp</span>
           </a>
@@ -451,12 +444,11 @@
   </section>
 
   <!-- ======================================================== -->
-  <!-- MODAL: IMMERSIVE 3D LUXURY PROPERTY VIEWER (NEVER STUCK) -->
+  <!-- MODAL: ARCHITECTURAL PROPERTY SHOWCASE                   -->
   <!-- ======================================================== -->
-  <div id="propertyModal" class="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl transition-opacity duration-300 opacity-0 pointer-events-none" onclick="handleBackdropClick(event)">
+  <div id="propModal" class="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-xl transition-opacity duration-300 opacity-0 pointer-events-none" onclick="handleModalBackdrop(event)">
     <div class="bg-[#0A111F] border border-white/20 rounded-3xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative flex flex-col" onclick="event.stopPropagation()">
       
-      <!-- Modal Header -->
       <div class="p-5 sm:p-6 border-b border-white/10 flex items-center justify-between bg-black/60 sticky top-0 z-30 backdrop-blur-xl">
         <div class="flex items-center space-x-3">
           <div class="w-10 h-10 rounded-xl bg-amber-400 text-black flex items-center justify-center font-serif font-black text-sm">
@@ -464,28 +456,27 @@
           </div>
           <div>
             <div class="flex items-center space-x-2">
-              <span id="modalLocation" class="text-[10px] uppercase tracking-widest font-extrabold text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-500/30">Palm Jumeirah</span>
+              <span id="mLocation" class="text-[10px] uppercase tracking-widest font-extrabold text-amber-300 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-500/30">Palm Jumeirah</span>
               <span class="text-[10px] text-emerald-300 font-bold bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-500/30">10-Year Golden Visa</span>
             </div>
-            <h3 id="modalTitle" class="font-serif font-bold text-white text-lg sm:text-2xl mt-0.5">The Ellington Water Villa</h3>
+            <h3 id="mTitle" class="font-serif font-bold text-white text-lg sm:text-2xl mt-0.5">The Ellington Water Villa</h3>
           </div>
         </div>
 
         <div class="flex items-center space-x-3">
           <div class="text-right hidden sm:block mr-2">
-            <span id="modalPriceAED" class="font-serif font-black text-amber-300 text-xl block leading-none">AED 38,000,000</span>
-            <span id="modalPriceUSD" class="text-xs text-slate-400">~$10,340,000 USD</span>
+            <span id="mPriceAED" class="font-serif font-black text-amber-300 text-xl block leading-none">AED 38,000,000</span>
+            <span id="mPriceUSD" class="text-xs text-slate-400">~$10,340,000 USD</span>
           </div>
-          <button type="button" onclick="closeModal()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center space-x-2 transition-colors border border-white/15 text-xs font-bold cursor-pointer">
+          <button type="button" onclick="closePropModal()" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center space-x-2 transition-colors border border-white/15 text-xs font-bold cursor-pointer">
             <i class="fa-solid fa-xmark text-sm"></i>
             <span>Close</span>
           </button>
         </div>
       </div>
 
-      <!-- High-Definition Picture Preview -->
       <div class="relative h-64 sm:h-96 w-full overflow-hidden bg-slate-900 select-none">
-        <img id="modalImg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85" alt="Property Preview" class="w-full h-full object-cover">
+        <img id="mImg" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85" alt="Property Preview" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/20 pointer-events-none"></div>
 
         <div class="absolute bottom-4 left-4 right-4 flex items-end justify-between">
@@ -493,45 +484,44 @@
             <span class="text-[10px] text-amber-300 font-bold block uppercase tracking-wider">DLD Escrow Protected</span>
             <span class="text-xs font-bold text-white">Direct Developer Allocation</span>
           </div>
-          <span id="modalPriceMobile" class="sm:hidden bg-amber-400 text-black px-2.5 py-1 rounded-lg text-xs font-bold font-serif">AED 38M</span>
+          <span id="mPriceMobile" class="sm:hidden bg-amber-400 text-black px-2.5 py-1 rounded-lg text-xs font-bold font-serif">AED 38M</span>
         </div>
       </div>
 
-      <!-- Specs & Details -->
       <div class="p-5 sm:p-7 space-y-5">
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
           <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
             <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Suites</span>
-            <span id="modalBeds" class="font-serif text-base font-bold text-white">6 Suites</span>
+            <span id="mBeds" class="font-serif text-base font-bold text-white">6 Suites</span>
           </div>
           <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
             <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Bathrooms</span>
-            <span id="modalBaths" class="font-serif text-base font-bold text-white">8 Baths</span>
+            <span id="mBaths" class="font-serif text-base font-bold text-white">8 Baths</span>
           </div>
           <div class="bg-white/5 p-3 rounded-2xl border border-white/10 text-center">
             <span class="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">Built-Up Area</span>
-            <span id="modalArea" class="font-serif text-base font-bold text-white">11,500 Sq. Ft.</span>
+            <span id="mArea" class="font-serif text-base font-bold text-white">11,500 Sq. Ft.</span>
           </div>
           <div class="bg-amber-950/40 p-3 rounded-2xl border border-amber-500/30 text-center">
             <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider block">Net Yield</span>
-            <span id="modalYield" class="font-serif text-base font-bold text-amber-400">8.6% Tax-Free</span>
+            <span id="mYield" class="font-serif text-base font-bold text-amber-400">8.6% Tax-Free</span>
           </div>
         </div>
 
         <div>
           <h4 class="font-serif font-bold text-white text-xs uppercase tracking-wider mb-1.5 text-slate-300">Property Overview</h4>
-          <p id="modalDesc" class="text-xs text-slate-300 leading-relaxed"></p>
+          <p id="mDesc" class="text-xs text-slate-300 leading-relaxed"></p>
         </div>
 
-        <div id="modalHighlights" class="flex flex-wrap gap-2"></div>
+        <div id="mHighlights" class="flex flex-wrap gap-2"></div>
 
         <div class="pt-4 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <button type="button" onclick="closeModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs transition-colors flex items-center justify-center space-x-2 border border-white/15 cursor-pointer">
+          <button type="button" onclick="closePropModal()" class="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/10 hover:bg-white/15 text-white font-bold text-xs transition-colors flex items-center justify-center space-x-2 border border-white/15 cursor-pointer">
             <i class="fa-solid fa-arrow-left"></i>
-            <span>Back to Skyline</span>
+            <span>Back to Penthouse</span>
           </button>
 
-          <a id="modalWhatsAppBtn" href="https://wa.me/971566037833" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-black font-bold text-xs shadow-xl transition-all">
+          <a id="mWhatsAppBtn" href="https://wa.me/971566037833" target="_blank" class="w-full sm:w-auto inline-flex items-center justify-center space-x-2.5 px-6 py-3.5 rounded-xl bg-gradient-to-r from-amber-400 to-yellow-400 hover:from-amber-300 hover:to-yellow-300 text-black font-bold text-xs shadow-xl transition-all">
             <i class="fa-brands fa-whatsapp text-base"></i>
             <span>Book Private Viewing on WhatsApp</span>
           </a>
@@ -542,50 +532,13 @@
   </div>
 
   <!-- FOOTER -->
-  <footer id="contact" class="bg-[#05080F] border-t border-white/10 py-16 text-xs text-slate-400">
-    <div class="max-w-7xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
-        <div>
-          <div class="flex items-center space-x-2 mb-3">
-            <div class="w-7 h-7 rounded-lg bg-amber-400 text-black flex items-center justify-center font-serif font-black text-xs">
-              R
-            </div>
-            <span class="font-serif font-bold text-white text-sm">REALTOR SIGNATURE</span>
-          </div>
-          <p class="text-slate-400 text-xs leading-relaxed mb-3">
-            Buyer-first luxury real estate brokerage & spatial advisory. Licensed by the Dubai Land Department (RERA # 59128).
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-serif font-bold text-white uppercase tracking-wider mb-3">Direct Office</h4>
-          <p class="text-slate-400 text-xs leading-relaxed">
-            Suite 107-A29, White Swan Building,<br>
-            Trade Centre First, Sheikh Zayed Road,<br>
-            Dubai, United Arab Emirates
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-serif font-bold text-white uppercase tracking-wider mb-3">Direct Inquiries</h4>
-          <p class="text-slate-400 text-xs space-y-1">
-            <span class="block"><strong>WhatsApp:</strong> <a href="https://wa.me/971566037833" class="text-amber-300 hover:underline">+971 56 603 7833</a></span>
-            <span class="block"><strong>Portal:</strong> <a href="https://realtoruae.com" target="_blank" class="text-slate-300 hover:underline">realtoruae.com</a></span>
-          </p>
-        </div>
-
-        <div>
-          <h4 class="font-serif font-bold text-white uppercase tracking-wider mb-3">Escrow Security</h4>
-          <p class="text-slate-400 text-xs leading-relaxed">
-            All client payments are held directly in official DLD-approved Escrow accounts under UAE Law No. (8) of 2007.
-          </p>
-        </div>
+  <footer class="bg-[#080D1A] border-t border-white/10 py-12 text-xs text-slate-400">
+    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+      <div>
+        <span class="font-serif font-bold text-white text-sm">REALTOR SIGNATURE PROPERTIES</span>
+        <p class="text-slate-400 text-xs mt-1">Licensed by Dubai Land Department • RERA #59128</p>
       </div>
-
-      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between text-slate-500 gap-4">
-        <span>© 2026 Realtor Signature Properties. All rights reserved.</span>
-        <span>Exact Sequence Matching Video 1 & Video 2 References.</span>
-      </div>
+      <span>Suite 107-A29, White Swan Building, Sheikh Zayed Road, Dubai</span>
     </div>
   </footer>
 
@@ -594,63 +547,79 @@
   <!-- ======================================================== -->
   <script>
     // --------------------------------------------------------
-    // PART 1: THE EXACT VIDEO 1 CINEMATIC SEQUENCE
+    // PART 1: VIDEO 1 AUTOMATIC CINEMATIC SEQUENCE
     // --------------------------------------------------------
-    const stage1 = document.getElementById('stage1InvestDubai');
-    const stage2 = document.getElementById('stage2Penthouse');
+    const s1 = document.getElementById('v1Scene1');
+    const s2 = document.getElementById('v1Scene2');
     const sheikh = document.getElementById('sheikhFigure');
-    const c1 = document.getElementById('card1');
-    const c2 = document.getElementById('card2');
-    const c3 = document.getElementById('card3');
-    const c4 = document.getElementById('card4');
-    const cardsList = [c1, c2, c3, c4];
+    const cards = [
+      document.getElementById('c1'),
+      document.getElementById('c2'),
+      document.getElementById('c3'),
+      document.getElementById('c4')
+    ];
 
-    let heroStep = 1;
-    let autoTimer = null;
+    let currentScene = 1;
+    let sceneTimer = null;
 
-    function runHeroCinematic() {
-      // Step 1: "Invest in DUBAI" Skyline (0s - 3.5s)
-      heroStep = 1;
-      stage1.style.opacity = '1';
-      stage2.style.opacity = '0';
-      stage2.style.pointerEvents = 'none';
+    function playVideo1Flow() {
+      // Scene 1: Skyline & Invest in DUBAI (0s - 3.8s)
+      currentScene = 1;
+      s1.style.opacity = '1';
+      s2.style.opacity = '0';
+      s2.style.pointerEvents = 'none';
       sheikh.style.opacity = '0';
-      sheikh.style.transform = 'translateY(3rem)';
-      
-      [c1, c2].forEach(c => { c.style.transform = 'translateX(-3rem)'; c.style.opacity = '0'; });
-      [c3, c4].forEach(c => { c.style.transform = 'translateX(3rem)'; c.style.opacity = '0'; });
+      sheikh.style.transform = 'translateY(2.5rem)';
 
-      // Step 2: Transition into Penthouse + Sheikh looking at Burj (at 3.5s)
-      autoTimer = setTimeout(() => {
-        heroStep = 2;
-        stage1.style.opacity = '0';
-        stage2.style.opacity = '1';
-        stage2.style.pointerEvents = 'auto';
+      [cards[0], cards[1]].forEach(c => { c.style.transform = 'translateX(-3rem)'; c.style.opacity = '0'; });
+      [cards[2], cards[3]].forEach(c => { c.style.transform = 'translateX(3rem)'; c.style.opacity = '0'; });
 
-        // Sheikh rises smoothly
+      // Scene 2: Penthouse Zoom-Out & Sheikh (at 3.8s)
+      sceneTimer = setTimeout(() => {
+        currentScene = 2;
+        s1.style.opacity = '0';
+        s2.style.opacity = '1';
+        s2.style.pointerEvents = 'auto';
+
         sheikh.style.opacity = '1';
         sheikh.style.transform = 'translateY(0)';
 
-        // Step 3: The 4 White Luxury Cards fly in framing the window (at 5.0s)
+        // Scene 3: The 4 White Cards Fly In (at 5.0s)
         setTimeout(() => {
-          heroStep = 3;
-          cardsList.forEach(c => {
+          cards.forEach(c => {
             c.style.transform = 'translateX(0)';
             c.style.opacity = '1';
           });
-        }, 1200);
+        }, 1100);
 
-      }, 3500);
+      }, 3800);
     }
 
-    runHeroCinematic();
+    playVideo1Flow();
+
+    function jumpToHeroScene(num) {
+      clearTimeout(sceneTimer);
+      if (num === 1) {
+        playVideo1Flow();
+      } else {
+        s1.style.opacity = '0';
+        s2.style.opacity = '1';
+        s2.style.pointerEvents = 'auto';
+        sheikh.style.opacity = '1';
+        sheikh.style.transform = 'translateY(0)';
+        cards.forEach(c => {
+          c.style.transform = 'translateX(0)';
+          c.style.opacity = '1';
+        });
+      }
+    }
 
     // --------------------------------------------------------
-    // 4 CARDS DATA & TACTILE 3D PUSH-BACK
+    // 4 CARDS DATA & MODAL
     // --------------------------------------------------------
     const propertiesData = [
       {
-        title: "The Ellington Water Villa",
+        title: "Ellington Water Villa",
         location: "Palm Jumeirah • Frond G",
         priceAED: "AED 38,000,000",
         priceUSD: "~$10,340,000 USD",
@@ -660,7 +629,7 @@
         yield: "8.6% Tax-Free",
         desc: "Architectural masterpiece on Palm Jumeirah Frond G. Features double-height ocean-facing atrium, private boat mooring, and bespoke European minimalist interior craft.",
         mainImg: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=85",
-        highlights: ["Private White Sand Beach", "Infinity Heated Lap Pool", "Calacatta Gold Marble", "10-Year Golden Visa", "DLD Escrow Secured"]
+        highlights: ["Private Sand Beach", "Infinity Heated Lap Pool", "Calacatta Gold Marble", "10-Year Golden Visa", "DLD Escrow Secured"]
       },
       {
         title: "Horizon Beachfront Mansion",
@@ -703,41 +672,41 @@
       }
     ];
 
-    function handleCardClick(event, index) {
+    function triggerCardClick(event, index) {
       if (event) event.stopPropagation();
-      const card = cardsList[index];
+      const card = cards[index];
       if (!card) return;
 
-      // 1. Tactile 3D physical push-back
-      card.classList.add('card-pushed');
+      // 1. Physical 3D Press Back
+      card.classList.add('pressed');
 
-      // 2. Open luxury modal smoothly after 150ms
+      // 2. Open Modal after 140ms
       setTimeout(() => {
-        card.classList.remove('card-pushed');
-        openModal(index);
-      }, 150);
+        card.classList.remove('pressed');
+        openPropertyModal(index);
+      }, 140);
     }
 
-    const modal = document.getElementById('propertyModal');
-    const modalImg = document.getElementById('modalImg');
+    const modal = document.getElementById('propModal');
+    const modalImg = document.getElementById('mImg');
 
-    function openModal(index) {
+    function openPropertyModal(index) {
       const data = propertiesData[index];
       if (!data || !modal) return;
 
-      document.getElementById('modalLocation').textContent = data.location;
-      document.getElementById('modalTitle').textContent = data.title;
-      document.getElementById('modalPriceAED').textContent = data.priceAED;
-      document.getElementById('modalPriceUSD').textContent = data.priceUSD;
-      document.getElementById('modalPriceMobile').textContent = data.priceAED;
-      document.getElementById('modalBeds').textContent = data.beds;
-      document.getElementById('modalBaths').textContent = data.baths;
-      document.getElementById('modalArea').textContent = data.area;
-      document.getElementById('modalYield').textContent = data.yield;
-      document.getElementById('modalDesc').textContent = data.desc;
+      document.getElementById('mLocation').textContent = data.location;
+      document.getElementById('mTitle').textContent = data.title;
+      document.getElementById('mPriceAED').textContent = data.priceAED;
+      document.getElementById('mPriceUSD').textContent = data.priceUSD;
+      document.getElementById('mPriceMobile').textContent = data.priceAED;
+      document.getElementById('mBeds').textContent = data.beds;
+      document.getElementById('mBaths').textContent = data.baths;
+      document.getElementById('mArea').textContent = data.area;
+      document.getElementById('mYield').textContent = data.yield;
+      document.getElementById('mDesc').textContent = data.desc;
       modalImg.src = data.mainImg;
 
-      const hlContainer = document.getElementById('modalHighlights');
+      const hlContainer = document.getElementById('mHighlights');
       hlContainer.innerHTML = '';
       data.highlights.forEach(h => {
         const span = document.createElement('span');
@@ -746,28 +715,28 @@
         hlContainer.appendChild(span);
       });
 
-      document.getElementById('modalWhatsAppBtn').href = `https://wa.me/971566037833?text=Hi%20Realtor%20UAE,%20I%20am%20inquiring%20about%20${encodeURIComponent(data.title)}%20(${encodeURIComponent(data.priceAED)}).%20Please%20send%20the%20viewing%20schedule.`;
+      document.getElementById('mWhatsAppBtn').href = `https://wa.me/971566037833?text=Hi%20Realtor%20UAE,%20I%20am%20inquiring%20about%20${encodeURIComponent(data.title)}%20(${encodeURIComponent(data.priceAED)}).%20Please%20send%20the%20viewing%20schedule.`;
 
       modal.classList.remove('opacity-0', 'pointer-events-none');
       modal.classList.add('opacity-100');
     }
 
-    function closeModal() {
+    function closePropModal() {
       if (!modal) return;
       modal.classList.add('opacity-0', 'pointer-events-none');
       modal.classList.remove('opacity-100');
     }
 
-    function handleBackdropClick(e) {
-      if (e.target === modal) closeModal();
+    function handleModalBackdrop(e) {
+      if (e.target === modal) closePropModal();
     }
 
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape') closePropModal();
     });
 
     // --------------------------------------------------------
-    // PART 2: THE EXACT REFERENCE 2 "FORMA" CONTINUOUS WALKTHROUGH
+    // PART 2: VIDEO 2 FORMA CONTINUOUS WALKTHROUGH
     // --------------------------------------------------------
     const formaRooms = [
       {
@@ -822,113 +791,97 @@
     ];
 
     let formaIdx = 0;
-    let formaAutoPlayActive = true;
-    let formaInterval = null;
+    let formaAutoActive = true;
+    let formaTimer = null;
 
-    const fBg = document.getElementById('formaBgImg');
-    const fNum = document.getElementById('formaNumber');
-    const fTitle = document.getElementById('formaTitle');
-    const fSub = document.getElementById('formaSubtitle');
-    const fContainer = document.getElementById('formaTextContainer');
-    const fPills = document.getElementById('formaPills');
+    const fImg = document.getElementById('formaImg');
+    const fNum = document.getElementById('formaRoomNum');
+    const fTitle = document.getElementById('formaRoomTitle');
+    const fSub = document.getElementById('formaRoomSub');
+    const fBlock = document.getElementById('formaTextBlock');
+    const fPills = document.getElementById('formaPillContainer');
 
-    // Build Pills
     formaRooms.forEach((r, idx) => {
       const p = document.createElement('div');
-      p.className = `forma-pill h-1.5 rounded-full cursor-pointer transition-all ${idx === 0 ? 'w-10 bg-amber-400' : 'w-4 bg-white/20'}`;
-      p.onclick = () => jumpToRoom(idx);
+      p.className = `forma-pill-bar h-1 rounded-full cursor-pointer transition-all ${idx === 0 ? 'w-10 bg-amber-400' : 'w-4 bg-white/20'}`;
+      p.onclick = () => jumpToForma(idx);
       fPills.appendChild(p);
     });
 
-    function renderRoom() {
+    function renderFormaRoom() {
       const room = formaRooms[formaIdx];
-      
-      // Update image with smooth scale pan
-      fBg.style.opacity = '0.35';
+
+      fImg.style.opacity = '0.35';
       fTitle.style.opacity = '0';
       fTitle.style.transform = 'translateY(1.5rem)';
       fSub.style.opacity = '0';
 
       setTimeout(() => {
-        fBg.src = room.img;
+        fImg.src = room.img;
         fNum.textContent = room.num;
         fTitle.textContent = room.title;
         fSub.textContent = room.sub;
 
-        // Alignment: Left, Right, or Center as Video 2
-        fContainer.className = `my-auto transition-all duration-700 max-w-2xl ${room.align === 'text-right' ? 'ml-auto text-right' : room.align === 'text-center' ? 'mx-auto text-center' : 'text-left'}`;
+        fBlock.className = `my-auto transition-all duration-700 max-w-2xl ${room.align === 'text-right' ? 'ml-auto text-right' : room.align === 'text-center' ? 'mx-auto text-center' : 'text-left'}`;
 
-        fBg.style.opacity = '0.85';
+        fImg.style.opacity = '0.85';
         fTitle.style.opacity = '1';
         fTitle.style.transform = 'translateY(0)';
         fSub.style.opacity = '1';
 
-        // Update pills
         Array.from(fPills.children).forEach((pill, i) => {
           if (i === formaIdx) {
-            pill.className = 'forma-pill h-1.5 rounded-full cursor-pointer transition-all w-10 bg-amber-400';
+            pill.className = 'forma-pill-bar h-1 rounded-full cursor-pointer transition-all w-10 bg-amber-400';
           } else {
-            pill.className = 'forma-pill h-1.5 rounded-full cursor-pointer transition-all w-4 bg-white/20';
+            pill.className = 'forma-pill-bar h-1 rounded-full cursor-pointer transition-all w-4 bg-white/20';
           }
         });
       }, 350);
     }
 
-    function stepForma(delta) {
+    function navigateForma(delta) {
       formaIdx = (formaIdx + delta + formaRooms.length) % formaRooms.length;
-      renderRoom();
+      renderFormaRoom();
     }
 
-    function jumpToRoom(idx) {
+    function jumpToForma(idx) {
       formaIdx = idx;
-      renderRoom();
+      renderFormaRoom();
     }
 
-    function toggleFormaAutoPlay() {
-      formaAutoPlayActive = !formaAutoPlayActive;
-      const btn = document.getElementById('formaPlayPauseBtn');
-      if (formaAutoPlayActive) {
-        btn.innerHTML = '<i class="fa-solid fa-pause mr-1"></i> Auto';
-        startFormaInterval();
+    function toggleFormaPlay() {
+      formaAutoActive = !formaAutoActive;
+      const btn = document.getElementById('formaPlayBtn');
+      if (formaAutoActive) {
+        btn.innerHTML = '<i class="fa-solid fa-pause mr-1"></i> Auto Glide';
+        startFormaLoop();
       } else {
         btn.innerHTML = '<i class="fa-solid fa-play mr-1"></i> Play';
-        clearInterval(formaInterval);
+        clearInterval(formaTimer);
       }
     }
 
-    function startFormaInterval() {
-      clearInterval(formaInterval);
-      formaInterval = setInterval(() => {
-        if (formaAutoPlayActive) stepForma(1);
+    function startFormaLoop() {
+      clearInterval(formaTimer);
+      formaTimer = setInterval(() => {
+        if (formaAutoActive) navigateForma(1);
       }, 4200);
     }
 
-    startFormaInterval();
-
-    // Swipe support for FORMA on mobile
-    let touchStartX = 0;
-    document.getElementById('forma-showcase').addEventListener('touchstart', (e) => {
-      touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-
-    document.getElementById('forma-showcase').addEventListener('touchend', (e) => {
-      const touchEndX = e.changedTouches[0].clientX;
-      if (touchStartX - touchEndX > 50) stepForma(1);
-      if (touchEndX - touchStartX > 50) stepForma(-1);
-    }, { passive: true });
+    startFormaLoop();
 
     // --------------------------------------------------------
-    // PART 3: 10-YEAR GOLDEN VISA CALCULATOR
+    // PART 3: GOLDEN VISA CALCULATOR
     // --------------------------------------------------------
-    const slider = document.getElementById('calcSlider');
-    const display = document.getElementById('calcValText');
-    const rental = document.getElementById('outRental');
-    const gain = document.getElementById('outGain');
-    const visa = document.getElementById('outVisa');
-    const banner = document.getElementById('visaStatusBanner');
-    const waBtn = document.getElementById('calcWaBtn');
+    const slider = document.getElementById('sliderInput');
+    const display = document.getElementById('sliderDisplay');
+    const rental = document.getElementById('rentalYield');
+    const gain = document.getElementById('capitalGain');
+    const visa = document.getElementById('visaTier');
+    const banner = document.getElementById('visaBanner');
+    const waBtn = document.getElementById('btnWhatsAppCalc');
 
-    function updateCalc() {
+    function updateCalculator() {
       const val = parseInt(slider.value);
       const usd = Math.round(val / 3.6725);
       display.textContent = `AED ${val.toLocaleString()} (~$${usd.toLocaleString()})`;
@@ -954,7 +907,7 @@
       waBtn.href = `https://wa.me/971566037833?text=Hi%20Realtor%20UAE,%20I%20used%20your%20Golden%20Visa%20calculator%20for%20AED%20${val.toLocaleString()}%20allocation.%20Please%20send%20matching%20developer%20options.`;
     }
 
-    slider.addEventListener('input', updateCalc);
+    slider.addEventListener('input', updateCalculator);
   </script>
 </body>
 </html>
