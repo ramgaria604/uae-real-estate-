@@ -41,44 +41,52 @@ body:hover #cursor{opacity:1}
 @keyframes plFadeIn{to{opacity:1}}
 
 /* ==================== NAV ==================== */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(20px,5vw,60px);height:72px;display:flex;align-items:center;justify-content:space-between;transition:background 0.4s ease,border-color 0.4s ease;border-bottom:1px solid transparent}
-nav.scrolled{background:rgba(8,8,16,0.92);backdrop-filter:blur(24px);border-color:rgba(255,255,255,0.05)}
-.nav-brand{display:flex;align-items:center;gap:14px}
-.nav-monogram{width:36px;height:36px;border:1px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-size:14px;font-weight:700;color:#c9a84c;transition:all 0.3s ease}
-.nav-monogram:hover{background:rgba(201,168,76,0.1)}
-.nav-wordmark{font-family:'Bodoni Moda',serif;font-size:18px;font-weight:700;letter-spacing:0.3em;color:#e8e4dc}
-.nav-sub{font-size:9px;font-weight:300;letter-spacing:0.5em;color:#6b6b7a;text-transform:uppercase;margin-top:-2px}
-.nav-links{display:flex;align-items:center;gap:36px}
-.nav-links a{font-size:10px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:#9999aa;transition:color 0.3s ease}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(16px,4vw,56px);height:76px;display:flex;align-items:center;justify-content:space-between;transition:background 0.5s ease,border-color 0.5s ease,box-shadow 0.5s ease;border-bottom:1px solid transparent;overflow:visible}
+nav.scrolled{background:rgba(8,8,16,0.95);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-color:rgba(255,255,255,0.05);box-shadow:0 1px 40px rgba(0,0,0,0.6)}
+.nav-brand{display:flex;align-items:center;gap:14px;flex-shrink:0}
+.nav-monogram{width:38px;height:38px;border:1px solid rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-size:15px;font-weight:700;color:#c9a84c;transition:all 0.3s ease;flex-shrink:0}
+.nav-monogram:hover{background:rgba(201,168,76,0.12);border-color:#c9a84c}
+.nav-wordmark{font-family:'Bodoni Moda',serif;font-size:19px;font-weight:800;letter-spacing:0.32em;color:#e8e4dc}
+.nav-sub{font-size:9px;font-weight:300;letter-spacing:0.45em;color:#6b6b7a;text-transform:uppercase;margin-top:-1px}
+.nav-links{display:flex;align-items:center;gap:32px;flex-shrink:0}
+.nav-links a{font-size:10px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:#9999aa;transition:color 0.3s ease;white-space:nowrap}
 .nav-links a:hover{color:#c9a84c}
-.nav-cta{display:flex;align-items:center;gap:16px}
-.btn-ghost{font-size:10px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);padding:9px 20px;transition:all 0.3s ease}
-.btn-ghost:hover{background:rgba(201,168,76,0.08);border-color:#c9a84c}
-.btn-primary{font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:#c9a84c;color:#080810;padding:10px 24px;transition:all 0.3s ease}
-.btn-primary:hover{background:#f0d080}
-.nav-currency{background:transparent;border:1px solid rgba(255,255,255,0.08);color:#9999aa;font-size:10px;font-weight:400;letter-spacing:0.15em;padding:8px 12px;outline:none;transition:all 0.3s ease;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
-.nav-currency:focus{border-color:rgba(201,168,76,0.4);color:#c9a84c}
+.nav-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,0.45);padding:10px 18px;transition:all 0.3s ease;white-space:nowrap;line-height:1}
+.btn-ghost:hover{background:rgba(201,168,76,0.1);border-color:#c9a84c}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;background:linear-gradient(135deg,#c9a84c,#e8c96a);color:#080810;padding:11px 22px;transition:all 0.3s ease;white-space:nowrap;line-height:1}
+.btn-primary:hover{background:linear-gradient(135deg,#e8c96a,#c9a84c);box-shadow:0 4px 20px rgba(201,168,76,0.35)}
+.nav-currency{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#9999aa;font-size:10px;font-weight:400;letter-spacing:0.12em;padding:9px 28px 9px 12px;outline:none;transition:all 0.3s ease;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;font-family:'Inter',sans-serif}
+.nav-currency:focus{border-color:rgba(201,168,76,0.5);color:#c9a84c}
 .nav-currency option{background:#0d0d1a;color:#e8e4dc}
 
 /* ==================== HERO ==================== */
 #hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;transform:scale(1.08);animation:heroKenBurns 20s ease-in-out infinite alternate}
-@keyframes heroKenBurns{0%{transform:scale(1.08) translate(0,0)}100%{transform:scale(1.14) translate(-1%,-1%)}}
-.hero-vignette{position:absolute;inset:0;background:linear-gradient(0deg,#080810 0%,rgba(8,8,16,0.6) 40%,rgba(8,8,16,0.1) 70%,rgba(8,8,16,0.5) 100%)}
-.hero-content{position:relative;z-index:10;width:100%;padding:0 clamp(20px,8vw,120px) clamp(60px,8vh,100px);display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:40px}
-.hero-left .eyebrow{font-size:10px;font-weight:400;letter-spacing:0.5em;text-transform:uppercase;color:#c9a84c;margin-bottom:24px;display:flex;align-items:center;gap:12px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.2s ease}
-.hero-left .eyebrow::before{content:'';width:30px;height:1px;background:#c9a84c}
-.hero-left h1{font-family:'Bodoni Moda',serif;font-size:clamp(52px,8vw,120px);font-weight:900;line-height:0.92;letter-spacing:-0.02em;color:#e8e4dc;opacity:0;transform:translateY(40px);transition:all 1s 1s ease}
-.hero-left h1 em{font-style:italic;font-weight:400;color:#c9a84c}
-.hero-left .hero-desc{font-size:13px;font-weight:300;line-height:1.9;color:#8888a0;max-width:360px;margin-top:28px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.4s ease}
-.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:40px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.6s ease}
-.hero-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,0.05)}
-.hero-stat{background:#080810;padding:20px 24px;text-align:center}
-.hero-stat-num{font-family:'Bodoni Moda',serif;font-size:28px;font-weight:700;color:#c9a84c;display:block;line-height:1}
-.hero-stat-label{font-size:9px;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;margin-top:6px;display:block}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 25%;transform:scale(1.08);animation:heroKenBurns 22s ease-in-out infinite alternate}
+@keyframes heroKenBurns{0%{transform:scale(1.08) translate(0,0)}100%{transform:scale(1.15) translate(-1.5%,-0.8%)}}
+.hero-vignette{position:absolute;inset:0;background:linear-gradient(0deg,#080810 0%,rgba(8,8,16,0.65) 35%,rgba(8,8,16,0.08) 65%,rgba(8,8,16,0.55) 100%)}
+.hero-content{position:relative;z-index:10;width:100%;padding:0 clamp(20px,8vw,120px) clamp(70px,9vh,110px);display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:40px}
+.hero-left .eyebrow{font-size:10px;font-weight:400;letter-spacing:0.55em;text-transform:uppercase;color:#c9a84c;margin-bottom:28px;display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.2s ease}
+.hero-left .eyebrow::before{content:'';width:36px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c)}
+.hero-left h1{font-family:'Bodoni Moda',serif;font-size:clamp(56px,8.5vw,128px);font-weight:900;line-height:0.9;letter-spacing:-0.025em;color:#e8e4dc;opacity:0;transform:translateY(40px);transition:all 1s 1s ease}
+.hero-left h1 em{font-style:italic;font-weight:300;color:#c9a84c;display:block}
+.hero-left .hero-desc{font-size:13px;font-weight:300;line-height:2;color:#8888a0;max-width:380px;margin-top:30px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.4s ease;border-left:1px solid rgba(201,168,76,0.25);padding-left:16px}
+.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:28px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.6s ease}
+.hero-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.12)}
+.hero-stat{background:rgba(8,8,16,0.85);backdrop-filter:blur(12px);padding:22px 26px;text-align:center;transition:background 0.3s ease}
+.hero-stat:hover{background:rgba(20,18,10,0.9)}
+.hero-stat-num{font-family:'Bodoni Moda',serif;font-size:30px;font-weight:800;color:#c9a84c;display:block;line-height:1}
+.hero-stat-num small{font-size:16px;vertical-align:super;font-weight:400}
+.hero-stat-label{font-size:8px;font-weight:400;letter-spacing:0.35em;text-transform:uppercase;color:#55556a;margin-top:8px;display:block}
 .hero-actions{display:flex;gap:12px;width:100%;justify-content:flex-end}
 .hero-loaded .eyebrow,.hero-loaded h1,.hero-loaded .hero-desc,.hero-loaded .hero-right{opacity:1;transform:translateY(0)}
+
+/* Live badge on hero */
+.hero-live-badge{position:absolute;top:92px;right:clamp(20px,8vw,120px);z-index:20;display:flex;align-items:center;gap:8px;border:1px solid rgba(201,168,76,0.25);background:rgba(8,8,16,0.75);backdrop-filter:blur(12px);padding:8px 16px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#9999aa;opacity:0;transform:translateY(-10px);transition:all 0.6s 2s ease}
+.hero-loaded .hero-live-badge{opacity:1;transform:translateY(0)}
+.hero-live-badge .live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:livePulse 2s ease-in-out infinite}
+@keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.4)}50%{opacity:0.7;box-shadow:0 0 0 6px rgba(34,197,94,0)}}
 
 /* Hero scroll indicator */
 .scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;animation:scrollBounce 2s ease-in-out infinite}
@@ -235,8 +243,12 @@ footer{background:#06060e;padding:60px clamp(20px,8vw,120px) 40px;border-top:1px
 .reveal-right.visible{opacity:1;transform:translateX(0)}
 
 /* ==================== RESPONSIVE ==================== */
+@media(max-width:1280px){
+  .nav-links{display:none}
+  .nav-cta{gap:8px}
+}
 @media(max-width:1024px){
-  .hero-content{grid-template-columns:1fr;gap:30px}
+  .hero-content{grid-template-columns:1fr;gap:36px}
   .hero-right{align-items:flex-start}
   .hero-actions{justify-content:flex-start}
   .portfolio-grid{grid-template-columns:1fr}
@@ -248,7 +260,13 @@ footer{background:#06060e;padding:60px clamp(20px,8vw,120px) 40px;border-top:1px
   .forma-intro{grid-template-columns:1fr}
 }
 @media(max-width:768px){
-  .nav-links{display:none}
+  nav{padding:0 16px;height:68px}
+  .nav-brand .nav-sub{display:none}
+  .btn-ghost{display:none}
+  .btn-primary{padding:10px 16px;font-size:9px}
+  .nav-currency{padding:8px 24px 8px 10px;font-size:9px}
+  .hero-content{padding:0 20px clamp(60px,8vh,80px)}
+  .hero-left h1{font-size:clamp(44px,13vw,80px)}
   .hero-stat-grid{grid-template-columns:repeat(2,1fr)}
   .modal-specs{grid-template-columns:repeat(2,1fr)}
   .modal-actions{flex-direction:column}
@@ -259,6 +277,9 @@ footer{background:#06060e;padding:60px clamp(20px,8vw,120px) 40px;border-top:1px
   body{cursor:auto}
   #cursor,#cursor-ring{display:none}
   button,select,a{cursor:pointer}
+  .modal-overlay{padding:12px}
+  .modal-body{padding:24px}
+  .vip-services{gap:10px}
 }
 </style>
 </head>
@@ -309,6 +330,13 @@ footer{background:#06060e;padding:60px clamp(20px,8vw,120px) 40px;border-top:1px
     <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2560&q=90" alt="Dubai Ultra-Luxury Skyline" loading="eager">
   </div>
   <div class="hero-vignette"></div>
+
+  <!-- Live Active Listings Badge -->
+  <div class="hero-live-badge" id="heroLiveBadge">
+    <span class="live-dot"></span>
+    <span>4 Active Crown Listings</span>
+  </div>
+
   <div class="hero-content" id="heroContent">
     <div class="hero-left">
       <div class="eyebrow">Invitation Only · Dubai</div>
@@ -368,11 +396,51 @@ footer{background:#06060e;padding:60px clamp(20px,8vw,120px) 40px;border-top:1px
   </div>
 </div>
 
+<!-- TRUST / CREDENTIALS STRIP -->
+<div style="padding:40px clamp(20px,8vw,120px);background:#0a0a14;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
+  <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:center">
+    <div style="text-align:center">
+      <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#e8e4dc;line-height:1">20+</div>
+      <div style="font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#44445a;margin-top:4px">Years Advisory</div>
+    </div>
+    <div style="width:1px;height:40px;background:rgba(255,255,255,0.05)"></div>
+    <div style="text-align:center">
+      <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#e8e4dc;line-height:1">AED 2.4B</div>
+      <div style="font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#44445a;margin-top:4px">Transactions Closed</div>
+    </div>
+    <div style="width:1px;height:40px;background:rgba(255,255,255,0.05)"></div>
+    <div style="text-align:center">
+      <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#e8e4dc;line-height:1">62</div>
+      <div style="font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#44445a;margin-top:4px">Countries Served</div>
+    </div>
+    <div style="width:1px;height:40px;background:rgba(255,255,255,0.05)"></div>
+    <div style="text-align:center">
+      <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#e8e4dc;line-height:1">#1</div>
+      <div style="font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#44445a;margin-top:4px">Ultra-Prime Dubai</div>
+    </div>
+  </div>
+  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;border:1px solid rgba(255,255,255,0.06);padding:8px 16px">RERA #94821</div>
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;border:1px solid rgba(255,255,255,0.06);padding:8px 16px">DLD Certified</div>
+    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;border:1px solid rgba(255,255,255,0.06);padding:8px 16px">Forbes Recognized</div>
+  </div>
+</div>
+
 <!-- PORTFOLIO -->
 <section id="portfolio">
   <div class="section-header reveal">
     <div class="eyebrow">The Crown Collection</div>
     <h2>Trophy Residences,<br><em>Meticulously Curated.</em></h2>
+  </div>
+  <!-- Property Filter Row -->
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:0 clamp(20px,5vw,60px);margin-top:40px">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="filterPortfolio('all',this)" style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border:1px solid #c9a84c;color:#c9a84c;background:rgba(201,168,76,0.1);transition:all 0.3s ease" class="filter-btn active-filter">All Locations</button>
+      <button onclick="filterPortfolio('Downtown Dubai',this)" style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(255,255,255,0.08);color:#55556a;background:transparent;transition:all 0.3s ease" class="filter-btn">Downtown</button>
+      <button onclick="filterPortfolio('Palm Jumeirah',this)" style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(255,255,255,0.08);color:#55556a;background:transparent;transition:all 0.3s ease" class="filter-btn">Palm Jumeirah</button>
+      <button onclick="filterPortfolio('Jumeira Bay Island',this)" style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(255,255,255,0.08);color:#55556a;background:transparent;transition:all 0.3s ease" class="filter-btn">Jumeira Bay</button>
+    </div>
+    <div style="font-size:10px;color:#44445a;letter-spacing:0.2em">Showing <span id="propCount">4</span> Residences</div>
   </div>
   <div class="portfolio-grid">
     <!-- Top Row -->
@@ -444,9 +512,39 @@ footer{background:#06060e;padding:60px clamp(20px,8vw,120px) 40px;border-top:1px
   </div>
 </section>
 
+<!-- FEATURED PROPERTY — FULL BLEED CINEMATIC BANNER -->
+<div style="position:relative;height:85vh;min-height:500px;overflow:hidden;cursor:none" onclick="openPropertyModal(0)">
+  <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=90" alt="Featured — Atlantis Royal" style="width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.04);transition:transform 10s ease">
+  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,16,0.88) 0%,rgba(8,8,16,0.4) 50%,rgba(8,8,16,0.1) 100%)"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;padding:0 clamp(24px,8vw,120px)">
+    <div style="max-width:580px">
+      <div style="font-size:9px;font-weight:500;letter-spacing:0.5em;text-transform:uppercase;color:#c9a84c;margin-bottom:16px;display:flex;align-items:center;gap:12px">
+        <span style="display:inline-block;width:4px;height:4px;background:#c9a84c;border-radius:50%"></span>
+        Featured Listing — Palm Jumeirah
+      </div>
+      <div style="font-family:'Bodoni Moda',serif;font-size:clamp(32px,5.5vw,72px);font-weight:900;color:#e8e4dc;line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px">Atlantis Royal<br><em style="font-style:italic;font-weight:300;color:#c9a84c">Sky Villa</em></div>
+      <p style="font-size:13px;font-weight:300;line-height:1.9;color:#8888a0;max-width:420px;margin-bottom:28px">Suspended 180 metres above the Arabian Sea at the crown of Atlantis The Royal. Designed by KPF. Interiors by Sybille de Margerie. Unbroken 360° ocean panoramas.</p>
+      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+        <div>
+          <div style="font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:#44445a;margin-bottom:4px">Acquisition Price</div>
+          <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#c9a84c" id="featuredPrice">AED 115,000,000</div>
+        </div>
+        <button class="btn-primary" onclick="event.stopPropagation();openPropertyModal(1)" style="padding:13px 28px">Inspect Dossier</button>
+        <div style="display:flex;gap:16px;font-size:10px;color:#55556a;letter-spacing:0.1em">
+          <span>16,800 Sq Ft</span>
+          <span>·</span>
+          <span>5 Ocean Suites</span>
+          <span>·</span>
+          <span>Helipad</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="position:absolute;bottom:28px;right:clamp(24px,8vw,120px);font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:#55556a">Click to open dossier →</div>
+</div>
+
 <!-- FORMA INTERIORS -->
-<section id="forma">
-  <div class="forma-intro reveal">
+<section id="forma">  <div class="forma-intro reveal">
     <div>
       <div class="eyebrow" style="font-size:9px;font-weight:400;letter-spacing:0.6em;text-transform:uppercase;color:#c9a84c;display:flex;align-items:center;gap:12px;margin-bottom:20px">
         <span>Architectural Walkthrough</span>
@@ -867,6 +965,47 @@ function handleDossierRequest(){
 
 /* ==================== KEYBOARD ==================== */
 window.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closePropertyModal(); closeViewingModal(); } });
+
+/* ==================== PORTFOLIO FILTER ==================== */
+const cardLocMap = ['Downtown Dubai','Palm Jumeirah','Jumeira Bay Island','Palm Jumeirah'];
+function filterPortfolio(loc, btn){
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.style.border='1px solid rgba(255,255,255,0.08)';
+    b.style.color='#55556a';
+    b.style.background='transparent';
+  });
+  btn.style.border='1px solid #c9a84c';
+  btn.style.color='#c9a84c';
+  btn.style.background='rgba(201,168,76,0.1)';
+  const cards = document.querySelectorAll('.portfolio-card');
+  let visible=0;
+  cards.forEach((card,i)=>{
+    const cardLoc = card.getAttribute('data-loc') || cardLocMap[i] || '';
+    const show = loc==='all' || cardLoc===loc;
+    card.style.display = show ? '' : 'none';
+    if(show) visible++;
+  });
+  document.getElementById('propCount').textContent = visible;
+}
+
+/* ==================== UPDATE FEATURED PRICE ==================== */
+function updateFeaturedPrice(){
+  const fp = document.getElementById('featuredPrice');
+  if(fp) fp.textContent = formatPrice(115000000);
+}
+const origUpdateCurrency = updateCurrency;
+updateCurrency = function(c){
+  origUpdateCurrency(c);
+  updateFeaturedPrice();
+};
+
+/* ==================== HOVER IMAGE ZOOM ON FEATURED ==================== */
+const featBanner = document.querySelector('[onclick="openPropertyModal(0)"]');
+if(featBanner){
+  const featImg = featBanner.querySelector('img');
+  featBanner.addEventListener('mouseenter',()=>{ if(featImg) featImg.style.transform='scale(1.08)'; });
+  featBanner.addEventListener('mouseleave',()=>{ if(featImg) featImg.style.transform='scale(1.04)'; });
+}
 </script>
 </body>
 </html>
