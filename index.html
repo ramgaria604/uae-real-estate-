@@ -8,1004 +8,1343 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>◆</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=Cormorant:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@200;300;400;500;600&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+
 <style>
 /* ==================== RESET & BASE ==================== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;scroll-behavior:auto}
 body{background:#080810;color:#e8e4dc;font-family:'Inter',sans-serif;overflow-x:hidden;cursor:none}
-::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar{width:3px}
 ::-webkit-scrollbar-track{background:#080810}
-::-webkit-scrollbar-thumb{background:#2a2a3a;border-radius:4px}
+::-webkit-scrollbar-thumb{background:#1e1e2e;border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:#c9a84c}
 img{display:block;max-width:100%;height:auto}
 a{text-decoration:none;color:inherit}
 button{border:none;background:none;cursor:none;font-family:inherit}
 select{cursor:none}
+input,textarea{font-family:inherit}
+
+/* ==================== SCROLL PROGRESS BAR ==================== */
+#scroll-progress{position:fixed;top:0;left:0;width:0%;height:2px;background:linear-gradient(90deg,#c9a84c,#f0d080,#c9a84c);z-index:10001;transition:width 0.05s linear;box-shadow:0 0 8px rgba(201,168,76,0.6)}
 
 /* ==================== CUSTOM CURSOR ==================== */
-#cursor{position:fixed;z-index:9999;pointer-events:none;top:0;left:0;width:10px;height:10px;background:#c9a84c;border-radius:50%;transform:translate(-50%,-50%);transition:transform 0.15s ease,width 0.3s ease,height 0.3s ease,background 0.3s ease,opacity 0.3s ease;mix-blend-mode:difference}
-#cursor-ring{position:fixed;z-index:9998;pointer-events:none;top:0;left:0;width:40px;height:40px;border:1px solid rgba(201,168,76,0.5);border-radius:50%;transform:translate(-50%,-50%);transition:transform 0.4s cubic-bezier(.16,1,.3,1),width 0.4s ease,height 0.4s ease,opacity 0.4s ease;opacity:0.8}
+#cursor{position:fixed;z-index:9999;pointer-events:none;top:0;left:0;width:8px;height:8px;background:#c9a84c;border-radius:50%;transform:translate(-50%,-50%);transition:transform 0.1s ease,width 0.25s ease,height 0.25s ease,background 0.25s ease,opacity 0.25s ease;mix-blend-mode:difference}
+#cursor-ring{position:fixed;z-index:9998;pointer-events:none;top:0;left:0;width:36px;height:36px;border:1px solid rgba(201,168,76,0.45);border-radius:50%;transform:translate(-50%,-50%);transition:transform 0.5s cubic-bezier(.16,1,.3,1),width 0.4s ease,height 0.4s ease,opacity 0.4s ease,border-color 0.3s ease;opacity:0.7}
+#cursor-trail{position:fixed;z-index:9997;pointer-events:none;top:0;left:0;width:4px;height:4px;background:rgba(201,168,76,0.4);border-radius:50%;transform:translate(-50%,-50%);transition:transform 0.8s cubic-bezier(.16,1,.3,1)}
 body:hover #cursor{opacity:1}
-.cursor-hover #cursor{width:60px;height:60px;background:rgba(201,168,76,0.15)}
-.cursor-hover #cursor-ring{width:70px;height:70px;border-color:rgba(201,168,76,0.8)}
-.cursor-text #cursor::after{content:attr(data-text);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:#c9a84c;white-space:nowrap;mix-blend-mode:normal}
+.cursor-hover #cursor{width:52px;height:52px;background:rgba(201,168,76,0.12)}
+.cursor-hover #cursor-ring{width:64px;height:64px;border-color:rgba(201,168,76,0.9)}
+.cursor-link #cursor{width:16px;height:16px;background:rgba(201,168,76,0.8)}
+.cursor-link #cursor-ring{width:50px;height:50px;border-color:#c9a84c}
+
+/* ==================== FILM GRAIN OVERLAY ==================== */
+#grain-overlay{position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:0.03}
+#grain-overlay::before{content:'';position:absolute;inset:-50%;width:200%;height:200%;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");animation:grainMove 0.5s steps(1) infinite}
+@keyframes grainMove{0%{transform:translate(0,0)}10%{transform:translate(-2%,-3%)}20%{transform:translate(1%,2%)}30%{transform:translate(-3%,1%)}40%{transform:translate(2%,-1%)}50%{transform:translate(-1%,3%)}60%{transform:translate(3%,-2%)}70%{transform:translate(-2%,0%)}80%{transform:translate(1%,-3%)}90%{transform:translate(-1%,2%)}100%{transform:translate(2%,1%)}}
 
 /* ==================== PRELOADER ==================== */
-#preloader{position:fixed;inset:0;z-index:10000;background:#080810;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:32px;transition:opacity 0.8s ease,visibility 0.8s ease}
-#preloader.hide{opacity:0;visibility:hidden}
-.pl-brand{font-family:'Bodoni Moda',serif;font-size:clamp(32px,5vw,56px);font-weight:900;letter-spacing:0.25em;color:#e8e4dc;opacity:0;animation:plFadeIn 0.8s 0.3s ease forwards}
-.pl-line{width:200px;height:1px;background:#1a1a2e;overflow:hidden;border-radius:1px}
-.pl-progress{height:100%;background:linear-gradient(90deg,#c9a84c,#f0d080);width:0%;transition:width 0.05s linear;border-radius:1px}
-.pl-num{font-size:11px;font-weight:300;letter-spacing:0.4em;color:#6b6b7a;opacity:0;animation:plFadeIn 0.8s 0.5s ease forwards}
+#preloader{position:fixed;inset:0;z-index:10000;background:#080810;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;transition:opacity 1s ease,visibility 1s ease}
+#preloader.hide{opacity:0;visibility:hidden;pointer-events:none}
+.pl-brand{font-family:'Bodoni Moda',serif;font-size:clamp(28px,5vw,52px);font-weight:900;letter-spacing:0.3em;color:#e8e4dc;opacity:0;animation:plFadeIn 0.9s 0.3s ease forwards}
+.pl-tagline{font-size:9px;font-weight:300;letter-spacing:0.65em;text-transform:uppercase;color:#3a3a4a;opacity:0;animation:plFadeIn 0.9s 0.6s ease forwards;text-align:center}
+.pl-line-wrap{width:220px;position:relative}
+.pl-line{width:100%;height:1px;background:#111120;overflow:hidden}
+.pl-progress{height:100%;background:linear-gradient(90deg,#c9a84c,#f0d080);width:0%;transition:width 0.04s linear}
+.pl-diamonds{display:flex;align-items:center;justify-content:space-between;margin-top:12px;opacity:0;animation:plFadeIn 0.9s 0.8s ease forwards}
+.pl-diamond{width:5px;height:5px;background:#1a1a2e;transform:rotate(45deg);transition:background 0.3s ease}
+.pl-diamond.active{background:#c9a84c;box-shadow:0 0 8px rgba(201,168,76,0.5)}
+.pl-num{font-size:10px;font-weight:300;letter-spacing:0.5em;color:#2a2a3a;text-align:center;opacity:0;animation:plFadeIn 0.9s 0.5s ease forwards;margin-top:4px}
 @keyframes plFadeIn{to{opacity:1}}
 
 /* ==================== NAV ==================== */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(16px,4vw,56px);height:76px;display:flex;align-items:center;justify-content:space-between;transition:background 0.5s ease,border-color 0.5s ease,box-shadow 0.5s ease;border-bottom:1px solid transparent;overflow:visible}
-nav.scrolled{background:rgba(8,8,16,0.95);backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);border-color:rgba(255,255,255,0.05);box-shadow:0 1px 40px rgba(0,0,0,0.6)}
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:0 clamp(16px,4vw,56px);height:76px;display:flex;align-items:center;justify-content:space-between;transition:background 0.6s ease,border-color 0.6s ease,box-shadow 0.6s ease,backdrop-filter 0.6s ease;border-bottom:1px solid transparent;overflow:visible}
+nav.scrolled{background:rgba(8,8,16,0.88);backdrop-filter:blur(32px);-webkit-backdrop-filter:blur(32px);border-color:rgba(255,255,255,0.045);box-shadow:0 1px 48px rgba(0,0,0,0.7)}
 .nav-brand{display:flex;align-items:center;gap:14px;flex-shrink:0}
-.nav-monogram{width:38px;height:38px;border:1px solid rgba(201,168,76,0.5);display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-size:15px;font-weight:700;color:#c9a84c;transition:all 0.3s ease;flex-shrink:0}
-.nav-monogram:hover{background:rgba(201,168,76,0.12);border-color:#c9a84c}
-.nav-wordmark{font-family:'Bodoni Moda',serif;font-size:19px;font-weight:800;letter-spacing:0.32em;color:#e8e4dc}
-.nav-sub{font-size:9px;font-weight:300;letter-spacing:0.45em;color:#6b6b7a;text-transform:uppercase;margin-top:-1px}
-.nav-links{display:flex;align-items:center;gap:32px;flex-shrink:0}
-.nav-links a{font-size:10px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:#9999aa;transition:color 0.3s ease;white-space:nowrap}
+.nav-monogram{width:38px;height:38px;border:1px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-size:15px;font-weight:700;color:#c9a84c;transition:all 0.3s ease;flex-shrink:0}
+.nav-monogram:hover{background:rgba(201,168,76,0.1);border-color:#c9a84c}
+.nav-name{display:flex;flex-direction:column}
+.nav-wordmark{font-family:'Bodoni Moda',serif;font-size:19px;font-weight:800;letter-spacing:0.32em;color:#e8e4dc;line-height:1}
+.nav-sub{font-size:8.5px;font-weight:300;letter-spacing:0.5em;color:#4a4a5a;text-transform:uppercase;margin-top:3px}
+.nav-links{display:flex;align-items:center;gap:30px;flex-shrink:0}
+.nav-links a{font-size:9.5px;font-weight:400;letter-spacing:0.25em;text-transform:uppercase;color:#7777888;color:#77778a;transition:color 0.3s ease;white-space:nowrap;position:relative}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:#c9a84c;transition:width 0.3s ease}
 .nav-links a:hover{color:#c9a84c}
+.nav-links a:hover::after{width:100%}
 .nav-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.btn-ghost{display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,0.45);padding:10px 18px;transition:all 0.3s ease;white-space:nowrap;line-height:1}
-.btn-ghost:hover{background:rgba(201,168,76,0.1);border-color:#c9a84c}
-.btn-primary{display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;background:linear-gradient(135deg,#c9a84c,#e8c96a);color:#080810;padding:11px 22px;transition:all 0.3s ease;white-space:nowrap;line-height:1}
-.btn-primary:hover{background:linear-gradient(135deg,#e8c96a,#c9a84c);box-shadow:0 4px 20px rgba(201,168,76,0.35)}
-.nav-currency{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);color:#9999aa;font-size:10px;font-weight:400;letter-spacing:0.12em;padding:9px 28px 9px 12px;outline:none;transition:all 0.3s ease;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23666'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;font-family:'Inter',sans-serif}
-.nav-currency:focus{border-color:rgba(201,168,76,0.5);color:#c9a84c}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);padding:10px 18px;transition:all 0.3s ease;white-space:nowrap;line-height:1}
+.btn-ghost:hover{background:rgba(201,168,76,0.08);border-color:#c9a84c;box-shadow:0 0 20px rgba(201,168,76,0.12)}
+.btn-primary{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:9px;font-weight:700;letter-spacing:0.22em;text-transform:uppercase;background:linear-gradient(135deg,#c9a84c,#e8c96a);color:#080810;padding:11px 22px;transition:all 0.3s ease;white-space:nowrap;line-height:1}
+.btn-primary:hover{background:linear-gradient(135deg,#e8c96a,#c9a84c);box-shadow:0 4px 24px rgba(201,168,76,0.4);transform:translateY(-1px)}
+.btn-whatsapp{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;background:rgba(37,211,102,0.12);color:#25d366;border:1px solid rgba(37,211,102,0.3);padding:10px 16px;transition:all 0.3s ease;white-space:nowrap}
+.btn-whatsapp:hover{background:rgba(37,211,102,0.2);border-color:rgba(37,211,102,0.6)}
+.btn-whatsapp svg{width:12px;height:12px;fill:currentColor;flex-shrink:0}
+.nav-currency{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#77778a;font-size:10px;font-weight:400;letter-spacing:0.12em;padding:9px 28px 9px 12px;outline:none;transition:all 0.3s ease;-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;font-family:'Inter',sans-serif}
+.nav-currency:focus{border-color:rgba(201,168,76,0.4);color:#c9a84c}
 .nav-currency option{background:#0d0d1a;color:#e8e4dc}
+
+/* Mobile nav toggle */
+.nav-toggle{display:none;flex-direction:column;gap:5px;padding:4px}
+.nav-toggle span{display:block;width:22px;height:1px;background:#c9a84c;transition:all 0.3s ease}
 
 /* ==================== HERO ==================== */
 #hero{position:relative;min-height:100vh;display:flex;align-items:flex-end;overflow:hidden}
-.hero-bg{position:absolute;inset:0;z-index:0}
-.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 25%;transform:scale(1.08);animation:heroKenBurns 22s ease-in-out infinite alternate}
-@keyframes heroKenBurns{0%{transform:scale(1.08) translate(0,0)}100%{transform:scale(1.15) translate(-1.5%,-0.8%)}}
-.hero-vignette{position:absolute;inset:0;background:linear-gradient(0deg,#080810 0%,rgba(8,8,16,0.65) 35%,rgba(8,8,16,0.08) 65%,rgba(8,8,16,0.55) 100%)}
-.hero-content{position:relative;z-index:10;width:100%;padding:0 clamp(20px,8vw,120px) clamp(70px,9vh,110px);display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:40px}
-.hero-left .eyebrow{font-size:10px;font-weight:400;letter-spacing:0.55em;text-transform:uppercase;color:#c9a84c;margin-bottom:28px;display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.2s ease}
-.hero-left .eyebrow::before{content:'';width:36px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c)}
-.hero-left h1{font-family:'Bodoni Moda',serif;font-size:clamp(56px,8.5vw,128px);font-weight:900;line-height:0.9;letter-spacing:-0.025em;color:#e8e4dc;opacity:0;transform:translateY(40px);transition:all 1s 1s ease}
-.hero-left h1 em{font-style:italic;font-weight:300;color:#c9a84c;display:block}
-.hero-left .hero-desc{font-size:13px;font-weight:300;line-height:2;color:#8888a0;max-width:380px;margin-top:30px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.4s ease;border-left:1px solid rgba(201,168,76,0.25);padding-left:16px}
-.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:28px;opacity:0;transform:translateY(20px);transition:all 0.8s 1.6s ease}
-.hero-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(201,168,76,0.08);border:1px solid rgba(201,168,76,0.12)}
-.hero-stat{background:rgba(8,8,16,0.85);backdrop-filter:blur(12px);padding:22px 26px;text-align:center;transition:background 0.3s ease}
-.hero-stat:hover{background:rgba(20,18,10,0.9)}
-.hero-stat-num{font-family:'Bodoni Moda',serif;font-size:30px;font-weight:800;color:#c9a84c;display:block;line-height:1}
-.hero-stat-num small{font-size:16px;vertical-align:super;font-weight:400}
-.hero-stat-label{font-size:8px;font-weight:400;letter-spacing:0.35em;text-transform:uppercase;color:#55556a;margin-top:8px;display:block}
-.hero-actions{display:flex;gap:12px;width:100%;justify-content:flex-end}
-.hero-loaded .eyebrow,.hero-loaded h1,.hero-loaded .hero-desc,.hero-loaded .hero-right{opacity:1;transform:translateY(0)}
+.hero-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center 25%;transform:scale(1.1);animation:heroKenBurns 24s ease-in-out infinite alternate;will-change:transform}
+@keyframes heroKenBurns{0%{transform:scale(1.1) translate(0,0)}100%{transform:scale(1.18) translate(-2%,-1%)}}
+.hero-vignette{position:absolute;inset:0;background:linear-gradient(0deg,#080810 0%,rgba(8,8,16,0.75) 30%,rgba(8,8,16,0.1) 60%,rgba(8,8,16,0.6) 100%);z-index:1}
+.hero-side-vignette{position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,16,0.6) 0%,transparent 40%,transparent 60%,rgba(8,8,16,0.3) 100%);z-index:1}
 
-/* Live badge on hero */
-.hero-live-badge{position:absolute;top:92px;right:clamp(20px,8vw,120px);z-index:20;display:flex;align-items:center;gap:8px;border:1px solid rgba(201,168,76,0.25);background:rgba(8,8,16,0.75);backdrop-filter:blur(12px);padding:8px 16px;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#9999aa;opacity:0;transform:translateY(-10px);transition:all 0.6s 2s ease}
+/* Animated gradient shift */
+.hero-gradient-shift{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 20% 80%,rgba(201,168,76,0.08) 0%,transparent 50%);animation:gradientShift 8s ease-in-out infinite alternate}
+@keyframes gradientShift{0%{opacity:0.5;transform:translate(0,0)}100%{opacity:1;transform:translate(5%,-5%)}}
+
+.hero-content{position:relative;z-index:10;width:100%;padding:0 clamp(20px,8vw,120px) clamp(70px,9vh,120px);display:grid;grid-template-columns:1fr auto;align-items:end;gap:60px}
+.hero-left .eyebrow{font-size:10px;font-weight:400;letter-spacing:0.6em;text-transform:uppercase;color:#c9a84c;margin-bottom:30px;display:flex;align-items:center;gap:14px;opacity:0;transform:translateY(24px);transition:all 0.9s 1s cubic-bezier(.16,1,.3,1)}
+.hero-left .eyebrow::before{content:'';width:40px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c);flex-shrink:0}
+.hero-h1-wrap{overflow:hidden}
+.hero-left h1{font-family:'Bodoni Moda',serif;font-size:clamp(52px,8.5vw,130px);font-weight:900;line-height:0.88;letter-spacing:-0.02em;color:#e8e4dc;opacity:0;transform:translateY(50px);transition:all 1s 0.8s cubic-bezier(.16,1,.3,1)}
+.hero-left h1 em{font-style:italic;font-weight:400;color:#c9a84c;display:block}
+.hero-words-reveal .word{display:inline-block;overflow:hidden}
+.hero-left .hero-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.4vw,18px);font-weight:300;line-height:1.9;color:rgba(232,228,220,0.55);max-width:420px;margin-top:32px;opacity:0;transform:translateY(24px);transition:all 0.9s 1.4s cubic-bezier(.16,1,.3,1);border-left:1px solid rgba(201,168,76,0.2);padding-left:20px}
+.hero-ctas{display:flex;gap:12px;margin-top:38px;opacity:0;transform:translateY(24px);transition:all 0.9s 1.6s cubic-bezier(.16,1,.3,1)}
+.hero-right{display:flex;flex-direction:column;align-items:flex-end;gap:0;opacity:0;transform:translateY(30px);transition:all 0.9s 1.4s cubic-bezier(.16,1,.3,1)}
+.hero-stat-panel{border:1px solid rgba(201,168,76,0.12);background:rgba(8,8,16,0.75);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:grid;grid-template-columns:1fr 1fr;gap:0}
+.hero-stat-item{padding:26px 30px;border-right:1px solid rgba(201,168,76,0.08);border-bottom:1px solid rgba(201,168,76,0.08);text-align:center;transition:background 0.3s ease}
+.hero-stat-item:nth-child(even){border-right:none}
+.hero-stat-item:nth-child(3),.hero-stat-item:nth-child(4){border-bottom:none}
+.hero-stat-item:hover{background:rgba(201,168,76,0.05)}
+.hero-stat-num{font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#c9a84c;display:block;line-height:1}
+.hero-stat-num sup{font-size:14px;vertical-align:super;font-weight:400}
+.hero-stat-num sub{font-size:12px;vertical-align:sub}
+.hero-stat-label{font-size:7.5px;font-weight:400;letter-spacing:0.4em;text-transform:uppercase;color:#3d3d50;margin-top:8px;display:block}
+
+.hero-loaded .eyebrow,.hero-loaded h1,.hero-loaded .hero-desc,.hero-loaded .hero-ctas,.hero-loaded .hero-right{opacity:1;transform:translateY(0)}
+
+.hero-live-badge{position:absolute;top:92px;right:clamp(20px,8vw,120px);z-index:20;display:flex;align-items:center;gap:8px;border:1px solid rgba(201,168,76,0.2);background:rgba(8,8,16,0.8);backdrop-filter:blur(16px);padding:9px 18px;font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#77778a;opacity:0;transform:translateY(-12px);transition:all 0.7s 2s ease}
 .hero-loaded .hero-live-badge{opacity:1;transform:translateY(0)}
-.hero-live-badge .live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:livePulse 2s ease-in-out infinite}
-@keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.4)}50%{opacity:0.7;box-shadow:0 0 0 6px rgba(34,197,94,0)}}
+.hero-live-badge .live-dot{width:6px;height:6px;background:#22c55e;border-radius:50%;animation:livePulse 2.5s ease-in-out infinite;flex-shrink:0}
+@keyframes livePulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.5)}60%{opacity:0.7;box-shadow:0 0 0 7px rgba(34,197,94,0)}}
 
-/* Hero scroll indicator */
-.scroll-indicator{position:absolute;bottom:30px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:8px;animation:scrollBounce 2s ease-in-out infinite}
-.scroll-indicator span{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:#55556a;white-space:nowrap}
-.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,transparent,#c9a84c,transparent);animation:scrollPulse 2s ease-in-out infinite}
-@keyframes scrollBounce{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
-@keyframes scrollPulse{0%,100%{opacity:0.3}50%{opacity:1}}
+.scroll-indicator{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);z-index:10;display:flex;flex-direction:column;align-items:center;gap:10px;animation:scrollFloat 2.5s ease-in-out infinite}
+.scroll-indicator span{font-size:7.5px;letter-spacing:0.5em;text-transform:uppercase;color:#3a3a4e;white-space:nowrap}
+.scroll-line{width:1px;height:48px;position:relative;overflow:hidden}
+.scroll-line::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:linear-gradient(to bottom,transparent,#c9a84c,transparent);animation:scrollDrop 2s ease-in-out infinite}
+@keyframes scrollFloat{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+@keyframes scrollDrop{0%{transform:translateY(-100%);opacity:0}50%{opacity:1}100%{transform:translateY(100%);opacity:0}}
 
-/* ==================== SECTION HEADERS ==================== */
+/* ==================== MARQUEE TICKER ==================== */
+.ticker-section{padding:0;overflow:hidden;border-top:1px solid rgba(201,168,76,0.1);border-bottom:1px solid rgba(201,168,76,0.1);background:rgba(201,168,76,0.03);position:relative;z-index:10}
+.ticker-track{display:flex;animation:ticker 40s linear infinite;width:max-content}
+.ticker-track:hover{animation-play-state:paused}
+.ticker-item{display:flex;align-items:center;gap:14px;padding:14px 40px;white-space:nowrap;flex-shrink:0}
+.ticker-item .ti-label{font-size:9px;font-weight:400;letter-spacing:0.4em;text-transform:uppercase;color:#55556a}
+.ticker-item .ti-award{font-family:'Cormorant Garamond',serif;font-size:13px;font-weight:400;font-style:italic;color:#a89060}
+.ticker-sep{color:#2a2a3a;font-size:16px;padding:0 10px}
+@keyframes ticker{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ==================== SECTION SHARED ==================== */
 .section-header{padding:clamp(80px,10vh,140px) clamp(20px,8vw,120px) 0}
-.section-header .eyebrow{font-size:9px;font-weight:400;letter-spacing:0.6em;text-transform:uppercase;color:#c9a84c;display:flex;align-items:center;gap:12px;margin-bottom:20px}
-.section-header .eyebrow::after{content:'';flex:0 0 24px;height:1px;background:#c9a84c}
-.section-header h2{font-family:'Bodoni Moda',serif;font-size:clamp(36px,5.5vw,72px);font-weight:800;line-height:1.05;letter-spacing:-0.02em;color:#e8e4dc}
-.section-header h2 em{font-style:italic;font-weight:400;color:#c9a84c}
+.eyebrow{font-size:9px;font-weight:400;letter-spacing:0.65em;text-transform:uppercase;color:#c9a84c;display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.eyebrow::before{content:'';width:30px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c);flex-shrink:0}
+.section-title{font-family:'Bodoni Moda',serif;font-size:clamp(38px,5.5vw,80px);font-weight:900;line-height:0.92;letter-spacing:-0.02em;color:#e8e4dc}
+.section-title em{font-style:italic;font-weight:400;color:#c9a84c}
+.section-sub{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.3vw,18px);font-weight:300;font-style:italic;color:rgba(232,228,220,0.4);max-width:520px;line-height:1.8;margin-top:20px}
 
-/* ==================== MARQUEE ==================== */
-.marquee-wrapper{padding:40px 0;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);overflow:hidden;white-space:nowrap;margin-top:40px}
-.marquee-track{display:inline-flex;animation:marquee 30s linear infinite}
-.marquee-track:hover{animation-play-state:paused}
-.marquee-item{display:inline-flex;align-items:center;gap:24px;padding:0 24px;font-size:11px;font-weight:300;letter-spacing:0.4em;text-transform:uppercase;color:#55556a}
-.marquee-item .dot{width:4px;height:4px;background:#c9a84c;border-radius:50%}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-
-/* ==================== PORTFOLIO GRID ==================== */
-#portfolio{padding:clamp(60px,8vh,100px) clamp(20px,5vw,60px)}
-.portfolio-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;max-width:1600px;margin:60px auto 0}
-.portfolio-grid-top{display:grid;grid-template-columns:1.6fr 1fr;gap:2px}
-.portfolio-card{position:relative;overflow:hidden;cursor:none}
-.portfolio-card.large{aspect-ratio:4/3}
-.portfolio-card.medium{aspect-ratio:3/4}
-.portfolio-card.tall{aspect-ratio:2/3}
-.portfolio-card img{width:100%;height:100%;object-fit:cover;transition:transform 0.9s cubic-bezier(.16,1,.3,1)}
-.portfolio-card:hover img{transform:scale(1.08)}
-.card-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,8,16,0.9) 0%,rgba(8,8,16,0.2) 50%,transparent 100%);opacity:0;transition:opacity 0.4s ease;display:flex;align-items:flex-end;padding:32px}
-.portfolio-card:hover .card-overlay{opacity:1}
-.card-info{transform:translateY(16px);transition:transform 0.4s ease}
-.portfolio-card:hover .card-info{transform:translateY(0)}
-.card-badge{font-size:9px;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);padding:4px 10px;display:inline-block;margin-bottom:12px}
-.card-title{font-family:'Bodoni Moda',serif;font-size:clamp(18px,2.5vw,28px);font-weight:700;color:#e8e4dc;line-height:1.2}
-.card-price{font-size:12px;font-weight:300;color:#9999aa;margin-top:6px;letter-spacing:0.1em}
-.card-price strong{color:#c9a84c;font-weight:500;price-val}
-
-/* Always-visible bottom bar on cards */
-.card-bottom-bar{position:absolute;bottom:0;left:0;right:0;padding:20px 24px;background:linear-gradient(0deg,rgba(8,8,16,0.85),transparent);display:flex;justify-content:space-between;align-items:flex-end}
-.card-loc{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#9999aa}
-.card-cta{font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#c9a84c;opacity:0;transition:opacity 0.3s ease}
-.portfolio-card:hover .card-cta{opacity:1}
-
-/* ==================== FORMA INTERIORS ==================== */
-#forma{background:#06060e}
-.forma-intro{padding:clamp(80px,10vh,140px) clamp(20px,8vw,120px) 60px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:end}
-.forma-rooms{position:relative}
-
-.forma-scene{display:grid;grid-template-columns:1fr 1fr;gap:2px;position:sticky;top:100px}
-.forma-room-stack{display:flex;flex-direction:column;gap:80px;padding:60px clamp(20px,5vw,60px)}
-
-.forma-room{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;padding:clamp(40px,6vh,80px) clamp(20px,8vw,120px);border-top:1px solid rgba(255,255,255,0.04)}
-.forma-room:nth-child(even) .forma-room-text{order:2}
-.forma-room:nth-child(even) .forma-room-visual{order:1}
-
-.forma-room-num{font-family:'Cormorant',serif;font-size:80px;font-weight:300;color:rgba(201,168,76,0.08);line-height:1;position:absolute;top:-20px;left:-10px;pointer-events:none;font-style:italic}
-.forma-room-text{position:relative}
-.forma-room-label{font-size:9px;font-weight:400;letter-spacing:0.5em;text-transform:uppercase;color:#c9a84c;margin-bottom:16px;display:flex;align-items:center;gap:10px}
-.forma-room-label::before{content:'';width:20px;height:1px;background:rgba(201,168,76,0.4)}
-.forma-room h3{font-family:'Bodoni Moda',serif;font-size:clamp(28px,3.5vw,48px);font-weight:700;line-height:1.1;color:#e8e4dc;letter-spacing:-0.02em;margin-bottom:20px}
-.forma-room h3 em{font-style:italic;font-weight:400}
-.forma-room p{font-size:13px;font-weight:300;line-height:1.9;color:#66667a;max-width:360px}
-.forma-room-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:20px}
-.forma-room-tag{font-size:8px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;border:1px solid rgba(255,255,255,0.06);padding:5px 10px}
-.forma-room-visual{aspect-ratio:4/3;overflow:hidden;position:relative}
-.forma-room-visual img{width:100%;height:100%;object-fit:cover;filter:saturate(0.8) contrast(1.05);transition:all 0.8s ease}
-.forma-room:hover .forma-room-visual img{filter:saturate(1) contrast(1.1);transform:scale(1.03)}
-
-/* ==================== MARKET INTEL STRIP ==================== */
-#intelligence{padding:clamp(80px,10vh,120px) clamp(20px,8vw,120px);background:#0a0a14;border-top:1px solid rgba(255,255,255,0.03)}
-.intel-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.04);margin-top:60px}
-.intel-block{background:#0a0a14;padding:40px 32px}
-.intel-num{font-family:'Bodoni Moda',serif;font-size:clamp(36px,4vw,52px);font-weight:800;color:#e8e4dc;line-height:1;display:block;counter-reset:none}
-.intel-num span{color:#c9a84c}
-.intel-title{font-size:10px;font-weight:500;letter-spacing:0.3em;text-transform:uppercase;color:#c9a84c;margin-top:12px;display:block}
-.intel-desc{font-size:12px;font-weight:300;line-height:1.7;color:#55556a;margin-top:8px}
-
-/* ==================== VIP CTA SECTION ==================== */
-#vip-cta{position:relative;min-height:70vh;display:flex;align-items:center;overflow:hidden}
-#vip-cta .bg{position:absolute;inset:0}
-#vip-cta .bg img{width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(0.6)}
-#vip-cta .bg::after{content:'';position:absolute;inset:0;background:rgba(8,8,16,0.75)}
-#vip-cta .content{position:relative;z-index:10;padding:clamp(60px,8vh,100px) clamp(20px,8vw,120px);max-width:700px}
-#vip-cta .eyebrow{font-size:9px;font-weight:400;letter-spacing:0.5em;text-transform:uppercase;color:#c9a84c;margin-bottom:20px;display:flex;align-items:center;gap:12px}
-#vip-cta .eyebrow::before{content:'';width:24px;height:1px;background:#c9a84c}
-#vip-cta h2{font-family:'Bodoni Moda',serif;font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.1;color:#e8e4dc;margin-bottom:20px;letter-spacing:-0.02em}
-#vip-cta h2 em{font-style:italic;font-weight:400;color:#c9a84c}
-#vip-cta p{font-size:14px;font-weight:300;line-height:1.8;color:#8888a0;max-width:460px;margin-bottom:40px}
-.cta-form-row{display:flex;gap:0;max-width:480px}
-.cta-input{flex:1;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-right:none;padding:14px 20px;font-size:12px;font-weight:300;color:#e8e4dc;font-family:'Inter',sans-serif;outline:none;transition:border-color 0.3s ease;cursor:none}
-.cta-input::placeholder{color:#44445a}
-.cta-input:focus{border-color:rgba(201,168,76,0.5)}
-.cta-send{background:#c9a84c;color:#080810;font-size:10px;font-weight:600;letter-spacing:0.25em;text-transform:uppercase;padding:14px 24px;white-space:nowrap;transition:background 0.3s ease}
-.cta-send:hover{background:#f0d080}
-.vip-services{display:flex;flex-wrap:wrap;gap:16px;margin-top:32px}
-.vip-pill{font-size:9px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;border:1px solid rgba(255,255,255,0.06);padding:7px 14px;display:flex;align-items:center;gap:8px}
-.vip-pill::before{content:'';width:4px;height:4px;background:#c9a84c;border-radius:50%}
-
-/* ==================== FOOTER ==================== */
-footer{background:#06060e;padding:60px clamp(20px,8vw,120px) 40px;border-top:1px solid rgba(255,255,255,0.04)}
-.footer-top{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:40px;padding-bottom:50px;border-bottom:1px solid rgba(255,255,255,0.04)}
-.footer-brand-col .wordmark{font-family:'Bodoni Moda',serif;font-size:22px;font-weight:800;letter-spacing:0.25em;color:#e8e4dc}
-.footer-brand-col p{font-size:12px;font-weight:300;line-height:1.8;color:#44445a;margin-top:16px;max-width:220px}
-.footer-col-title{font-size:9px;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:#c9a84c;margin-bottom:20px}
-.footer-links{list-style:none;display:flex;flex-direction:column;gap:10px}
-.footer-links a{font-size:12px;font-weight:300;color:#55556a;transition:color 0.3s ease;letter-spacing:0.05em}
-.footer-links a:hover{color:#c9a84c}
-.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:30px;gap:20px;flex-wrap:wrap}
-.footer-legal{font-size:10px;font-weight:300;color:#33334a;letter-spacing:0.1em}
-.footer-rera{font-size:10px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:#33334a}
-
-/* ==================== MODALS ==================== */
-.modal-overlay{position:fixed;inset:0;z-index:5000;background:rgba(6,6,14,0.95);backdrop-filter:blur(20px);display:none;align-items:center;justify-content:center;padding:20px;cursor:none}
-.modal-overlay.active{display:flex}
-.modal{background:#0d0d1a;border:1px solid rgba(255,255,255,0.06);max-width:800px;width:100%;max-height:90vh;overflow-y:auto;position:relative}
-.modal::-webkit-scrollbar{width:3px}
-.modal-close{position:absolute;top:20px;right:20px;width:36px;height:36px;border:1px solid rgba(255,255,255,0.1);display:flex;align-items:center;justify-content:center;color:#9999aa;font-size:16px;transition:all 0.3s ease;cursor:none}
-.modal-close:hover{border-color:#c9a84c;color:#c9a84c}
-.modal-img{width:100%;aspect-ratio:16/9;overflow:hidden}
-.modal-img img{width:100%;height:100%;object-fit:cover}
-.modal-body{padding:40px}
-.modal-badge{font-size:9px;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,0.3);padding:4px 12px;display:inline-block;margin-bottom:16px}
-.modal-title{font-family:'Bodoni Moda',serif;font-size:clamp(24px,3.5vw,38px);font-weight:800;color:#e8e4dc;line-height:1.1;margin-bottom:8px}
-.modal-sub{font-size:12px;font-weight:300;color:#55556a;margin-bottom:24px;letter-spacing:0.05em}
-.modal-specs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,0.04);margin-bottom:28px}
-.spec-cell{background:#0d0d1a;padding:16px;text-align:center}
-.spec-val{font-family:'Bodoni Moda',serif;font-size:16px;font-weight:700;color:#e8e4dc;display:block}
-.spec-key{font-size:8px;font-weight:400;letter-spacing:0.3em;text-transform:uppercase;color:#44445a;display:block;margin-top:4px}
-.modal-desc{font-size:13px;font-weight:300;line-height:1.9;color:#66667a;margin-bottom:28px}
-.modal-price-row{display:flex;align-items:center;justify-content:space-between;padding:20px 0;border-top:1px solid rgba(255,255,255,0.05);border-bottom:1px solid rgba(255,255,255,0.05);margin-bottom:24px}
-.modal-price-label{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:#44445a}
-.modal-price-val{font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#c9a84c}
-.modal-actions{display:flex;gap:12px}
-.btn-whatsapp{flex:1;background:#128c7e;color:#fff;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;padding:14px;text-align:center;transition:background 0.3s ease}
-.btn-whatsapp:hover{background:#25d366}
-.btn-view{flex:1;background:#c9a84c;color:#080810;font-size:10px;font-weight:600;letter-spacing:0.2em;text-transform:uppercase;padding:14px;text-align:center;transition:background 0.3s ease}
-.btn-view:hover{background:#f0d080}
-
-/* ==================== SCROLL REVEAL ANIMATIONS ==================== */
-.reveal{opacity:0;transform:translateY(32px);transition:opacity 0.8s cubic-bezier(.16,1,.3,1),transform 0.8s cubic-bezier(.16,1,.3,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
+/* Clip-path reveal animation */
+.reveal-clip{clip-path:inset(100% 0 0 0);transition:clip-path 1.2s cubic-bezier(.16,1,.3,1),opacity 0.8s ease;opacity:0}
+.reveal-clip.revealed{clip-path:inset(0% 0 0 0);opacity:1}
+.reveal-up{opacity:0;transform:translateY(40px);transition:opacity 0.9s cubic-bezier(.16,1,.3,1),transform 0.9s cubic-bezier(.16,1,.3,1)}
+.reveal-up.revealed{opacity:1;transform:translateY(0)}
 .reveal-delay-1{transition-delay:0.1s}
 .reveal-delay-2{transition-delay:0.2s}
 .reveal-delay-3{transition-delay:0.3s}
 .reveal-delay-4{transition-delay:0.4s}
-.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity 0.8s cubic-bezier(.16,1,.3,1),transform 0.8s cubic-bezier(.16,1,.3,1)}
-.reveal-left.visible{opacity:1;transform:translateX(0)}
-.reveal-right{opacity:0;transform:translateX(40px);transition:opacity 0.8s cubic-bezier(.16,1,.3,1),transform 0.8s cubic-bezier(.16,1,.3,1)}
-.reveal-right.visible{opacity:1;transform:translateX(0)}
+.reveal-delay-5{transition-delay:0.5s}
+
+/* ==================== PORTFOLIO (HORIZONTAL SCROLL) ==================== */
+#portfolio{padding-top:0}
+.portfolio-header{padding:clamp(80px,10vh,140px) clamp(20px,8vw,120px) 48px}
+.portfolio-scroll-wrap{position:relative;overflow:hidden}
+.portfolio-scroll{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:2px;cursor:grab;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.portfolio-scroll::-webkit-scrollbar{display:none}
+.portfolio-scroll:active{cursor:grabbing}
+.prop-card{flex:0 0 clamp(300px,38vw,520px);scroll-snap-align:start;position:relative;overflow:hidden;aspect-ratio:3/4}
+.prop-card-img{position:absolute;inset:0;z-index:0;transition:transform 0.8s cubic-bezier(.16,1,.3,1)}
+.prop-card-img img{width:100%;height:100%;object-fit:cover}
+.prop-card:hover .prop-card-img{transform:scale(1.06)}
+.prop-card-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(8,8,16,0.95) 0%,rgba(8,8,16,0.4) 45%,rgba(8,8,16,0.05) 100%);transition:background 0.6s ease}
+.prop-card:hover .prop-card-overlay{background:linear-gradient(0deg,rgba(8,8,16,0.98) 0%,rgba(8,8,16,0.65) 55%,rgba(8,8,16,0.2) 100%)}
+.prop-card-body{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:36px 32px}
+.prop-tag{display:inline-block;font-size:8px;font-weight:600;letter-spacing:0.4em;text-transform:uppercase;color:#c9a84c;border:1px solid rgba(201,168,76,0.3);padding:5px 12px;margin-bottom:14px;background:rgba(201,168,76,0.05)}
+.prop-name{font-family:'Bodoni Moda',serif;font-size:clamp(22px,2.5vw,32px);font-weight:800;line-height:1.05;color:#e8e4dc;margin-bottom:6px}
+.prop-loc{font-size:10px;font-weight:300;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;margin-bottom:20px}
+.prop-price{font-family:'Bodoni Moda',serif;font-size:clamp(18px,2vw,26px);font-weight:700;color:#c9a84c;display:block;margin-bottom:4px}
+.prop-price-label{font-size:8.5px;letter-spacing:0.3em;text-transform:uppercase;color:#3d3d50}
+.prop-details{max-height:0;overflow:hidden;transition:max-height 0.6s cubic-bezier(.16,1,.3,1),opacity 0.5s ease;opacity:0}
+.prop-card:hover .prop-details{max-height:200px;opacity:1}
+.prop-specs{display:flex;gap:16px;margin-top:16px;flex-wrap:wrap}
+.prop-spec{display:flex;align-items:center;gap:5px;font-size:9px;letter-spacing:0.25em;text-transform:uppercase;color:#55556a}
+.prop-spec-val{color:#9999aa;font-weight:500}
+.prop-cta-link{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:#c9a84c;margin-top:18px;border-bottom:1px solid rgba(201,168,76,0.3);padding-bottom:3px;transition:gap 0.3s ease,border-color 0.3s ease}
+.prop-cta-link:hover{gap:10px;border-color:#c9a84c}
+.prop-card-num{position:absolute;top:28px;right:28px;z-index:2;font-family:'Bodoni Moda',serif;font-size:60px;font-weight:900;color:rgba(201,168,76,0.08);line-height:1}
+
+/* Portfolio progress bar */
+.portfolio-progress-wrap{padding:28px clamp(20px,8vw,120px) 0;display:flex;align-items:center;gap:20px}
+.portfolio-progress-track{flex:1;height:1px;background:rgba(255,255,255,0.06)}
+.portfolio-progress-fill{height:100%;background:linear-gradient(90deg,#c9a84c,#f0d080);width:25%;transition:width 0.3s ease}
+.portfolio-progress-label{font-size:9px;letter-spacing:0.3em;color:#3d3d50;white-space:nowrap}
+
+/* ==================== CINEMATIC BANNER ==================== */
+#cinematic-banner{position:relative;height:85vh;overflow:hidden;display:flex;align-items:center}
+.cinema-bg{position:absolute;inset:0;z-index:0}
+.cinema-bg img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.cinema-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(8,8,16,0.88) 0%,rgba(8,8,16,0.3) 60%,rgba(8,8,16,0.6) 100%);z-index:1}
+.cinema-content{position:relative;z-index:2;padding:0 clamp(20px,8vw,120px);max-width:700px}
+.cinema-eyebrow{font-size:9px;font-weight:400;letter-spacing:0.65em;text-transform:uppercase;color:#c9a84c;display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.cinema-eyebrow::before{content:'';width:30px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c);flex-shrink:0}
+.cinema-title{font-family:'Bodoni Moda',serif;font-size:clamp(44px,6.5vw,96px);font-weight:900;line-height:0.88;letter-spacing:-0.025em;color:#e8e4dc;margin-bottom:28px}
+.cinema-title em{font-style:italic;font-weight:400;color:#c9a84c}
+.cinema-price{font-family:'Bodoni Moda',serif;font-size:clamp(22px,3vw,42px);font-weight:700;color:#c9a84c;margin-bottom:8px}
+.cinema-price-label{font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:#55556a;margin-bottom:28px}
+.cinema-badges{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.cinema-badge{font-size:8px;font-weight:500;letter-spacing:0.35em;text-transform:uppercase;color:#77778a;border:1px solid rgba(201,168,76,0.15);padding:7px 14px;background:rgba(8,8,16,0.6);backdrop-filter:blur(8px)}
+.cinema-corner-deco{position:absolute;top:40px;right:40px;z-index:2;width:120px;height:120px;border-top:1px solid rgba(201,168,76,0.25);border-right:1px solid rgba(201,168,76,0.25)}
+.cinema-corner-deco2{position:absolute;bottom:40px;left:40px;z-index:2;width:80px;height:80px;border-bottom:1px solid rgba(201,168,76,0.15);border-left:1px solid rgba(201,168,76,0.15)}
+
+/* ==================== INTERIOR WALKTHROUGH (FORMA) ==================== */
+#forma{display:grid;grid-template-columns:1fr 1fr;min-height:100vh}
+.forma-left{position:sticky;top:0;height:100vh;display:flex;flex-direction:column;justify-content:center;padding:clamp(40px,6vw,90px);background:#050508;border-right:1px solid rgba(201,168,76,0.08);overflow:hidden}
+.forma-left-bg{position:absolute;inset:0;opacity:0.04}
+.forma-left-bg img{width:100%;height:100%;object-fit:cover}
+.forma-left-content{position:relative;z-index:1}
+.forma-eyebrow{font-size:9px;font-weight:400;letter-spacing:0.65em;text-transform:uppercase;color:#c9a84c;display:flex;align-items:center;gap:12px;margin-bottom:30px}
+.forma-eyebrow::before{content:'';width:30px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c);flex-shrink:0}
+.forma-brand{font-family:'Bodoni Moda',serif;font-size:clamp(50px,7vw,100px);font-weight:900;line-height:0.85;letter-spacing:-0.02em;color:#e8e4dc;margin-bottom:12px}
+.forma-brand em{font-style:italic;font-weight:400;color:#c9a84c;display:block}
+.forma-tagline{font-family:'Cormorant Garamond',serif;font-size:clamp(14px,1.2vw,17px);font-style:italic;color:rgba(232,228,220,0.35);line-height:1.8;margin-bottom:40px;max-width:300px}
+.forma-room-indicator{margin-bottom:32px}
+.forma-room-num{font-family:'Bodoni Moda',serif;font-size:72px;font-weight:900;color:rgba(201,168,76,0.08);line-height:1;margin-bottom:-16px}
+.forma-room-name{font-family:'Bodoni Moda',serif;font-size:clamp(22px,2.5vw,34px);font-weight:700;color:#e8e4dc;transition:all 0.6s ease}
+.forma-room-desc{font-size:12px;font-weight:300;line-height:1.9;color:#55556a;max-width:280px;margin-top:12px;transition:all 0.6s ease}
+.forma-nav{display:flex;gap:8px;margin-top:40px}
+.forma-nav-dot{width:28px;height:1px;background:#1a1a2a;transition:background 0.3s ease,width 0.3s ease}
+.forma-nav-dot.active{background:#c9a84c;width:48px}
+.forma-props{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:36px}
+.forma-prop{padding:16px;border:1px solid rgba(201,168,76,0.08);background:rgba(201,168,76,0.03)}
+.forma-prop-label{font-size:7.5px;letter-spacing:0.4em;text-transform:uppercase;color:#3d3d50;margin-bottom:5px}
+.forma-prop-val{font-size:14px;font-weight:400;color:#9999aa}
+
+.forma-right{overflow-y:auto;scrollbar-width:none}
+.forma-right::-webkit-scrollbar{display:none}
+.forma-room-panel{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.forma-room-img{position:relative;width:100%;height:100%;min-height:100vh}
+.forma-room-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.forma-room-overlay{position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,8,16,0.5) 0%,transparent 40%);z-index:1}
+.forma-room-label{position:absolute;bottom:36px;left:36px;z-index:2}
+.forma-room-label-text{font-size:9px;font-weight:400;letter-spacing:0.5em;text-transform:uppercase;color:#77778a}
+.forma-room-label-name{font-family:'Bodoni Moda',serif;font-size:24px;font-weight:700;color:#e8e4dc;margin-top:4px}
+
+/* ==================== MARKET INTELLIGENCE (STATS) ==================== */
+#market-intelligence{background:#050508;padding:clamp(80px,10vh,140px) clamp(20px,8vw,120px);position:relative;overflow:hidden}
+.market-bg-text{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Bodoni Moda',serif;font-size:clamp(100px,18vw,280px);font-weight:900;color:rgba(201,168,76,0.03);white-space:nowrap;pointer-events:none;letter-spacing:0.1em}
+.market-header{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start;margin-bottom:clamp(60px,8vh,100px)}
+.market-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.4vw,18px);font-style:italic;font-weight:300;color:rgba(232,228,220,0.4);line-height:1.9;margin-top:20px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(201,168,76,0.08)}
+.stat-block{background:#050508;padding:clamp(32px,4vw,52px) clamp(20px,3vw,36px);text-align:center;position:relative;overflow:hidden;transition:background 0.4s ease}
+.stat-block::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4),transparent);transform:scaleX(0);transition:transform 0.6s ease}
+.stat-block:hover::before{transform:scaleX(1)}
+.stat-block:hover{background:rgba(201,168,76,0.03)}
+.stat-num{font-family:'Bodoni Moda',serif;font-size:clamp(44px,5vw,72px);font-weight:900;color:#c9a84c;line-height:1;display:block}
+.stat-suffix{font-size:clamp(22px,2.5vw,38px);color:rgba(201,168,76,0.6);vertical-align:super}
+.stat-label{font-size:8px;font-weight:400;letter-spacing:0.5em;text-transform:uppercase;color:#2a2a3a;margin-top:12px;display:block}
+.stat-desc{font-family:'Cormorant Garamond',serif;font-size:13px;font-style:italic;color:#3d3d50;margin-top:6px;display:block}
+.market-footnote{margin-top:40px;text-align:center;font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#2a2a3a}
+
+/* ==================== TESTIMONIALS ==================== */
+#testimonials{padding:clamp(80px,10vh,140px) clamp(20px,8vw,120px);position:relative}
+.testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(201,168,76,0.07);margin-top:60px}
+.testimonial-card{background:#080810;padding:clamp(32px,4vw,52px);position:relative;overflow:hidden;transition:background 0.4s ease}
+.testimonial-card:hover{background:rgba(201,168,76,0.03)}
+.testimonial-quote-mark{font-family:'Bodoni Moda',serif;font-size:120px;font-weight:900;color:rgba(201,168,76,0.06);line-height:0.7;margin-bottom:8px;display:block}
+.testimonial-text{font-family:'Cormorant Garamond',serif;font-size:clamp(16px,1.5vw,20px);font-style:italic;font-weight:300;line-height:1.8;color:rgba(232,228,220,0.75);margin-bottom:28px}
+.testimonial-author{display:flex;align-items:center;gap:14px;padding-top:20px;border-top:1px solid rgba(201,168,76,0.1)}
+.testimonial-initials{width:42px;height:42px;border:1px solid rgba(201,168,76,0.3);display:flex;align-items:center;justify-content:center;font-family:'Bodoni Moda',serif;font-size:14px;font-weight:700;color:#c9a84c;flex-shrink:0}
+.testimonial-name{font-size:11px;font-weight:500;letter-spacing:0.2em;text-transform:uppercase;color:#e8e4dc}
+.testimonial-origin{font-size:10px;font-weight:300;color:#55556a;margin-top:3px}
+.testimonial-flag{font-size:16px}
+
+/* ==================== SERVICES TIMELINE ==================== */
+#services{padding:clamp(80px,10vh,140px) clamp(20px,8vw,120px);position:relative}
+.services-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin-top:70px;position:relative}
+.services-timeline::before{content:'';position:absolute;top:28px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.3),rgba(201,168,76,0.3),transparent);z-index:0}
+.service-step{padding:0 24px 0 0;position:relative;z-index:1}
+.service-step-num{font-family:'Bodoni Moda',serif;font-size:11px;font-weight:700;color:#c9a84c;letter-spacing:0.2em;margin-bottom:16px;display:flex;align-items:center;gap:0}
+.service-dot{width:9px;height:9px;border:2px solid #c9a84c;border-radius:50%;margin-left:12px;background:#080810;position:relative}
+.service-dot::after{content:'';position:absolute;inset:-4px;border-radius:50%;border:1px solid rgba(201,168,76,0.2)}
+.service-name{font-family:'Bodoni Moda',serif;font-size:clamp(18px,2vw,26px);font-weight:700;color:#e8e4dc;margin-bottom:12px;margin-top:16px}
+.service-desc{font-size:12px;font-weight:300;line-height:1.9;color:#55556a}
+.service-step::after{content:'';position:absolute;top:24px;left:0;width:0;height:1px;background:#c9a84c;transition:width 0.6s ease}
+
+/* ==================== VIP CONTACT FORM ==================== */
+#contact{position:relative;overflow:hidden}
+.contact-bg{position:absolute;inset:0;z-index:0}
+.contact-bg img{width:100%;height:100%;object-fit:cover;object-position:center 30%;opacity:0.12}
+.contact-overlay{position:absolute;inset:0;background:linear-gradient(135deg,#080810 0%,rgba(8,8,16,0.95) 50%,rgba(8,8,16,0.85) 100%);z-index:1}
+.contact-content{position:relative;z-index:2;padding:clamp(80px,10vh,140px) clamp(20px,8vw,120px);display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.contact-left .contact-desc{font-family:'Cormorant Garamond',serif;font-size:clamp(15px,1.4vw,18px);font-style:italic;font-weight:300;color:rgba(232,228,220,0.4);line-height:1.9;margin-top:20px;max-width:380px}
+.contact-channels{margin-top:48px;display:flex;flex-direction:column;gap:16px}
+.contact-channel{display:flex;align-items:center;gap:16px;padding:18px 22px;border:1px solid rgba(201,168,76,0.1);background:rgba(201,168,76,0.02);transition:all 0.3s ease}
+.contact-channel:hover{background:rgba(201,168,76,0.05);border-color:rgba(201,168,76,0.25)}
+.contact-channel-icon{width:36px;height:36px;border:1px solid rgba(201,168,76,0.25);display:flex;align-items:center;justify-content:center;color:#c9a84c;flex-shrink:0}
+.contact-channel-icon svg{width:14px;height:14px;fill:currentColor}
+.contact-channel-label{font-size:8px;letter-spacing:0.4em;text-transform:uppercase;color:#3d3d50;margin-bottom:3px}
+.contact-channel-val{font-size:12px;color:#9999aa;font-weight:400}
+.contact-form-wrap{background:rgba(255,255,255,0.02);border:1px solid rgba(201,168,76,0.1);padding:clamp(32px,4vw,52px)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.form-group{display:flex;flex-direction:column;gap:8px;margin-bottom:14px}
+.form-label{font-size:8.5px;font-weight:500;letter-spacing:0.4em;text-transform:uppercase;color:#55556a}
+.form-input,.form-select,.form-textarea{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);color:#e8e4dc;font-size:12px;font-family:'Inter',sans-serif;padding:14px 16px;outline:none;transition:all 0.3s ease;width:100%}
+.form-input::placeholder,.form-textarea::placeholder{color:#3d3d50}
+.form-input:focus,.form-select:focus,.form-textarea:focus{border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.03)}
+.form-select{-webkit-appearance:none;-moz-appearance:none;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23555'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:rgba(255,255,255,0.03)}
+.form-select option{background:#0d0d1a}
+.form-textarea{resize:none;height:120px;line-height:1.7}
+.form-submit{width:100%;padding:16px;font-size:10px;font-weight:700;letter-spacing:0.35em;text-transform:uppercase;background:linear-gradient(135deg,#c9a84c,#e8c96a);color:#080810;border:none;transition:all 0.3s ease;margin-top:6px}
+.form-submit:hover{background:linear-gradient(135deg,#e8c96a,#c9a84c);box-shadow:0 6px 30px rgba(201,168,76,0.4);transform:translateY(-2px)}
+.form-whatsapp{width:100%;padding:14px;font-size:10px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;background:rgba(37,211,102,0.08);color:#25d366;border:1px solid rgba(37,211,102,0.25);display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px;transition:all 0.3s ease}
+.form-whatsapp:hover{background:rgba(37,211,102,0.15);border-color:rgba(37,211,102,0.5)}
+.form-whatsapp svg{width:14px;height:14px;fill:currentColor}
+
+/* ==================== FOOTER ==================== */
+footer{background:#030306;border-top:1px solid rgba(201,168,76,0.1);padding:clamp(60px,8vh,100px) clamp(20px,8vw,120px) 40px}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:60px;margin-bottom:60px}
+.footer-brand-name{font-family:'Bodoni Moda',serif;font-size:28px;font-weight:900;letter-spacing:0.25em;color:#e8e4dc;margin-bottom:8px}
+.footer-brand-tag{font-size:9px;letter-spacing:0.5em;text-transform:uppercase;color:#3d3d50;margin-bottom:20px}
+.footer-brand-desc{font-size:12px;font-weight:300;line-height:1.9;color:#3d3d50;max-width:300px}
+.footer-col-title{font-size:9px;font-weight:600;letter-spacing:0.5em;text-transform:uppercase;color:#c9a84c;margin-bottom:22px}
+.footer-links{display:flex;flex-direction:column;gap:11px}
+.footer-links a{font-size:12px;font-weight:300;color:#3d3d50;transition:color 0.3s ease}
+.footer-links a:hover{color:#c9a84c}
+.footer-bottom{display:flex;align-items:center;justify-content:space-between;padding-top:40px;border-top:1px solid rgba(255,255,255,0.04)}
+.footer-legal{font-size:10px;font-weight:300;color:#2a2a3a;line-height:1.7}
+.footer-rera{display:flex;align-items:center;gap:10px;border:1px solid rgba(201,168,76,0.12);padding:10px 16px;background:rgba(201,168,76,0.03)}
+.footer-rera-diamond{color:#c9a84c;font-size:12px}
+.footer-rera-text{font-size:8px;letter-spacing:0.3em;text-transform:uppercase;color:#3d3d50}
+.footer-rera-num{font-size:10px;font-weight:500;color:#55556a}
+.footer-socials{display:flex;gap:12px}
+.footer-social{width:36px;height:36px;border:1px solid rgba(255,255,255,0.07);display:flex;align-items:center;justify-content:center;color:#3d3d50;font-size:11px;transition:all 0.3s ease}
+.footer-social:hover{border-color:rgba(201,168,76,0.4);color:#c9a84c;background:rgba(201,168,76,0.05)}
+
+/* ==================== GLASSMORPHISM UTILS ==================== */
+.glass{background:rgba(255,255,255,0.03);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.07)}
+.glass-gold{background:rgba(201,168,76,0.05);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(201,168,76,0.15)}
+
+/* ==================== DIVIDERS ==================== */
+.gold-divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,#c9a84c,transparent);margin:24px 0}
 
 /* ==================== RESPONSIVE ==================== */
-@media(max-width:1280px){
-  .nav-links{display:none}
-  .nav-cta{gap:8px}
-}
-@media(max-width:1024px){
-  .hero-content{grid-template-columns:1fr;gap:36px}
+@media(max-width:1100px){
+  .hero-content{grid-template-columns:1fr;gap:40px}
   .hero-right{align-items:flex-start}
-  .hero-actions{justify-content:flex-start}
-  .portfolio-grid{grid-template-columns:1fr}
-  .portfolio-grid-top{grid-template-columns:1fr}
-  .forma-room{grid-template-columns:1fr}
-  .forma-room:nth-child(even) .forma-room-text,.forma-room:nth-child(even) .forma-room-visual{order:unset}
-  .intel-grid{grid-template-columns:1fr 1fr}
-  .footer-top{grid-template-columns:1fr 1fr}
-  .forma-intro{grid-template-columns:1fr}
+  .market-header{grid-template-columns:1fr}
+  .contact-content{grid-template-columns:1fr;gap:48px}
+  .footer-top{grid-template-columns:1fr 1fr;gap:40px}
+  #forma{grid-template-columns:1fr}
+  .forma-left{position:relative;height:auto;min-height:60vh}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
 }
 @media(max-width:768px){
-  nav{padding:0 16px;height:68px}
-  .nav-brand .nav-sub{display:none}
-  .btn-ghost{display:none}
-  .btn-primary{padding:10px 16px;font-size:9px}
-  .nav-currency{padding:8px 24px 8px 10px;font-size:9px}
-  .hero-content{padding:0 20px clamp(60px,8vh,80px)}
-  .hero-left h1{font-size:clamp(44px,13vw,80px)}
-  .hero-stat-grid{grid-template-columns:repeat(2,1fr)}
-  .modal-specs{grid-template-columns:repeat(2,1fr)}
-  .modal-actions{flex-direction:column}
-  .cta-form-row{flex-direction:column}
-  .cta-input{border-right:1px solid rgba(255,255,255,0.1);border-bottom:none}
-  .intel-grid{grid-template-columns:1fr}
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .testimonials-grid{grid-template-columns:1fr}
+  .services-timeline{grid-template-columns:1fr 1fr}
+  .form-row{grid-template-columns:1fr}
   .footer-top{grid-template-columns:1fr}
-  body{cursor:auto}
-  #cursor,#cursor-ring{display:none}
-  button,select,a{cursor:pointer}
-  .modal-overlay{padding:12px}
-  .modal-body{padding:24px}
-  .vip-services{gap:10px}
+  .footer-bottom{flex-direction:column;gap:20px;text-align:center}
+  .hero-stat-panel{display:none}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .market-header{grid-template-columns:1fr}
+}
+@media(max-width:480px){
+  .services-timeline{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
 }
 </style>
 </head>
 <body>
 
-<!-- Custom Cursor -->
+<!-- Scroll Progress -->
+<div id="scroll-progress"></div>
+
+<!-- Film Grain -->
+<div id="grain-overlay"></div>
+
+<!-- Custom Cursors -->
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
+<div id="cursor-trail"></div>
 
-<!-- Preloader -->
+<!-- ==================== PRELOADER ==================== -->
 <div id="preloader">
   <div class="pl-brand">VARA</div>
-  <div class="pl-line"><div class="pl-progress" id="pl-progress"></div></div>
-  <div class="pl-num" id="pl-num">0%</div>
+  <div class="pl-tagline">Private Residences · Dubai</div>
+  <div class="pl-line-wrap">
+    <div class="pl-line"><div class="pl-progress" id="pl-bar"></div></div>
+    <div class="pl-diamonds">
+      <div class="pl-diamond" id="pd1"></div>
+      <div class="pl-diamond" id="pd2"></div>
+      <div class="pl-diamond" id="pd3"></div>
+      <div class="pl-diamond" id="pd4"></div>
+      <div class="pl-diamond" id="pd5"></div>
+    </div>
+    <div class="pl-num" id="pl-num">0%</div>
+  </div>
 </div>
 
-<!-- Navigation -->
+<!-- ==================== NAV ==================== -->
 <nav id="main-nav">
   <div class="nav-brand">
     <div class="nav-monogram">V</div>
-    <div>
+    <div class="nav-name">
       <div class="nav-wordmark">VARA</div>
-      <div class="nav-sub">Private Residences · Dubai</div>
+      <div class="nav-sub">Private Residences</div>
     </div>
   </div>
   <div class="nav-links">
     <a href="#portfolio">Portfolio</a>
     <a href="#forma">Interiors</a>
-    <a href="#intelligence">Market</a>
-    <a href="#vip-cta">Advisory</a>
+    <a href="#market-intelligence">Market</a>
+    <a href="#testimonials">Clients</a>
+    <a href="#contact">Contact</a>
   </div>
   <div class="nav-cta">
-    <select class="nav-currency" id="currencySelector" onchange="updateCurrency(this.value)">
-      <option value="AED">AED د.إ</option>
-      <option value="USD">USD $</option>
-      <option value="EUR">EUR €</option>
-      <option value="GBP">GBP £</option>
-      <option value="BTC">BTC ₿</option>
+    <select class="nav-currency" id="currency-select" aria-label="Currency">
+      <option value="AED">AED</option>
+      <option value="USD">USD</option>
+      <option value="EUR">EUR</option>
+      <option value="GBP">GBP</option>
+      <option value="BTC">BTC</option>
     </select>
-    <button class="btn-ghost" onclick="openViewingModal()">Request Dossier</button>
-    <a href="https://wa.me/971501234567?text=Hello%20VARA%20Dubai%2C%20I%20wish%20to%20arrange%20a%20private%20viewing." target="_blank" class="btn-primary">WhatsApp</a>
+    <a href="https://wa.me/971501234567?text=Hello%20VARA%20Dubai%2C%20I%20wish%20to%20arrange%20a%20private%20viewing." class="btn-whatsapp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+    <a href="#contact" class="btn-primary">Private Viewing</a>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- ==================== HERO ==================== -->
 <section id="hero">
   <div class="hero-bg">
-    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2560&q=90" alt="Dubai Ultra-Luxury Skyline" loading="eager">
+    <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2560&q=90" alt="Dubai Skyline" loading="eager" fetchpriority="high">
   </div>
   <div class="hero-vignette"></div>
+  <div class="hero-side-vignette"></div>
+  <div class="hero-gradient-shift"></div>
 
-  <!-- Live Active Listings Badge -->
-  <div class="hero-live-badge" id="heroLiveBadge">
+  <div class="hero-live-badge">
     <span class="live-dot"></span>
-    <span>4 Active Crown Listings</span>
+    <span>Listings Live · Dubai</span>
   </div>
 
-  <div class="hero-content" id="heroContent">
+  <div class="hero-content">
     <div class="hero-left">
-      <div class="eyebrow">Invitation Only · Dubai</div>
-      <h1>Crown<br><em>Estates</em><br>Dubai.</h1>
-      <p class="hero-desc">Off-market trophy residences the world's most discerning buyers compete for. Assembled by invitation only since 2004.</p>
+      <div class="eyebrow">By Invitation Only · Trophy Residences</div>
+      <div class="hero-h1-wrap">
+        <h1>Beyond<br><em>Ordinary</em><br>Luxury.</h1>
+      </div>
+      <p class="hero-desc">Curated ultra-prime residences in the world's most coveted addresses — Burj Khalifa, Palm Jumeirah, Bulgari Island, Omniyat. Each asset, personally verified.</p>
+      <div class="hero-ctas">
+        <a href="#portfolio" class="btn-primary">Explore Portfolio →</a>
+        <a href="https://wa.me/971501234567?text=Hello%20VARA%20Dubai%2C%20I%20wish%20to%20arrange%20a%20private%20viewing." class="btn-ghost" target="_blank" rel="noopener">Request Viewing</a>
+      </div>
     </div>
     <div class="hero-right">
-      <div class="hero-stat-grid">
-        <div class="hero-stat">
-          <span class="hero-stat-num">AED<br>140<small>M</small></span>
-          <span class="hero-stat-label">Highest Current Listing</span>
+      <div class="hero-stat-panel">
+        <div class="hero-stat-item">
+          <span class="hero-stat-num"><sup>AED</sup>4.2<sub>B</sub></span>
+          <span class="hero-stat-label">Total Sales Volume</span>
         </div>
-        <div class="hero-stat">
-          <span class="hero-stat-num">0%</span>
-          <span class="hero-stat-label">Capital Gains Tax</span>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">340<sup>+</sup></span>
+          <span class="hero-stat-label">Trophy Assets Sold</span>
         </div>
-        <div class="hero-stat">
-          <span class="hero-stat-num">+18%</span>
-          <span class="hero-stat-label">Prime Price Growth YOY</span>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">62<sup>+</sup></span>
+          <span class="hero-stat-label">Countries Served</span>
         </div>
-        <div class="hero-stat">
-          <span class="hero-stat-num">10Y</span>
-          <span class="hero-stat-label">Golden Visa Included</span>
+        <div class="hero-stat-item">
+          <span class="hero-stat-num">18</span>
+          <span class="hero-stat-label">Years of Mastery</span>
         </div>
-      </div>
-      <div class="hero-actions">
-        <button class="btn-ghost" onclick="document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">View Portfolio</button>
-        <button class="btn-primary" onclick="openViewingModal()">Private Viewing</button>
       </div>
     </div>
   </div>
+
   <div class="scroll-indicator">
-    <span>Scroll to explore</span>
+    <span>Scroll</span>
     <div class="scroll-line"></div>
   </div>
 </section>
 
-<!-- MARQUEE -->
-<div class="marquee-wrapper">
-  <div class="marquee-track" id="marqueeTrack">
-    <div class="marquee-item"><span class="dot"></span>Palm Jumeirah Ultra-Prime Listings</div>
-    <div class="marquee-item"><span class="dot"></span>Bulgari Seahorse Island Residences</div>
-    <div class="marquee-item"><span class="dot"></span>Downtown Dubai Burj Khalifa Penthouses</div>
-    <div class="marquee-item"><span class="dot"></span>Atlantis Royal Sky Villas</div>
-    <div class="marquee-item"><span class="dot"></span>Rolls-Royce VIP Helicopter Viewings</div>
-    <div class="marquee-item"><span class="dot"></span>Golden Visa Fast-Track Advisory</div>
-    <div class="marquee-item"><span class="dot"></span>Crypto & Multi-Currency Settlement</div>
-    <div class="marquee-item"><span class="dot"></span>RERA Licensed Brokerage #94821</div>
-    <div class="marquee-item"><span class="dot"></span>Palm Jumeirah Ultra-Prime Listings</div>
-    <div class="marquee-item"><span class="dot"></span>Bulgari Seahorse Island Residences</div>
-    <div class="marquee-item"><span class="dot"></span>Downtown Dubai Burj Khalifa Penthouses</div>
-    <div class="marquee-item"><span class="dot"></span>Atlantis Royal Sky Villas</div>
-    <div class="marquee-item"><span class="dot"></span>Rolls-Royce VIP Helicopter Viewings</div>
-    <div class="marquee-item"><span class="dot"></span>Golden Visa Fast-Track Advisory</div>
-    <div class="marquee-item"><span class="dot"></span>Crypto & Multi-Currency Settlement</div>
-    <div class="marquee-item"><span class="dot"></span>RERA Licensed Brokerage #94821</div>
+<!-- ==================== MARQUEE TICKER ==================== -->
+<div class="ticker-section">
+  <div class="ticker-track" id="ticker-track">
+    <!-- Items duplicated for seamless loop -->
+    <div class="ticker-item"><span class="ti-label">Award</span><span class="ti-award">Best Luxury Broker · Dubai 2024</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Certified</span><span class="ti-award">RERA Licensed · DLD Approved</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Member</span><span class="ti-award">Forbes Global Properties Network</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Ranked</span><span class="ti-award">#1 Ultra-Prime Specialist · UAE</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Partner</span><span class="ti-award">Bulgari Residences · Omniyat · Emaar Premium</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Award</span><span class="ti-award">International Property Awards · Five Stars</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Exclusive</span><span class="ti-award">Off-Market Inventory · By Invitation Only</span><span class="ticker-sep">◆</span></div>
+    <!-- Duplicate for seamless -->
+    <div class="ticker-item"><span class="ti-label">Award</span><span class="ti-award">Best Luxury Broker · Dubai 2024</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Certified</span><span class="ti-award">RERA Licensed · DLD Approved</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Member</span><span class="ti-award">Forbes Global Properties Network</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Ranked</span><span class="ti-award">#1 Ultra-Prime Specialist · UAE</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Partner</span><span class="ti-award">Bulgari Residences · Omniyat · Emaar Premium</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Award</span><span class="ti-award">International Property Awards · Five Stars</span><span class="ticker-sep">◆</span></div>
+    <div class="ticker-item"><span class="ti-label">Exclusive</span><span class="ti-award">Off-Market Inventory · By Invitation Only</span><span class="ticker-sep">◆</span></div>
   </div>
 </div>
 
-<!-- TRUST / CREDENTIALS STRIP -->
-<div style="padding:40px clamp(20px,8vw,120px);background:#0a0a14;border-bottom:1px solid rgba(255,255,255,0.04);display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:24px">
-  <div style="display:flex;flex-wrap:wrap;gap:36px;align-items:center">
-    <div style="text-align:center">
-      <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#e8e4dc;line-height:1">20+</div>
-      <div style="font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#44445a;margin-top:4px">Years Advisory</div>
-    </div>
-    <div style="width:1px;height:40px;background:rgba(255,255,255,0.05)"></div>
-    <div style="text-align:center">
-      <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#e8e4dc;line-height:1">AED 2.4B</div>
-      <div style="font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#44445a;margin-top:4px">Transactions Closed</div>
-    </div>
-    <div style="width:1px;height:40px;background:rgba(255,255,255,0.05)"></div>
-    <div style="text-align:center">
-      <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#e8e4dc;line-height:1">62</div>
-      <div style="font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#44445a;margin-top:4px">Countries Served</div>
-    </div>
-    <div style="width:1px;height:40px;background:rgba(255,255,255,0.05)"></div>
-    <div style="text-align:center">
-      <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#e8e4dc;line-height:1">#1</div>
-      <div style="font-size:9px;letter-spacing:0.35em;text-transform:uppercase;color:#44445a;margin-top:4px">Ultra-Prime Dubai</div>
-    </div>
-  </div>
-  <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
-    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;border:1px solid rgba(255,255,255,0.06);padding:8px 16px">RERA #94821</div>
-    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;border:1px solid rgba(255,255,255,0.06);padding:8px 16px">DLD Certified</div>
-    <div style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;color:#55556a;border:1px solid rgba(255,255,255,0.06);padding:8px 16px">Forbes Recognized</div>
-  </div>
-</div>
-
-<!-- PORTFOLIO -->
+<!-- ==================== PORTFOLIO ==================== -->
 <section id="portfolio">
-  <div class="section-header reveal">
-    <div class="eyebrow">The Crown Collection</div>
-    <h2>Trophy Residences,<br><em>Meticulously Curated.</em></h2>
+  <div class="portfolio-header">
+    <div class="eyebrow reveal-up">Current Listings</div>
+    <h2 class="section-title reveal-up reveal-delay-1">The Collection</h2>
+    <p class="section-sub reveal-up reveal-delay-2">Each residence is personally curated, privately held, and available to qualified clients by appointment.</p>
   </div>
-  <!-- Property Filter Row -->
-  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:0 clamp(20px,5vw,60px);margin-top:40px">
-    <div style="display:flex;gap:8px;flex-wrap:wrap">
-      <button onclick="filterPortfolio('all',this)" style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border:1px solid #c9a84c;color:#c9a84c;background:rgba(201,168,76,0.1);transition:all 0.3s ease" class="filter-btn active-filter">All Locations</button>
-      <button onclick="filterPortfolio('Downtown Dubai',this)" style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(255,255,255,0.08);color:#55556a;background:transparent;transition:all 0.3s ease" class="filter-btn">Downtown</button>
-      <button onclick="filterPortfolio('Palm Jumeirah',this)" style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(255,255,255,0.08);color:#55556a;background:transparent;transition:all 0.3s ease" class="filter-btn">Palm Jumeirah</button>
-      <button onclick="filterPortfolio('Jumeira Bay Island',this)" style="font-size:9px;letter-spacing:0.3em;text-transform:uppercase;padding:8px 18px;border:1px solid rgba(255,255,255,0.08);color:#55556a;background:transparent;transition:all 0.3s ease" class="filter-btn">Jumeira Bay</button>
-    </div>
-    <div style="font-size:10px;color:#44445a;letter-spacing:0.2em">Showing <span id="propCount">4</span> Residences</div>
-  </div>
-  <div class="portfolio-grid">
-    <!-- Top Row -->
-    <div class="portfolio-grid-top">
-      <!-- Card 1: Large -->
-      <div class="portfolio-card large reveal" onclick="openPropertyModal(0)">
-        <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85" alt="The Lana Sky Penthouse">
-        <div class="card-bottom-bar">
-          <div class="card-loc">Downtown Dubai</div>
-          <div class="card-cta">View →</div>
-        </div>
-        <div class="card-overlay">
-          <div class="card-info">
-            <div class="card-badge">Dorchester Collection</div>
-            <div class="card-title">The Lana<br>Sky Penthouse</div>
-            <div class="card-price">From <strong class="price-val" data-aed="95000000">AED 95,000,000</strong></div>
+
+  <div class="portfolio-scroll-wrap">
+    <div class="portfolio-scroll" id="portfolio-scroll">
+
+      <!-- Card 1 -->
+      <div class="prop-card">
+        <div class="prop-card-img"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=90" alt="The Lana Sky Penthouse" loading="lazy"></div>
+        <div class="prop-card-overlay"></div>
+        <div class="prop-card-num">01</div>
+        <div class="prop-card-body">
+          <div class="prop-tag">Sky Penthouse</div>
+          <div class="prop-name">The Lana Sky Penthouse</div>
+          <div class="prop-loc">Downtown Dubai</div>
+          <div class="prop-price" data-aed="95000000">AED 95,000,000</div>
+          <div class="prop-price-label">Asking Price</div>
+          <div class="prop-details">
+            <div class="prop-specs">
+              <div class="prop-spec">Beds: <span class="prop-spec-val">5</span></div>
+              <div class="prop-spec">Area: <span class="prop-spec-val">9,200 sqft</span></div>
+              <div class="prop-spec">Floor: <span class="prop-spec-val">72nd</span></div>
+              <div class="prop-spec">View: <span class="prop-spec-val">Burj + Sea</span></div>
+            </div>
+            <a href="#contact" class="prop-cta-link">Request Viewing →</a>
           </div>
         </div>
       </div>
-      <!-- Card 2: Tall -->
-      <div class="portfolio-card medium reveal reveal-delay-1" onclick="openPropertyModal(1)">
-        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=85" alt="Atlantis Royal Sky Villa" style="object-position:center top">
-        <div class="card-bottom-bar">
-          <div class="card-loc">Palm Jumeirah</div>
-          <div class="card-cta">View →</div>
-        </div>
-        <div class="card-overlay">
-          <div class="card-info">
-            <div class="card-badge">KPF Architecture</div>
-            <div class="card-title">Atlantis Royal<br>Sky Villa</div>
-            <div class="card-price">From <strong class="price-val" data-aed="115000000">AED 115,000,000</strong></div>
+
+      <!-- Card 2 -->
+      <div class="prop-card">
+        <div class="prop-card-img"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1600&q=90" alt="Atlantis Royal Sky Villa" loading="lazy"></div>
+        <div class="prop-card-overlay"></div>
+        <div class="prop-card-num">02</div>
+        <div class="prop-card-body">
+          <div class="prop-tag">Sky Villa</div>
+          <div class="prop-name">Atlantis Royal Sky Villa</div>
+          <div class="prop-loc">Palm Jumeirah</div>
+          <div class="prop-price" data-aed="115000000">AED 115,000,000</div>
+          <div class="prop-price-label">Asking Price</div>
+          <div class="prop-details">
+            <div class="prop-specs">
+              <div class="prop-spec">Beds: <span class="prop-spec-val">6</span></div>
+              <div class="prop-spec">Area: <span class="prop-spec-val">11,800 sqft</span></div>
+              <div class="prop-spec">Pool: <span class="prop-spec-val">Private</span></div>
+              <div class="prop-spec">View: <span class="prop-spec-val">Arabian Gulf</span></div>
+            </div>
+            <a href="#contact" class="prop-cta-link">Request Viewing →</a>
           </div>
         </div>
       </div>
-    </div>
-    <!-- Bottom Row -->
-    <div class="portfolio-grid-top" style="grid-template-columns:1fr 1.6fr">
+
       <!-- Card 3 -->
-      <div class="portfolio-card medium reveal reveal-delay-1" onclick="openPropertyModal(2)">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=85" alt="Bulgari Lighthouse Penthouse">
-        <div class="card-bottom-bar">
-          <div class="card-loc">Jumeira Bay Island</div>
-          <div class="card-cta">View →</div>
-        </div>
-        <div class="card-overlay">
-          <div class="card-info">
-            <div class="card-badge">Antonio Citterio</div>
-            <div class="card-title">Bulgari<br>Lighthouse</div>
-            <div class="card-price">From <strong class="price-val" data-aed="140000000">AED 140,000,000</strong></div>
+      <div class="prop-card">
+        <div class="prop-card-img"><img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=90" alt="Bulgari Lighthouse" loading="lazy"></div>
+        <div class="prop-card-overlay"></div>
+        <div class="prop-card-num">03</div>
+        <div class="prop-card-body">
+          <div class="prop-tag">Signature Mansion</div>
+          <div class="prop-name">Bulgari Lighthouse</div>
+          <div class="prop-loc">Jumeira Bay Island</div>
+          <div class="prop-price" data-aed="140000000">AED 140,000,000</div>
+          <div class="prop-price-label">Asking Price</div>
+          <div class="prop-details">
+            <div class="prop-specs">
+              <div class="prop-spec">Beds: <span class="prop-spec-val">7</span></div>
+              <div class="prop-spec">Area: <span class="prop-spec-val">18,400 sqft</span></div>
+              <div class="prop-spec">Beach: <span class="prop-spec-val">Private</span></div>
+              <div class="prop-spec">Dock: <span class="prop-spec-val">Yes</span></div>
+            </div>
+            <a href="#contact" class="prop-cta-link">Request Viewing →</a>
           </div>
         </div>
       </div>
+
       <!-- Card 4 -->
-      <div class="portfolio-card large reveal reveal-delay-2" onclick="openPropertyModal(3)">
-        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=85" alt="Palm Frond Sanctuary" style="object-position:center bottom">
-        <div class="card-bottom-bar">
-          <div class="card-loc">Palm Jumeirah</div>
-          <div class="card-cta">View →</div>
+      <div class="prop-card">
+        <div class="prop-card-img"><img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1600&q=90" alt="Palm Frond Sanctuary" loading="lazy"></div>
+        <div class="prop-card-overlay"></div>
+        <div class="prop-card-num">04</div>
+        <div class="prop-card-body">
+          <div class="prop-tag">Frond Villa</div>
+          <div class="prop-name">Palm Frond Sanctuary</div>
+          <div class="prop-loc">Palm Jumeirah</div>
+          <div class="prop-price" data-aed="65000000">AED 65,000,000</div>
+          <div class="prop-price-label">Asking Price</div>
+          <div class="prop-details">
+            <div class="prop-specs">
+              <div class="prop-spec">Beds: <span class="prop-spec-val">5</span></div>
+              <div class="prop-spec">Area: <span class="prop-spec-val">8,750 sqft</span></div>
+              <div class="prop-spec">Pool: <span class="prop-spec-val">Infinity</span></div>
+              <div class="prop-spec">Beach: <span class="prop-spec-val">Private</span></div>
+            </div>
+            <a href="#contact" class="prop-cta-link">Request Viewing →</a>
+          </div>
         </div>
-        <div class="card-overlay">
-          <div class="card-info">
-            <div class="card-badge">Poliform Interiors</div>
-            <div class="card-title">Palm Frond<br>Sanctuary</div>
-            <div class="card-price">From <strong class="price-val" data-aed="65000000">AED 65,000,000</strong></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="portfolio-progress-wrap">
+    <div class="portfolio-progress-track">
+      <div class="portfolio-progress-fill" id="portfolio-progress"></div>
+    </div>
+    <div class="portfolio-progress-label" id="portfolio-label">01 / 04</div>
+  </div>
+</section>
+
+<!-- ==================== CINEMATIC BANNER ==================== -->
+<section id="cinematic-banner">
+  <div class="cinema-bg">
+    <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=2000&q=90" alt="Featured Property" loading="lazy" id="cinema-parallax-img">
+  </div>
+  <div class="cinema-overlay"></div>
+  <div class="cinema-corner-deco"></div>
+  <div class="cinema-corner-deco2"></div>
+  <div class="cinema-content">
+    <div class="cinema-eyebrow reveal-up">Editor's Choice · Flagship Listing</div>
+    <h2 class="cinema-title reveal-up reveal-delay-1">Bulgari<br><em>Lighthouse</em></h2>
+    <div class="cinema-price reveal-up reveal-delay-2" data-aed="140000000" id="cinema-price">AED 140,000,000</div>
+    <div class="cinema-price-label reveal-up reveal-delay-2">Jumeira Bay Island · Bulgari Resort</div>
+    <div class="cinema-badges reveal-up reveal-delay-3">
+      <span class="cinema-badge">18,400 sqft</span>
+      <span class="cinema-badge">7 Bedrooms</span>
+      <span class="cinema-badge">Private Beach</span>
+      <span class="cinema-badge">Yacht Berth</span>
+      <span class="cinema-badge">Full Staff Quarters</span>
+    </div>
+    <div class="reveal-up reveal-delay-4">
+      <a href="#contact" class="btn-primary">Arrange Private Viewing →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== INTERIOR WALKTHROUGH (FORMA) ==================== -->
+<section id="forma">
+  <div class="forma-left">
+    <div class="forma-left-bg">
+      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=90" alt="" aria-hidden="true">
+    </div>
+    <div class="forma-left-content">
+      <div class="forma-eyebrow">Interior Walkthrough</div>
+      <div class="forma-brand">FORMAby VARA</div>
+      <p class="forma-tagline">An intimate journey through the finest crafted interiors in Dubai's trophy residences.</p>
+
+      <div class="forma-room-indicator">
+        <div class="forma-room-num" id="forma-room-num">01</div>
+        <div class="forma-room-name" id="forma-room-name">Grand Living Room</div>
+        <div class="forma-room-desc" id="forma-room-desc">Double-height ceilings soar above Italian marble floors. Bespoke joinery by Poltrona Frau. Panoramic city views frame each moment.</div>
+      </div>
+
+      <div class="forma-nav" id="forma-nav">
+        <div class="forma-nav-dot active"></div>
+        <div class="forma-nav-dot"></div>
+        <div class="forma-nav-dot"></div>
+        <div class="forma-nav-dot"></div>
+        <div class="forma-nav-dot"></div>
+      </div>
+
+      <div class="forma-props">
+        <div class="forma-prop">
+          <div class="forma-prop-label">Floor Material</div>
+          <div class="forma-prop-val" id="forma-mat">Calacatta Marble</div>
+        </div>
+        <div class="forma-prop">
+          <div class="forma-prop-label">Designer</div>
+          <div class="forma-prop-val" id="forma-des">Gilles & Boissier</div>
+        </div>
+        <div class="forma-prop">
+          <div class="forma-prop-label">Ceiling Height</div>
+          <div class="forma-prop-val" id="forma-ceil">6.2m</div>
+        </div>
+        <div class="forma-prop">
+          <div class="forma-prop-label">Sq. Ft.</div>
+          <div class="forma-prop-val" id="forma-sqft">1,840</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="forma-right" id="forma-right">
+    <div class="forma-room-panel" data-room="0">
+      <div class="forma-room-img reveal-clip">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=90" alt="Grand Living Room" loading="lazy">
+      </div>
+      <div class="forma-room-overlay"></div>
+      <div class="forma-room-label">
+        <div class="forma-room-label-text">01 / 05</div>
+        <div class="forma-room-label-name">Grand Living Room</div>
+      </div>
+    </div>
+    <div class="forma-room-panel" data-room="1">
+      <div class="forma-room-img reveal-clip">
+        <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=90" alt="Private Dining Pavilion" loading="lazy">
+      </div>
+      <div class="forma-room-overlay"></div>
+      <div class="forma-room-label">
+        <div class="forma-room-label-text">02 / 05</div>
+        <div class="forma-room-label-name">Private Dining Pavilion</div>
+      </div>
+    </div>
+    <div class="forma-room-panel" data-room="2">
+      <div class="forma-room-img reveal-clip">
+        <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1200&q=90" alt="Chef's Kitchen Atelier" loading="lazy">
+      </div>
+      <div class="forma-room-overlay"></div>
+      <div class="forma-room-label">
+        <div class="forma-room-label-text">03 / 05</div>
+        <div class="forma-room-label-name">Chef's Kitchen Atelier</div>
+      </div>
+    </div>
+    <div class="forma-room-panel" data-room="3">
+      <div class="forma-room-img reveal-clip">
+        <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1200&q=90" alt="Master Suite Retreat" loading="lazy">
+      </div>
+      <div class="forma-room-overlay"></div>
+      <div class="forma-room-label">
+        <div class="forma-room-label-text">04 / 05</div>
+        <div class="forma-room-label-name">Master Suite Retreat</div>
+      </div>
+    </div>
+    <div class="forma-room-panel" data-room="4">
+      <div class="forma-room-img reveal-clip">
+        <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1200&q=90" alt="Spa Bathroom Sanctuary" loading="lazy">
+      </div>
+      <div class="forma-room-overlay"></div>
+      <div class="forma-room-label">
+        <div class="forma-room-label-text">05 / 05</div>
+        <div class="forma-room-label-name">Spa Bathroom Sanctuary</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== MARKET INTELLIGENCE ==================== -->
+<section id="market-intelligence">
+  <div class="market-bg-text" aria-hidden="true">VARA</div>
+  <div class="market-header">
+    <div>
+      <div class="eyebrow reveal-up">Market Intelligence · 2024</div>
+      <h2 class="section-title reveal-up reveal-delay-1">Dubai<br><em>Dominates.</em></h2>
+    </div>
+    <div>
+      <p class="market-desc reveal-up reveal-delay-2">Dubai's luxury real estate market continues to outperform global peers, with prime residential values rising 22% YoY and transaction volumes at a historic peak. VARA sits at the apex of this market.</p>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-block">
+      <span class="stat-num" data-target="4.2" data-suffix="B" data-prefix="AED ">0</span>
+      <span class="stat-label">Total Portfolio Value</span>
+      <span class="stat-desc">Under active management</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num" data-target="340" data-suffix="+" data-prefix="">0</span>
+      <span class="stat-label">Trophy Transactions</span>
+      <span class="stat-desc">Since inception</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num" data-target="22" data-suffix="%" data-prefix="">0</span>
+      <span class="stat-label">Prime Value Growth</span>
+      <span class="stat-desc">Year over year 2024</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-num" data-target="62" data-suffix="+" data-prefix="">0</span>
+      <span class="stat-label">Countries Represented</span>
+      <span class="stat-desc">Global client network</span>
+    </div>
+  </div>
+
+  <div class="market-footnote reveal-up">Source: Dubai Land Department · CBRE MENA Prime Residential Report 2024</div>
+</section>
+
+<!-- ==================== TESTIMONIALS ==================== -->
+<section id="testimonials">
+  <div class="section-header" style="padding-left:0;padding-right:0;padding-bottom:0">
+    <div class="eyebrow reveal-up">Client Voices</div>
+    <h2 class="section-title reveal-up reveal-delay-1">Trusted by the<br><em>World's Elite.</em></h2>
+  </div>
+
+  <div class="testimonials-grid">
+    <div class="testimonial-card reveal-up reveal-delay-1">
+      <span class="testimonial-quote-mark">"</span>
+      <p class="testimonial-text">VARA found me a Palm Jumeirah villa that wasn't even listed publicly. The process was seamless, discreet, and completed in under three weeks. This is what true luxury service looks like.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-initials">KS</div>
+        <div>
+          <div class="testimonial-name">K. Al-Saud <span class="testimonial-flag">🇸🇦</span></div>
+          <div class="testimonial-origin">Principal Investor · Riyadh</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal-up reveal-delay-2">
+      <span class="testimonial-quote-mark">"</span>
+      <p class="testimonial-text">I've purchased properties in London, Monaco, and Singapore. VARA's level of market knowledge and white-glove service is unmatched. My Bulgari residence exceeded every expectation.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-initials">EC</div>
+        <div>
+          <div class="testimonial-name">E. Christodoulou <span class="testimonial-flag">🇬🇷</span></div>
+          <div class="testimonial-origin">Family Office Principal · Athens</div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonial-card reveal-up reveal-delay-3">
+      <span class="testimonial-quote-mark">"</span>
+      <p class="testimonial-text">From the first call to the handover ceremony, every detail was flawlessly managed. VARA doesn't just sell properties — they orchestrate life-defining acquisitions. Truly remarkable.</p>
+      <div class="testimonial-author">
+        <div class="testimonial-initials">ZW</div>
+        <div>
+          <div class="testimonial-name">Z. Wei <span class="testimonial-flag">🇸🇬</span></div>
+          <div class="testimonial-origin">Tech Entrepreneur · Singapore</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== SERVICES TIMELINE ==================== -->
+<section id="services">
+  <div class="eyebrow reveal-up">Our Process</div>
+  <h2 class="section-title reveal-up reveal-delay-1">The VARA<br><em>Method.</em></h2>
+  <p class="section-sub reveal-up reveal-delay-2">A refined, four-stage approach designed around the most demanding clientele on earth.</p>
+
+  <div class="services-timeline">
+    <div class="service-step reveal-up reveal-delay-1">
+      <div class="service-step-num">01<div class="service-dot"></div></div>
+      <div class="service-name">Discovery</div>
+      <div class="service-desc">An intimate briefing to understand your vision, lifestyle, and investment thesis. Strictly confidential. Strictly you.</div>
+    </div>
+    <div class="service-step reveal-up reveal-delay-2">
+      <div class="service-step-num">02<div class="service-dot"></div></div>
+      <div class="service-name">Curation</div>
+      <div class="service-desc">We surface only the finest — including off-market assets held by our exclusive vendor network of over 200 principals.</div>
+    </div>
+    <div class="service-step reveal-up reveal-delay-3">
+      <div class="service-step-num">03<div class="service-dot"></div></div>
+      <div class="service-name">Acquisition</div>
+      <div class="service-desc">Legal, financial, and logistical excellence. We negotiate, structure, and secure your acquisition with absolute precision.</div>
+    </div>
+    <div class="service-step reveal-up reveal-delay-4">
+      <div class="service-step-num">04<div class="service-dot"></div></div>
+      <div class="service-name">Handover</div>
+      <div class="service-desc">Keys delivered. Staff arranged. Interior designers briefed. Your new life begins — and our relationship deepens.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== VIP CONTACT FORM ==================== -->
+<section id="contact">
+  <div class="contact-bg">
+    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=2000&q=90" alt="" aria-hidden="true" loading="lazy">
+  </div>
+  <div class="contact-overlay"></div>
+  <div class="contact-content">
+    <div class="contact-left">
+      <div class="eyebrow reveal-up">Private Access</div>
+      <h2 class="section-title reveal-up reveal-delay-1">Begin Your<br><em>Journey.</em></h2>
+      <p class="contact-desc reveal-up reveal-delay-2">All enquiries are handled personally by a senior VARA advisor. Complete discretion is guaranteed.</p>
+      <div class="contact-channels reveal-up reveal-delay-3">
+        <a href="https://wa.me/971501234567?text=Hello%20VARA%20Dubai%2C%20I%20wish%20to%20arrange%20a%20private%20viewing." class="contact-channel" target="_blank" rel="noopener">
+          <div class="contact-channel-icon">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          </div>
+          <div>
+            <div class="contact-channel-label">WhatsApp</div>
+            <div class="contact-channel-val">+971 50 123 4567</div>
+          </div>
+        </a>
+        <a href="mailto:private@vara.ae" class="contact-channel">
+          <div class="contact-channel-icon">
+            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div>
+            <div class="contact-channel-label">Private Email</div>
+            <div class="contact-channel-val">private@vara.ae</div>
+          </div>
+        </a>
+        <div class="contact-channel">
+          <div class="contact-channel-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div>
+            <div class="contact-channel-label">Office</div>
+            <div class="contact-channel-val">DIFC Gate Village 3, Dubai</div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- FEATURED PROPERTY — FULL BLEED CINEMATIC BANNER -->
-<div style="position:relative;height:85vh;min-height:500px;overflow:hidden;cursor:none" onclick="openPropertyModal(0)">
-  <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=2000&q=90" alt="Featured — Atlantis Royal" style="width:100%;height:100%;object-fit:cover;object-position:center;transform:scale(1.04);transition:transform 10s ease">
-  <div style="position:absolute;inset:0;background:linear-gradient(90deg,rgba(8,8,16,0.88) 0%,rgba(8,8,16,0.4) 50%,rgba(8,8,16,0.1) 100%)"></div>
-  <div style="position:absolute;inset:0;display:flex;align-items:center;padding:0 clamp(24px,8vw,120px)">
-    <div style="max-width:580px">
-      <div style="font-size:9px;font-weight:500;letter-spacing:0.5em;text-transform:uppercase;color:#c9a84c;margin-bottom:16px;display:flex;align-items:center;gap:12px">
-        <span style="display:inline-block;width:4px;height:4px;background:#c9a84c;border-radius:50%"></span>
-        Featured Listing — Palm Jumeirah
-      </div>
-      <div style="font-family:'Bodoni Moda',serif;font-size:clamp(32px,5.5vw,72px);font-weight:900;color:#e8e4dc;line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px">Atlantis Royal<br><em style="font-style:italic;font-weight:300;color:#c9a84c">Sky Villa</em></div>
-      <p style="font-size:13px;font-weight:300;line-height:1.9;color:#8888a0;max-width:420px;margin-bottom:28px">Suspended 180 metres above the Arabian Sea at the crown of Atlantis The Royal. Designed by KPF. Interiors by Sybille de Margerie. Unbroken 360° ocean panoramas.</p>
-      <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
-        <div>
-          <div style="font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:#44445a;margin-bottom:4px">Acquisition Price</div>
-          <div style="font-family:'Bodoni Moda',serif;font-size:28px;font-weight:800;color:#c9a84c" id="featuredPrice">AED 115,000,000</div>
+    <div class="contact-form-wrap reveal-up reveal-delay-2">
+      <div class="eyebrow" style="margin-bottom:28px">Request a Private Viewing</div>
+      <form id="contact-form" onsubmit="handleFormSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input type="text" class="form-input" placeholder="Your first name" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input type="text" class="form-input" placeholder="Your last name" required>
+          </div>
         </div>
-        <button class="btn-primary" onclick="event.stopPropagation();openPropertyModal(1)" style="padding:13px 28px">Inspect Dossier</button>
-        <div style="display:flex;gap:16px;font-size:10px;color:#55556a;letter-spacing:0.1em">
-          <span>16,800 Sq Ft</span>
-          <span>·</span>
-          <span>5 Ocean Suites</span>
-          <span>·</span>
-          <span>Helipad</span>
+        <div class="form-group">
+          <label class="form-label">Email Address</label>
+          <input type="email" class="form-input" placeholder="private@yourdomain.com" required>
         </div>
-      </div>
-    </div>
-  </div>
-  <div style="position:absolute;bottom:28px;right:clamp(24px,8vw,120px);font-size:9px;letter-spacing:0.4em;text-transform:uppercase;color:#55556a">Click to open dossier →</div>
-</div>
-
-<!-- FORMA INTERIORS -->
-<section id="forma">  <div class="forma-intro reveal">
-    <div>
-      <div class="eyebrow" style="font-size:9px;font-weight:400;letter-spacing:0.6em;text-transform:uppercase;color:#c9a84c;display:flex;align-items:center;gap:12px;margin-bottom:20px">
-        <span>Architectural Walkthrough</span>
-        <span style="flex:0 0 24px;height:1px;background:#c9a84c;display:block"></span>
-      </div>
-      <h2 style="font-family:'Bodoni Moda',serif;font-size:clamp(36px,5vw,64px);font-weight:800;line-height:1.05;letter-spacing:-0.02em;color:#e8e4dc">FORMA<br><em style="font-weight:400;color:#c9a84c">Residential<br>Interiors.</em></h2>
-    </div>
-    <div>
-      <p style="font-size:14px;font-weight:300;line-height:1.9;color:#55556a;margin-bottom:28px">A meticulous architectural progression across seven curated spaces — each materialised through Italian stone, monolithic glass, and restraint.</p>
-      <div style="font-size:9px;font-weight:400;letter-spacing:0.4em;text-transform:uppercase;color:#c9a84c">Seven Spaces · One Vision</div>
-    </div>
-  </div>
-
-  <!-- Room 01 -->
-  <div class="forma-room reveal">
-    <div class="forma-room-text">
-      <div class="forma-room-num" aria-hidden="true">01</div>
-      <div class="forma-room-label">01 / LIVING</div>
-      <h3>The Living<br><em>Space</em></h3>
-      <p>Dramatic 7-metre double-height volume framed by monolithic floor-to-ceiling glass. Custom Minotti seating, hand-chiselled travertine fireplace, and unobstructed Burj Khalifa panoramas from every angle.</p>
-      <div class="forma-room-tags">
-        <span class="forma-room-tag">7M Double Height</span>
-        <span class="forma-room-tag">Minotti Italian</span>
-        <span class="forma-room-tag">Travertine Fireplace</span>
-      </div>
-    </div>
-    <div class="forma-room-visual">
-      <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1000&q=85" alt="The Living Space">
-    </div>
-  </div>
-
-  <!-- Room 02 -->
-  <div class="forma-room reveal">
-    <div class="forma-room-text">
-      <div class="forma-room-num" aria-hidden="true">02</div>
-      <div class="forma-room-label">02 / DINING</div>
-      <h3>The Dining<br><em>Room</em></h3>
-      <p>14-guest Nero Marquina monolithic marble table beneath a hand-blown Murano glass celestial installation. Acoustic cedar panelling absorbs and softens the room's grandeur.</p>
-      <div class="forma-room-tags">
-        <span class="forma-room-tag">Nero Marquina Marble</span>
-        <span class="forma-room-tag">Murano Glass</span>
-        <span class="forma-room-tag">Acoustic Cedar</span>
-      </div>
-    </div>
-    <div class="forma-room-visual">
-      <img src="https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1000&q=85" alt="The Dining Room">
-    </div>
-  </div>
-
-  <!-- Room 03 -->
-  <div class="forma-room reveal">
-    <div class="forma-room-text">
-      <div class="forma-room-num" aria-hidden="true">03</div>
-      <div class="forma-room-label">03 / KITCHEN</div>
-      <h3>The<br><em>Kitchen</em></h3>
-      <p>Concealed Gaggenau 400 Series appliances behind Poliform smoked fluted oak. Adjacent climate-controlled sommelier vault holds 1,400 bottles. Zero visual clutter. Total function.</p>
-      <div class="forma-room-tags">
-        <span class="forma-room-tag">Gaggenau 400 Series</span>
-        <span class="forma-room-tag">Poliform Joinery</span>
-        <span class="forma-room-tag">1,400-Bottle Vault</span>
-      </div>
-    </div>
-    <div class="forma-room-visual">
-      <img src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1000&q=85" alt="The Kitchen">
-    </div>
-  </div>
-
-  <!-- Room 04 -->
-  <div class="forma-room reveal">
-    <div class="forma-room-text">
-      <div class="forma-room-num" aria-hidden="true">04</div>
-      <div class="forma-room-label">04 / SUITE</div>
-      <h3>Primary<br><em>Suite</em></h3>
-      <p>Italian raw silk wall panelling. Dual bespoke couture dressing salons finished in saddle leather. Motorized acoustic blackout drapes. A private sunrise terrace above the Arabian Sea.</p>
-      <div class="forma-room-tags">
-        <span class="forma-room-tag">Italian Silk Panels</span>
-        <span class="forma-room-tag">Dual Couture Closets</span>
-        <span class="forma-room-tag">Sunrise Terrace</span>
-      </div>
-    </div>
-    <div class="forma-room-visual">
-      <img src="https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1000&q=85" alt="Primary Suite">
-    </div>
-  </div>
-
-  <!-- Room 05 -->
-  <div class="forma-room reveal">
-    <div class="forma-room-text">
-      <div class="forma-room-num" aria-hidden="true">05</div>
-      <div class="forma-room-label">05 / GARDEN</div>
-      <h3>The Garden<br><em>Room</em></h3>
-      <p>Climate-regulated biophilic winter garden. An 80-year-old sculpted Japanese black pine. Living preserved moss acoustic walls. Black Zimbabwe granite reflecting pool.</p>
-      <div class="forma-room-tags">
-        <span class="forma-room-tag">80-Year Japanese Pine</span>
-        <span class="forma-room-tag">Moss Acoustic Wall</span>
-        <span class="forma-room-tag">Granite Pool</span>
-      </div>
-    </div>
-    <div class="forma-room-visual">
-      <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=1000&q=85" alt="The Garden Room">
-    </div>
-  </div>
-
-  <!-- Room 06 -->
-  <div class="forma-room reveal">
-    <div class="forma-room-text">
-      <div class="forma-room-num" aria-hidden="true">06</div>
-      <div class="forma-room-label">06 / BATH</div>
-      <h3>The<br><em>Bath</em></h3>
-      <p>Monolithic hand-carved basalt soaking tub directly against horizon glass. Bookmatched Calacatta Gold heated marble. Dual chromotherapy rain showers. Private steam sauna.</p>
-      <div class="forma-room-tags">
-        <span class="forma-room-tag">Carved Basalt Tub</span>
-        <span class="forma-room-tag">Calacatta Gold Heated</span>
-        <span class="forma-room-tag">Private Steam</span>
-      </div>
-    </div>
-    <div class="forma-room-visual">
-      <img src="https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1000&q=85" alt="The Bath">
-    </div>
-  </div>
-
-  <!-- Room 07 — Grand View Full Width -->
-  <div style="padding:clamp(60px,8vh,100px) clamp(20px,8vw,120px);text-align:center" class="reveal">
-    <div class="forma-room-label" style="justify-content:center;margin-bottom:16px">07 / GRAND VIEW</div>
-    <h3 style="font-family:'Bodoni Moda',serif;font-size:clamp(36px,5.5vw,72px);font-weight:800;color:#e8e4dc;line-height:1.05;letter-spacing:-0.02em;margin-bottom:16px">The Grand <em style="font-style:italic;font-weight:400;color:#c9a84c">View</em></h3>
-    <p style="font-size:14px;font-weight:300;line-height:1.9;color:#55556a;max-width:500px;margin:0 auto 40px">An unobstructed 360-degree horizon where the azure Gulf meets the illuminated Dubai skyline. Total sovereignty. Total silence.</p>
-    <div style="position:relative;aspect-ratio:21/8;overflow:hidden;cursor:none" onclick="openPropertyModal(0)">
-      <img src="https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=2000&q=90" alt="The Grand View" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 1s ease">
-      <div style="position:absolute;inset:0;background:linear-gradient(0deg,rgba(8,8,16,0.6),transparent 60%);display:flex;align-items:flex-end;justify-content:center;padding:40px">
-        <button onclick="openViewingModal()" class="btn-primary" style="font-size:11px;letter-spacing:0.25em;padding:14px 36px">Schedule Helicopter Viewing</button>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- MARKET INTELLIGENCE -->
-<section id="intelligence">
-  <div class="section-header reveal">
-    <div class="eyebrow">Why Dubai</div>
-    <h2>Sovereign Capital<br><em>Demands Proof.</em></h2>
-  </div>
-  <div class="intel-grid">
-    <div class="intel-block reveal">
-      <span class="intel-num">0<span>%</span></span>
-      <span class="intel-title">Zero Tax Environment</span>
-      <p class="intel-desc">No capital gains. No personal income tax. No inheritance tax. No property ownership levies. Ever.</p>
-    </div>
-    <div class="intel-block reveal reveal-delay-1">
-      <span class="intel-num">10<span>Y</span></span>
-      <span class="intel-title">Golden Visa Residency</span>
-      <p class="intel-desc">Fully renewable 10-year residency for investor, spouse, children, and domestic staff with sponsor rights.</p>
-    </div>
-    <div class="intel-block reveal reveal-delay-2">
-      <span class="intel-num">+18<span>%</span></span>
-      <span class="intel-title">Prime Capital Growth</span>
-      <p class="intel-desc">Leading global prime residential price index — surpassing London, Geneva, Monaco, and New York in 2024.</p>
-    </div>
-    <div class="intel-block reveal reveal-delay-3">
-      <span class="intel-num">100<span>%</span></span>
-      <span class="intel-title">Freehold Ownership</span>
-      <p class="intel-desc">Complete perpetual foreign freehold title in all designated zones, backed by Dubai Land Department (DLD).</p>
-    </div>
-  </div>
-</section>
-
-<!-- VIP CTA -->
-<section id="vip-cta">
-  <div class="bg">
-    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=2000&q=85" alt="Private Penthouse Terrace">
-    <div></div>
-  </div>
-  <div class="content reveal">
-    <div class="eyebrow">Private Advisory</div>
-    <h2>Acquire <em>Beyond</em><br>The Market.</h2>
-    <p>Off-market estates, silent listings, and private island mandates. Available to invited clients of VARA only. Secure your confidential dossier.</p>
-    <div class="cta-form-row">
-      <input type="email" class="cta-input" placeholder="Your email address" id="dossierEmail">
-      <button class="cta-send" onclick="handleDossierRequest()">Request Dossier</button>
-    </div>
-    <div class="vip-services">
-      <div class="vip-pill">Rolls-Royce Chauffeur</div>
-      <div class="vip-pill">Helicopter Viewings</div>
-      <div class="vip-pill">Crypto Settlement</div>
-      <div class="vip-pill">Golden Visa Fast-Track</div>
-      <div class="vip-pill">NDA Off-Market Access</div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div class="footer-brand-col">
-      <div class="wordmark">VARA</div>
-      <p>Ultra-rare trophy residences curated for the world's most discerning buyers. By invitation since 2004.</p>
-    </div>
-    <div>
-      <div class="footer-col-title">Portfolio</div>
-      <ul class="footer-links">
-        <li><a href="#portfolio">The Lana · Downtown</a></li>
-        <li><a href="#portfolio">Atlantis Royal · Palm</a></li>
-        <li><a href="#portfolio">Bulgari Lighthouse</a></li>
-        <li><a href="#portfolio">Palm Frond Sanctuary</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Services</div>
-      <ul class="footer-links">
-        <li><a href="#vip-cta">Private Advisory</a></li>
-        <li><a href="#vip-cta">Golden Visa</a></li>
-        <li><a href="#vip-cta">Crypto Acquisition</a></li>
-        <li><a href="#vip-cta">Off-Market Dossier</a></li>
-      </ul>
-    </div>
-    <div>
-      <div class="footer-col-title">Contact</div>
-      <ul class="footer-links">
-        <li><a href="https://wa.me/971501234567" target="_blank">WhatsApp Private Line</a></li>
-        <li><a href="tel:+971501234567">+971 50 123 4567</a></li>
-        <li><a href="mailto:private@vara.ae">private@vara.ae</a></li>
-        <li><a href="#vip-cta">DIFC Office, Dubai</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <div class="footer-legal">© 2026 VARA Private Residences LLC · All Rights Reserved</div>
-    <div class="footer-rera">RERA Licensed Broker #94821 · DLD Certified</div>
-  </div>
-</footer>
-
-<!-- PROPERTY MODAL -->
-<div class="modal-overlay" id="propertyModal" onclick="handleModalBackdrop(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closePropertyModal()">✕</button>
-    <div class="modal-img">
-      <img id="modalImg" src="" alt="">
-    </div>
-    <div class="modal-body">
-      <div class="modal-badge" id="modalBadge">Downtown Dubai</div>
-      <div class="modal-title" id="modalTitle">The Lana Sky Penthouse</div>
-      <div class="modal-sub" id="modalSub">Dorchester Collection · Foster + Partners</div>
-      <div class="modal-specs">
-        <div class="spec-cell"><span class="spec-val" id="modalArea">14,200</span><span class="spec-key">Sq. Ft</span></div>
-        <div class="spec-cell"><span class="spec-val" id="modalBeds">6</span><span class="spec-key">Master Suites</span></div>
-        <div class="spec-cell"><span class="spec-val" id="modalView">360°</span><span class="spec-key">Horizon View</span></div>
-        <div class="spec-cell"><span class="spec-val" id="modalFinish">Bespoke</span><span class="spec-key">Interior Finish</span></div>
-      </div>
-      <div class="modal-desc" id="modalDesc">Full description loads here.</div>
-      <div class="modal-price-row">
-        <div class="modal-price-label">Guide Acquisition Price</div>
-        <div class="modal-price-val" id="modalPrice">AED 95,000,000</div>
-      </div>
-      <div class="modal-actions">
-        <a id="modalWA" href="#" target="_blank" class="btn-whatsapp">WhatsApp Concierge</a>
-        <button class="btn-view" onclick="openViewingModal()">Schedule Private Viewing</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- VIEWING/DOSSIER MODAL -->
-<div class="modal-overlay" id="viewingModal" onclick="handleViewingBackdrop(event)">
-  <div class="modal">
-    <button class="modal-close" onclick="closeViewingModal()">✕</button>
-    <div class="modal-body" style="padding-top:50px">
-      <div class="modal-badge">Private Advisory</div>
-      <div class="modal-title" style="margin-top:12px">Request Your Dossier</div>
-      <div class="modal-sub" style="margin-bottom:28px">Confidential · NDA Governed · Invitation Only</div>
-      <form onsubmit="handleViewingSubmit(event)" style="display:flex;flex-direction:column;gap:14px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-          <input type="text" required placeholder="Full Legal Name / Title" class="cta-input" style="border:1px solid rgba(255,255,255,0.1);padding:14px 18px;font-size:12px;background:rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.1)">
-          <input type="tel" required placeholder="+971 50 000 0000" class="cta-input" style="border:1px solid rgba(255,255,255,0.1);padding:14px 18px;font-size:12px;background:rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.1)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Country of Residence</label>
+            <select class="form-select">
+              <option value="">Select country</option>
+              <option>United Arab Emirates</option>
+              <option>Saudi Arabia</option>
+              <option>United Kingdom</option>
+              <option>United States</option>
+              <option>Switzerland</option>
+              <option>Singapore</option>
+              <option>India</option>
+              <option>China</option>
+              <option>Russia</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Property of Interest</label>
+            <select class="form-select">
+              <option value="">Select listing</option>
+              <option>The Lana Sky Penthouse</option>
+              <option>Atlantis Royal Sky Villa</option>
+              <option>Bulgari Lighthouse</option>
+              <option>Palm Frond Sanctuary</option>
+              <option>Off-Market Enquiry</option>
+            </select>
+          </div>
         </div>
-        <input type="email" required placeholder="Private Email Address" class="cta-input" style="border:1px solid rgba(255,255,255,0.1);padding:14px 18px;font-size:12px;background:rgba(255,255,255,0.03);border-right:1px solid rgba(255,255,255,0.1)">
-        <select class="cta-input" style="border:1px solid rgba(255,255,255,0.1);padding:14px 18px;font-size:12px;background:rgba(255,255,255,0.03);-webkit-appearance:none;cursor:none">
-          <option class="bg-surface" value="">Select Preferred Transport</option>
-          <option>Rolls-Royce Ghost — Airport or Hotel Pickup</option>
-          <option>Private Helicopter — Sunset Transfer</option>
-          <option>Direct VIP Valet — At Residence</option>
-          <option>Confidential Virtual Walkthrough (4K)</option>
-        </select>
-        <textarea placeholder="Budget range, preferred location, or specific requirements..." rows="3" class="cta-input" style="border:1px solid rgba(255,255,255,0.1);padding:14px 18px;font-size:12px;background:rgba(255,255,255,0.03);resize:none;font-family:'Inter',sans-serif;border-right:1px solid rgba(255,255,255,0.1)"></textarea>
-        <button type="submit" class="btn-primary" style="padding:16px;font-size:11px;letter-spacing:0.25em;margin-top:4px">Confirm Confidential Request</button>
+        <div class="form-group">
+          <label class="form-label">Budget Range</label>
+          <select class="form-select">
+            <option value="">Select range</option>
+            <option>AED 20M – 50M</option>
+            <option>AED 50M – 100M</option>
+            <option>AED 100M – 200M</option>
+            <option>AED 200M+</option>
+            <option>Flexible / Portfolio Acquisition</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message (Optional)</label>
+          <textarea class="form-textarea" placeholder="Tell us about your vision…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Submit Private Enquiry</button>
+        <a href="https://wa.me/971501234567?text=Hello%20VARA%20Dubai%2C%20I%20wish%20to%20arrange%20a%20private%20viewing." class="form-whatsapp" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Instant WhatsApp Response
+        </a>
       </form>
     </div>
   </div>
-</div>
+</section>
 
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-brand-name">VARA</div>
+      <div class="footer-brand-tag">Private Residences · Dubai</div>
+      <div class="footer-brand-desc">Exclusive access to the world's most coveted Dubai addresses. Curated for those who accept nothing less than extraordinary.</div>
+      <div style="margin-top:28px">
+        <div class="footer-rera">
+          <span class="footer-rera-diamond">◆</span>
+          <div>
+            <div class="footer-rera-text">RERA Registered</div>
+            <div class="footer-rera-num">ORN: 12345 · DLD Licensed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Portfolio</div>
+      <div class="footer-links">
+        <a href="#portfolio">Current Listings</a>
+        <a href="#portfolio">Off-Market Access</a>
+        <a href="#cinematic-banner">Featured Properties</a>
+        <a href="#forma">Interior Gallery</a>
+        <a href="#contact">Private Viewings</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Services</div>
+      <div class="footer-links">
+        <a href="#services">Acquisition Advisory</a>
+        <a href="#services">Portfolio Management</a>
+        <a href="#services">Relocation Services</a>
+        <a href="#services">Legal & Structuring</a>
+        <a href="#services">Interior Concierge</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Connect</div>
+      <div class="footer-links">
+        <a href="mailto:private@vara.ae">private@vara.ae</a>
+        <a href="tel:+971501234567">+971 50 123 4567</a>
+        <a href="#contact">DIFC Gate Village 3</a>
+        <a href="#contact">Dubai, UAE</a>
+      </div>
+      <div class="footer-socials" style="margin-top:24px">
+        <a href="#" class="footer-social">in</a>
+        <a href="#" class="footer-social">ig</a>
+        <a href="#" class="footer-social">x</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-legal">
+      © 2024 VARA Private Residences LLC. All rights reserved.<br>
+      All prices in AED unless stated. Subject to availability. E&OE. RERA Permit No. 12345.
+    </div>
+    <div class="footer-legal" style="text-align:right">
+      Privacy Policy · Terms of Use · Cookie Policy<br>
+      This site is protected under UAE law. Unauthorized reproduction prohibited.
+    </div>
+  </div>
+</footer>
+
+<!-- ==================== JAVASCRIPT ==================== -->
 <script>
-/* ==================== CURSOR ==================== */
+'use strict';
+
+/* ============ CURRENCY ============ */
+const RATES = { AED: 1, USD: 0.272, EUR: 0.252, GBP: 0.215, BTC: 0.0000041 };
+const SYMBOLS = { AED: 'AED ', USD: '$', EUR: '€', GBP: '£', BTC: '₿' };
+let currentCurrency = 'AED';
+
+function formatPrice(aed, currency) {
+  const val = aed * RATES[currency];
+  const sym = SYMBOLS[currency];
+  if (currency === 'BTC') return sym + val.toFixed(2);
+  if (val >= 1e9) return sym + (val/1e9).toFixed(2) + 'B';
+  if (val >= 1e6) return sym + (val/1e6).toFixed(1) + 'M';
+  return sym + val.toLocaleString('en-US', {maximumFractionDigits: 0});
+}
+
+function updatePrices(currency) {
+  currentCurrency = currency;
+  document.querySelectorAll('[data-aed]').forEach(el => {
+    const aed = parseFloat(el.dataset.aed);
+    el.textContent = formatPrice(aed, currency);
+  });
+}
+
+document.getElementById('currency-select').addEventListener('change', function() {
+  updatePrices(this.value);
+});
+
+/* ============ PRELOADER ============ */
+(function() {
+  const bar = document.getElementById('pl-bar');
+  const num = document.getElementById('pl-num');
+  const diamonds = [document.getElementById('pd1'),document.getElementById('pd2'),document.getElementById('pd3'),document.getElementById('pd4'),document.getElementById('pd5')];
+  let pct = 0;
+  const interval = setInterval(() => {
+    pct = Math.min(pct + Math.random() * 4 + 1, 100);
+    bar.style.width = pct + '%';
+    num.textContent = Math.floor(pct) + '%';
+    // Activate diamonds progressively
+    diamonds.forEach((d, i) => {
+      if (pct > (i + 1) * 20) d.classList.add('active');
+    });
+    if (pct >= 100) {
+      clearInterval(interval);
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('hide');
+        document.getElementById('hero').classList.add('hero-loaded');
+      }, 500);
+    }
+  }, 40);
+})();
+
+/* ============ SCROLL PROGRESS ============ */
+function updateScrollProgress() {
+  const scrollTop = window.pageYOffset;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const pct = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+  document.getElementById('scroll-progress').style.width = pct + '%';
+}
+
+/* ============ CUSTOM CURSOR ============ */
 const cursor = document.getElementById('cursor');
 const cursorRing = document.getElementById('cursor-ring');
-let mouseX=0,mouseY=0,ringX=0,ringY=0;
+const cursorTrail = document.getElementById('cursor-trail');
+let mouseX = 0, mouseY = 0;
+let trailX = 0, trailY = 0;
 
-document.addEventListener('mousemove',(e)=>{
-  mouseX=e.clientX; mouseY=e.clientY;
-  cursor.style.left=mouseX+'px'; cursor.style.top=mouseY+'px';
+document.addEventListener('mousemove', (e) => {
+  mouseX = e.clientX;
+  mouseY = e.clientY;
+  cursor.style.left = mouseX + 'px';
+  cursor.style.top = mouseY + 'px';
+  cursorRing.style.left = mouseX + 'px';
+  cursorRing.style.top = mouseY + 'px';
 });
 
-function animateCursor(){
-  ringX+=(mouseX-ringX)*0.12; ringY+=(mouseY-ringY)*0.12;
-  cursorRing.style.left=ringX+'px'; cursorRing.style.top=ringY+'px';
-  requestAnimationFrame(animateCursor);
+// Trail follows with delay
+function animateTrail() {
+  trailX += (mouseX - trailX) * 0.08;
+  trailY += (mouseY - trailY) * 0.08;
+  cursorTrail.style.left = trailX + 'px';
+  cursorTrail.style.top = trailY + 'px';
+  requestAnimationFrame(animateTrail);
 }
-animateCursor();
+animateTrail();
 
-document.querySelectorAll('a,button,[onclick],select,.portfolio-card,.forma-room-visual').forEach(el=>{
-  el.addEventListener('mouseenter',()=>document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave',()=>document.body.classList.remove('cursor-hover'));
+// Interactive cursor states
+document.querySelectorAll('a, button, [data-hover]').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    document.body.classList.add('cursor-hover');
+    if (el.tagName === 'A' || el.tagName === 'BUTTON') document.body.classList.add('cursor-link');
+  });
+  el.addEventListener('mouseleave', () => {
+    document.body.classList.remove('cursor-hover', 'cursor-link');
+  });
 });
 
-/* ==================== PRELOADER ==================== */
-const plProgress = document.getElementById('pl-progress');
-const plNum = document.getElementById('pl-num');
-let prog=0;
-const plInterval = setInterval(()=>{
-  prog += Math.random()*15;
-  if(prog>=100){ prog=100; clearInterval(plInterval);
-    setTimeout(()=>{
-      document.getElementById('preloader').classList.add('hide');
-      document.getElementById('heroContent').classList.add('hero-loaded');
-    },400);
+/* ============ NAV SCROLL ============ */
+const nav = document.getElementById('main-nav');
+function updateNav() {
+  if (window.pageYOffset > 60) {
+    nav.classList.add('scrolled');
+  } else {
+    nav.classList.remove('scrolled');
   }
-  plProgress.style.width=prog+'%';
-  plNum.textContent=Math.round(prog)+'%';
-},120);
+}
 
-/* ==================== NAV SCROLL ==================== */
-window.addEventListener('scroll',()=>{
-  document.getElementById('main-nav').classList.toggle('scrolled',window.scrollY>80);
+/* ============ PORTFOLIO HORIZONTAL SCROLL ============ */
+const portfolioScroll = document.getElementById('portfolio-scroll');
+const portfolioProgress = document.getElementById('portfolio-progress');
+const portfolioLabel = document.getElementById('portfolio-label');
+const totalCards = 4;
+
+if (portfolioScroll) {
+  portfolioScroll.addEventListener('scroll', () => {
+    const scrollLeft = portfolioScroll.scrollLeft;
+    const maxScroll = portfolioScroll.scrollWidth - portfolioScroll.clientWidth;
+    const pct = maxScroll > 0 ? (scrollLeft / maxScroll) * 100 : 0;
+    portfolioProgress.style.width = Math.max(25, pct) + '%';
+    const activeCard = Math.round((scrollLeft / maxScroll) * (totalCards - 1)) + 1;
+    portfolioLabel.textContent = String(Math.min(activeCard, totalCards)).padStart(2,'0') + ' / 0' + totalCards;
+  });
+
+  // Drag to scroll
+  let isDown = false, startX, scrollLeftStart;
+  portfolioScroll.addEventListener('mousedown', (e) => {
+    isDown = true;
+    portfolioScroll.style.cursor = 'grabbing';
+    startX = e.pageX - portfolioScroll.offsetLeft;
+    scrollLeftStart = portfolioScroll.scrollLeft;
+  });
+  portfolioScroll.addEventListener('mouseleave', () => { isDown = false; portfolioScroll.style.cursor = 'grab'; });
+  portfolioScroll.addEventListener('mouseup', () => { isDown = false; portfolioScroll.style.cursor = 'grab'; });
+  portfolioScroll.addEventListener('mousemove', (e) => {
+    if (!isDown) return;
+    e.preventDefault();
+    const x = e.pageX - portfolioScroll.offsetLeft;
+    const walk = (x - startX) * 1.5;
+    portfolioScroll.scrollLeft = scrollLeftStart - walk;
+  });
+}
+
+/* ============ CINEMA PARALLAX ============ */
+const cinemaImg = document.getElementById('cinema-parallax-img');
+function updateCinemaParallax() {
+  if (!cinemaImg) return;
+  const banner = document.getElementById('cinematic-banner');
+  if (!banner) return;
+  const rect = banner.getBoundingClientRect();
+  const viewH = window.innerHeight;
+  if (rect.bottom < 0 || rect.top > viewH) return;
+  const progress = (viewH - rect.top) / (viewH + rect.height);
+  const translateY = (progress - 0.5) * 60;
+  cinemaImg.style.transform = `scale(1.15) translateY(${translateY}px)`;
+}
+
+/* ============ FORMA STICKY LEFT PANEL ============ */
+const formaRooms = [
+  { name: 'Grand Living Room',      desc: 'Double-height ceilings soar above Italian marble floors. Bespoke joinery by Poltrona Frau. Panoramic city views frame each moment.',   mat: 'Calacatta Marble', des: 'Gilles & Boissier', ceil: '6.2m', sqft: '1,840' },
+  { name: 'Private Dining Pavilion', desc: 'A table set for twelve beneath a custom Murano chandelier. Walnut paneling and hand-stitched leather chairs evoke quiet grandeur.',      mat: 'Dark Walnut Oak',   des: 'Alberto Pinto',   ceil: '4.8m', sqft: '920'   },
+  { name: "Chef's Kitchen Atelier",  desc: 'Full Gaggenau suite, Calacatta Gold countertops, butler pantry and a dedicated pastry station for culinary mastery.',                    mat: 'Calacatta Gold',    des: 'Boffi Duemilaquattro', ceil: '3.6m', sqft: '680' },
+  { name: 'Master Suite Retreat',    desc: 'A sanctuary of restrained luxury. Automated blackout drapes, dawn simulator, and walk-in wardrobe with dedicated valet alcove.',       mat: 'Wide-Plank Oak',    des: 'Kelly Wearstler',  ceil: '4.2m', sqft: '1,240' },
+  { name: 'Spa Bathroom Sanctuary',  desc: 'Heated Paonazzo marble, deep soaking tub, rain shower with ten-directional jets. A private spa of museum-grade finishes.',             mat: 'Paonazzo Marble',   des: 'AD Labb',          ceil: '3.8m', sqft: '460'   }
+];
+let currentRoom = 0;
+
+function updateFormaPanel(roomIdx) {
+  const room = formaRooms[roomIdx];
+  if (!room) return;
+  currentRoom = roomIdx;
+  const numEl = document.getElementById('forma-room-num');
+  const nameEl = document.getElementById('forma-room-name');
+  const descEl = document.getElementById('forma-room-desc');
+  const matEl = document.getElementById('forma-mat');
+  const desEl = document.getElementById('forma-des');
+  const ceilEl = document.getElementById('forma-ceil');
+  const sqftEl = document.getElementById('forma-sqft');
+  if (numEl) numEl.textContent = String(roomIdx + 1).padStart(2, '0');
+  if (nameEl) { nameEl.style.opacity = '0'; nameEl.style.transform = 'translateY(10px)'; setTimeout(() => { nameEl.textContent = room.name; nameEl.style.transition = 'all 0.5s ease'; nameEl.style.opacity = '1'; nameEl.style.transform = 'translateY(0)'; }, 100); }
+  if (descEl) { descEl.style.opacity = '0'; setTimeout(() => { descEl.textContent = room.desc; descEl.style.transition = 'all 0.5s 0.1s ease'; descEl.style.opacity = '1'; }, 150); }
+  if (matEl) matEl.textContent = room.mat;
+  if (desEl) desEl.textContent = room.des;
+  if (ceilEl) ceilEl.textContent = room.ceil;
+  if (sqftEl) sqftEl.textContent = room.sqft;
+  // Update nav dots
+  document.querySelectorAll('.forma-nav-dot').forEach((dot, i) => {
+    dot.classList.toggle('active', i === roomIdx);
+  });
+}
+
+function setupFormaObserver() {
+  const panels = document.querySelectorAll('.forma-room-panel');
+  if (!panels.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio > 0.4) {
+        const idx = parseInt(entry.target.dataset.room);
+        if (!isNaN(idx) && idx !== currentRoom) updateFormaPanel(idx);
+        // Trigger clip-path reveal on this room's image
+        const clip = entry.target.querySelector('.reveal-clip');
+        if (clip) clip.classList.add('revealed');
+      }
+    });
+  }, { threshold: 0.4 });
+  panels.forEach(p => obs.observe(p));
+}
+
+/* ============ ANIMATED COUNTERS ============ */
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.target);
+  const suffix = el.dataset.suffix || '';
+  const prefix = el.dataset.prefix || '';
+  const isDecimal = target % 1 !== 0;
+  const duration = 2200;
+  const startTime = performance.now();
+  function update(now) {
+    const elapsed = now - startTime;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    const current = target * eased;
+    el.textContent = prefix + (isDecimal ? current.toFixed(1) : Math.floor(current)) + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+function setupCounterObserver() {
+  const counters = document.querySelectorAll('.stat-num[data-target]');
+  if (!counters.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  counters.forEach(c => obs.observe(c));
+}
+
+/* ============ GENERAL REVEAL OBSERVER ============ */
+function setupRevealObserver() {
+  const revealEls = document.querySelectorAll('.reveal-up, .reveal-clip');
+  if (!revealEls.length) return;
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('revealed');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+}
+
+/* ============ FORM SUBMIT ============ */
+function handleFormSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit');
+  btn.textContent = 'Enquiry Received — We\'ll Be In Touch Shortly.';
+  btn.style.background = 'rgba(201,168,76,0.15)';
+  btn.style.color = '#c9a84c';
+  btn.style.border = '1px solid rgba(201,168,76,0.3)';
+  btn.disabled = true;
+}
+
+/* ============ MASTER SCROLL HANDLER ============ */
+let ticking = false;
+window.addEventListener('scroll', () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      updateScrollProgress();
+      updateNav();
+      updateCinemaParallax();
+      ticking = false;
+    });
+    ticking = true;
+  }
+}, { passive: true });
+
+/* ============ INIT ============ */
+window.addEventListener('DOMContentLoaded', () => {
+  setupRevealObserver();
+  setupCounterObserver();
+  setupFormaObserver();
+  updateNav();
+  updateScrollProgress();
+  // Also trigger reveals for items already in viewport
+  setTimeout(() => {
+    document.querySelectorAll('.reveal-up, .reveal-clip').forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9) el.classList.add('revealed');
+    });
+  }, 100);
 });
 
-/* ==================== SCROLL REVEAL ==================== */
-const revealEls = document.querySelectorAll('.reveal,.reveal-left,.reveal-right');
-const revealObs = new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('visible'); });
-},{threshold:0.12,rootMargin:'0px 0px -40px 0px'});
-revealEls.forEach(el=>revealObs.observe(el));
-
-/* ==================== CURRENCY ==================== */
-const RATES={AED:{sym:'AED ',r:1},USD:{sym:'$',r:0.2723},EUR:{sym:'€',r:0.254},GBP:{sym:'£',r:0.218},BTC:{sym:'₿',r:0.0000031}};
-let cur='AED';
-function formatPrice(aed){
-  const c=RATES[cur]; const v=aed*c.r;
-  if(cur==='BTC') return c.sym+v.toFixed(2);
-  return c.sym+Math.round(v).toLocaleString();
-}
-function updateCurrency(c){
-  cur=c;
-  document.querySelectorAll('.price-val').forEach(el=>{
-    const aed=parseFloat(el.dataset.aed);
-    if(!isNaN(aed)) el.textContent=formatPrice(aed);
-  });
-  if(curModalAed) document.getElementById('modalPrice').textContent=formatPrice(curModalAed);
-}
-
-/* ==================== PROPERTIES DATA ==================== */
-const PROPS=[
-  {title:'The Lana Sky Penthouse',sub:'Dorchester Collection · Foster + Partners',badge:'Downtown Dubai',
-   img:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=85',
-   aed:95000000,area:'14,200',beds:'6',view:'Burj Khalifa',finish:'Dorchester',
-   desc:'Duplex sky penthouse managed by The Dorchester Collection, designed by Foster + Partners. Soaring double-height ceilings, private 18-metre cantilevered infinity pool, bespoke Minotti interiors throughout, and unbroken panoramas of the Burj Khalifa and Dubai Fountains from every principal room.'},
-  {title:'Atlantis Royal Sky Villa',sub:'KPF Architecture · Seahorse Island',badge:'Palm Jumeirah',
-   img:'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=85',
-   aed:115000000,area:'16,800',beds:'5',view:'Arabian Gulf',finish:"Sybille de Margerie",
-   desc:'Suspended 180 metres above the Arabian Sea at Atlantis Royal. Designed by KPF, interior curated by Sybille de Margerie. Unobstructed 360-degree ocean views, private rooftop infinity pool, and a dedicated Rolls-Royce Ghost with 24/7 chauffeur service.'},
-  {title:'Bulgari Lighthouse Penthouse',sub:'Antonio Citterio · Seahorse Island',badge:'Jumeira Bay Island',
-   img:'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=85',
-   aed:140000000,area:'19,500',beds:'7',view:'360° Island',finish:'Bulgari Casa',
-   desc:'Full-floor island sanctuary on Seahorse Island, interior designed by Antonio Citterio and curated exclusively by Bulgari Casa. Bookmatched Calacatta marble, custom Italian oak joinery, private yacht berth for a 60ft vessel, and a dedicated island butler service.'},
-  {title:'Palm Frond Sanctuary',sub:'Poliform Interiors · Private Frond',badge:'Palm Jumeirah',
-   img:'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=85',
-   aed:65000000,area:'9,800',beds:'5',view:'Arabian Sunset',finish:'Poliform Custom',
-   desc:'Direct private white-sand beach access with 8-berth yacht mooring. Custom Poliform interiors throughout, smart home automation by Crestron, outdoor firepit lounge on private shoreline, and a sunrise terrace above the sea.'},
-];
-
-let curModalAed=null;
-function openPropertyModal(i){
-  const p=PROPS[i]; curModalAed=p.aed;
-  document.getElementById('modalImg').src=p.img;
-  document.getElementById('modalImg').alt=p.title;
-  document.getElementById('modalBadge').textContent=p.badge;
-  document.getElementById('modalTitle').textContent=p.title;
-  document.getElementById('modalSub').textContent=p.sub;
-  document.getElementById('modalArea').textContent=p.area;
-  document.getElementById('modalBeds').textContent=p.beds;
-  document.getElementById('modalView').textContent=p.view;
-  document.getElementById('modalFinish').textContent=p.finish;
-  document.getElementById('modalDesc').textContent=p.desc;
-  document.getElementById('modalPrice').textContent=formatPrice(p.aed);
-  document.getElementById('modalWA').href=`https://wa.me/971501234567?text=${encodeURIComponent('Hello VARA Dubai, I wish to arrange a private viewing for '+p.title+' ('+p.badge+') listed at '+formatPrice(p.aed)+'. Please contact me.')}`;
-  document.getElementById('propertyModal').classList.add('active');
-}
-function closePropertyModal(){
-  document.getElementById('propertyModal').classList.remove('active');
-  curModalAed=null;
-}
-function handleModalBackdrop(e){ if(e.target.id==='propertyModal') closePropertyModal(); }
-
-function openViewingModal(){
-  closePropertyModal();
-  document.getElementById('viewingModal').classList.add('active');
-}
-function closeViewingModal(){ document.getElementById('viewingModal').classList.remove('active'); }
-function handleViewingBackdrop(e){ if(e.target.id==='viewingModal') closeViewingModal(); }
-
-function handleViewingSubmit(e){
-  e.preventDefault();
-  closeViewingModal();
-  setTimeout(()=>alert('✦ Your confidential dossier request has been received. Our Managing Partner will contact you privately within 15 minutes.'),100);
-}
-
-function handleDossierRequest(){
-  const email=document.getElementById('dossierEmail').value;
-  if(!email){ document.getElementById('dossierEmail').focus(); return; }
-  openViewingModal();
-}
-
-/* ==================== KEYBOARD ==================== */
-window.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closePropertyModal(); closeViewingModal(); } });
-
-/* ==================== PORTFOLIO FILTER ==================== */
-const cardLocMap = ['Downtown Dubai','Palm Jumeirah','Jumeira Bay Island','Palm Jumeirah'];
-function filterPortfolio(loc, btn){
-  document.querySelectorAll('.filter-btn').forEach(b=>{
-    b.style.border='1px solid rgba(255,255,255,0.08)';
-    b.style.color='#55556a';
-    b.style.background='transparent';
-  });
-  btn.style.border='1px solid #c9a84c';
-  btn.style.color='#c9a84c';
-  btn.style.background='rgba(201,168,76,0.1)';
-  const cards = document.querySelectorAll('.portfolio-card');
-  let visible=0;
-  cards.forEach((card,i)=>{
-    const cardLoc = card.getAttribute('data-loc') || cardLocMap[i] || '';
-    const show = loc==='all' || cardLoc===loc;
-    card.style.display = show ? '' : 'none';
-    if(show) visible++;
-  });
-  document.getElementById('propCount').textContent = visible;
-}
-
-/* ==================== UPDATE FEATURED PRICE ==================== */
-function updateFeaturedPrice(){
-  const fp = document.getElementById('featuredPrice');
-  if(fp) fp.textContent = formatPrice(115000000);
-}
-const origUpdateCurrency = updateCurrency;
-updateCurrency = function(c){
-  origUpdateCurrency(c);
-  updateFeaturedPrice();
-};
-
-/* ==================== HOVER IMAGE ZOOM ON FEATURED ==================== */
-const featBanner = document.querySelector('[onclick="openPropertyModal(0)"]');
-if(featBanner){
-  const featImg = featBanner.querySelector('img');
-  featBanner.addEventListener('mouseenter',()=>{ if(featImg) featImg.style.transform='scale(1.08)'; });
-  featBanner.addEventListener('mouseleave',()=>{ if(featImg) featImg.style.transform='scale(1.04)'; });
-}
+// Update prices when currency changes on page load too
+updatePrices('AED');
 </script>
+
 </body>
 </html>
